@@ -4,22 +4,21 @@ import 'package:flutter/material.dart';
 abstract class AppTextStyle {
   AppTextStyle(Color primaryBlue);
 
-  /// 주로 AppBar의 Title에 주로 사용된다.
-  /// 예시
-  /// 홈, 채팅방, 음색 업로드, 메시지 보내기, 각종 navigationPage, 제목
-  static TextStyle appBarTitle() => const TextStyle(
+  //! 페이지의 핵심이 되는 텍스트에 주로 사용한다
+  /// MainAppBar, navigationPage -> 제목
+  static TextStyle headlineLarge({Color color = AppColor.neutrals20}) =>
+      TextStyle(
         fontFamily: 'PretendardVariable',
         fontSize: 22,
         fontWeight: FontWeight.bold,
-        color: AppColor.neutrals20,
+        color: color,
         letterSpacing: -0.2,
       );
 
-  /// 강조하는 텍스트에 주로 사용된다
-  /// 예시
-  /// PostPage -> 제목을 입력해주세요
-  /// ProfilePage -> 닉네임,프로필,고객센터
-  static TextStyle mainTitle(Color color) => TextStyle(
+  //! Bottom Sheet의 제목이 되는 텍스트에 주로 사용한다
+  /// SubAppBar -> 제목
+  static TextStyle headlineMedium({Color color = AppColor.neutrals20}) =>
+      TextStyle(
         fontFamily: 'PretendardVariable',
         fontSize: 20,
         fontWeight: FontWeight.bold,
@@ -27,48 +26,71 @@ abstract class AppTextStyle {
         letterSpacing: -0.2,
       );
 
-  /// 주로 닉네임에 사용된다
-  /// 예시
+  //! 페이지에서 강조하고 싶은 텍스트에 주로 사용된다
+  /// PostPage -> 제목을 입력해주세요, 제목
+  /// PostingCard -> Title
+  /// ProfilePage -> 닉네임
+  static TextStyle titleLarge({Color color = AppColor.neutrals20}) => TextStyle(
+        fontFamily: 'PretendardVariable',
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: color,
+        letterSpacing: -0.2,
+      );
+
+  //! 중요도가 비교적 높은 텍스트에 주로 사용된다
   /// HomePage -> 닉네임
-  /// PostPage -> 취소
-  static TextStyle bodyMedium(Color color) => TextStyle(
+  /// PostPage -> 닉네임
+  /// SubAppBar -> 완료 버튼
+  static TextStyle bodyLarge({Color color = AppColor.neutrals20}) => TextStyle(
+        fontFamily: 'PretendardVariable',
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: color,
+        letterSpacing: 0.2,
+      );
+
+  //! 중요도가 비교적 낮은 일반적인 텍스트에 주로 사용된다
+  /// SubAppBar -> 취소 버튼
+  /// HomePage -> 게시판 이름
+  /// ProfilePage -> ListTile text
+  /// PostPage -> 녹음 상태 알림
+  /// ChatPage -> 메시지 상태 알림
+  static TextStyle bodyMedium({Color color = AppColor.neutrals20}) => TextStyle(
       fontFamily: 'PretendardVariable',
       fontSize: 16,
       fontWeight: FontWeight.w500,
       color: color,
       letterSpacing: 0.2);
 
-  /// 주로 작은 텍스트중에 강조로 사용된다
-  /// 예시
-  /// 전송 버튼
-  /// ProfilePage -> ListTile text
-  static TextStyle bodyBold(Color color) => TextStyle(
+  //! 이용약관에 주로 사용된다
+  /// SnsLoginPage -> 이용약관
+  static TextStyle bodySmall({Color color = AppColor.neutrals20}) => TextStyle(
         fontFamily: 'PretendardVariable',
-        fontSize: 16,
+        fontSize: 12,
+        fontWeight: FontWeight.w300,
+        color: color,
+        letterSpacing: 0.2,
+      );
+
+  //! 영역을 구분하는 텍스트에 주로 사용된다
+  /// ProfilePage -> 안내 라벨 (프로필, 고객센터)
+  static TextStyle labelLarge({Color color = AppColor.neutrals60}) => TextStyle(
+        fontFamily: 'PretendardVariable',
+        fontSize: 20,
         fontWeight: FontWeight.bold,
         color: color,
         letterSpacing: -0.2,
       );
 
-  /// 주로 이용약관에 사용된다
-  /// 예시
-  /// 이용약관
-  static TextStyle bodyLight(Color color) => TextStyle(
-        fontFamily: 'PretendardVariable',
-        fontSize: 12,
-        fontWeight: FontWeight.w300,
-        color: color,
-        letterSpacing: -0.2,
-      );
-
-  /// 주로 Label로 사용된다.
-  /// 예시
-  /// 게시글 제목 Label, 게시판 이름 Label
-  static TextStyle labelMedium(Color color) => TextStyle(
+  //! 작은 Label에 주로 사용된다.
+  /// PostPage -> '게시글 제목' Label
+  static TextStyle labelMedium({Color color = AppColor.neutrals20}) =>
+      TextStyle(
         fontFamily: 'PretendardVariable',
         fontSize: 15,
         fontWeight: FontWeight.w500,
         color: color,
-        letterSpacing: -0.2,
+        letterSpacing: 0.2,
       );
 }

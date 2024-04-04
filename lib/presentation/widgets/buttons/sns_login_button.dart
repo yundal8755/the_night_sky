@@ -37,7 +37,7 @@ class SnsLoginButton extends StatelessWidget {
             Gap.size12,
             Text(
               text,
-              style: AppTextStyle.bodyLarge(color: AppColor.neutrals80),
+              style: AppTextStyle.bodyLarge(AppColor.neutrals80),
             ),
           ],
         ),

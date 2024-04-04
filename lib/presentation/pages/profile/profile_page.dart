@@ -79,7 +79,7 @@ class MyProfilePage extends StatelessWidget {
         if (_currentUser != null)
           ElevatedButton(
             child: Text('로그아웃',
-                style: AppTextStyle.bodyMedium(color: AppColor.neutrals80)),
+                style: AppTextStyle.bodyMedium(AppColor.neutrals80)),
             onPressed: () async {
               await loginViewModel.signOut();
               // UserProvider에서 사용자를 null로 설정합니다.
@@ -105,7 +105,7 @@ class MyProfilePage extends StatelessWidget {
             },
             child: Text(
               '로그인',
-              style: AppTextStyle.bodyMedium(color: AppColor.neutrals80),
+              style: AppTextStyle.bodyMedium(AppColor.neutrals80),
             ),
           ),
       ]),

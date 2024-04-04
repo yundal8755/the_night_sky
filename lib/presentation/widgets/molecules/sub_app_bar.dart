@@ -25,7 +25,7 @@ class SubAppBar extends StatelessWidget {
             TextButton(
               onPressed: () => Navigator.pop(context),
               child: Text("취소",
-                  style: AppTextStyle.bodyMedium(color: AppColor.neutrals60)),
+                  style: AppTextStyle.bodyMedium(AppColor.neutrals60)),
             ),
 
             // 모달 제목

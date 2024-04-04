@@ -8,7 +8,7 @@ import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar.
 import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/bottom_sheet_indicator.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/buttons/sns_login_button.dart';
+import 'package:everyones_tone/presentation/widgets/buttons/sns_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

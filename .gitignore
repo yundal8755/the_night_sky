@@ -1,3 +1,13 @@
+# Firebase
+lib/firebase_options.dart
+android/app/google-services.json
+ios/firebase_app_id_file.json
+ios/Runner/GoogleService-Info.plist
+
+# 적용이 안되고 있는 항목
+ios/Runner/Info.plist
+pubspec.lock
+
 # Miscellaneous
 *.class
 *.log

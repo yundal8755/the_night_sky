@@ -1,6 +1,6 @@
-import 'package:everyones_tone/app/config/app_text_style.dart';
+import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/utils/firestore_data.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/text_field.dart';
+import 'package:everyones_tone/presentation/pages/record/record_page.dart';
 import 'package:everyones_tone/presentation/widgets/molecules/sub_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -23,22 +23,7 @@ class PostPage extends StatelessWidget {
 
           if (_currentUser != null)
             Column(
-              children: [
-                Container(
-                  margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '게시글 제목',
-                        style: AppTextStyle.labelMedium(),
-                      ),
-                    ],
-                  ),
-                ),
-                const CustomTextField(),
-              ],
+              children: [Gap.size48, RecordPage()],
             ),
         ],
       ),

@@ -7,7 +7,8 @@ import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar.dart';
 import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/bottom_sheet_indicator.dart';
+import 'package:everyones_tone/presentation/pages/register_profile/register_profile_page.dart';
+import 'package:everyones_tone/presentation/widgets/bottom_sheet_indicator.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/sns_login_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -50,6 +51,13 @@ class LoginPage extends StatelessWidget {
                   ),
                   (Route<dynamic> route) => false,
                 );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterProfilePage(email: user.email!,),
+                  ),
+                );
               }
             }
           },
@@ -75,6 +83,13 @@ class LoginPage extends StatelessWidget {
                       builder: (context) => BottomNavBar(),
                     ),
                     (Route<dynamic> route) => false,
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterProfilePage(email: user.email!,),
+                    ),
                   );
                 }
               }

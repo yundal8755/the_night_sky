@@ -17,7 +17,7 @@ class AudioPlayButton extends StatelessWidget {
             height: 55,
           ),
 
-          // 재생, 일정지 버튼
+          // 재생, 일시정지 버튼
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               shape: const CircleBorder(),

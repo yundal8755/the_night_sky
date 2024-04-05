@@ -32,4 +32,6 @@ abstract class AppAssets {
       'assets/images/profile_random_image_4.jpeg';
   static const String profileRandomImage5 =
       'assets/images/profile_random_image_5.jpeg';
+  static const String profileBasicImage =
+      'assets/images/profile_basic_image.png';
 }

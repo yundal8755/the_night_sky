@@ -3,7 +3,7 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
-import 'package:everyones_tone/presentation/widgets/layout/background_gradient.dart';
+import 'package:everyones_tone/presentation/widgets/background_gradient.dart';
 import 'package:everyones_tone/presentation/pages/home/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
 import 'package:flutter/material.dart';

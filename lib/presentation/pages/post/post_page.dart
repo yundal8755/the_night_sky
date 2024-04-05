@@ -1,7 +1,7 @@
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/utils/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/record/record_page.dart';
-import 'package:everyones_tone/presentation/widgets/molecules/sub_app_bar.dart';
+import 'package:everyones_tone/presentation/widgets/sub_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class PostPage extends StatelessWidget {

@@ -54,9 +54,6 @@ class LoginViewModel {
   Future<bool> isUserRegistered(String email) async {
     final userDocument =
         FirebaseFirestore.instance.collection('user').doc(email);
-    await userDocument.set({
-      'userEmail' : email
-    });
     final doc = await userDocument.get();
     print('user Doc에 user.email 콜렉션 추가!');
     return doc.exists;

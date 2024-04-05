@@ -1,9 +1,6 @@
 import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/firestore_data.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
-import 'package:everyones_tone/presentation/widgets/molecules/main_app_bar.dart';
+import 'package:everyones_tone/presentation/widgets/main_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
@@ -31,7 +28,7 @@ class ChatPage extends StatelessWidget {
     return PopScope(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: const MainAppBar(title: '채팅방'),
+        appBar: MainAppBar(title: '채팅방'),
         body: SafeArea(
           child: Center(
             child: Column(
@@ -44,13 +41,6 @@ class ChatPage extends StatelessWidget {
                       '당신의 음색을 녹음해주세요!',
                       style: textStyle,
                     ),
-                    const ProfileCircleImage(
-                        radius: 32,
-                        backgroundImage: AppAssets.profileRandomImage1),
-                    Gap.size10,
-                    const ProfileCircleImage(
-                        radius: 72,
-                        backgroundImage: AppAssets.profileRandomImage1),
                   ])
               ],
             ),

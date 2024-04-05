@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:everyones_tone/app/constants/enum/record_status.dart';
+import 'package:everyones_tone/app/enums/record_status.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';

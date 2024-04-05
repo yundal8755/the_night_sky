@@ -1,5 +1,5 @@
 import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/presentation/widgets/molecules/main_app_bar.dart';
+import 'package:everyones_tone/presentation/widgets/main_app_bar.dart';
 import 'package:flutter/material.dart';
 
 ///
@@ -13,12 +13,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PopScope(
+    return PopScope(
       canPop: false,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: MainAppBar(title: '홈'),
-        body: SafeArea(
+        body: const SafeArea(
           child: Center(
               child: Card(
             color: AppColor.neutrals80,

@@ -1,5 +1,7 @@
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_data.dart';
+import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/widgets/main_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +11,13 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (_currentUser == null) {
+      bottomSheet(
+          context: context,
+          child: LoginPage(),
+          bottomSheetType: BottomSheetType.postPage);
+    }
+
     // MediaQuery를 사용하여 화면의 너비와 높이를 얻습니다.
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;

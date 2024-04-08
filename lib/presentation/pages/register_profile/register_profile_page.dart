@@ -4,6 +4,7 @@ import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:everyones_tone/presentation/pages/edit_profile_info/edit_profile_info_view_model.dart';
 import 'package:everyones_tone/presentation/pages/register_profile/register_profile_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/background_gradient.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_button.dart';
@@ -11,15 +12,15 @@ import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 
 class RegisterProfilePage extends StatelessWidget {
-  final String email;
+  final String userEmail;
   final RegisterProfileViewModel registerProfileViewModel =
       RegisterProfileViewModel();
-  RegisterProfilePage({super.key, required this.email});
+  final EditProfileInfoViewModel editProfileInfoViewModel =
+      EditProfileInfoViewModel();
+  RegisterProfilePage({super.key, required this.userEmail});
 
   @override
   Widget build(BuildContext context) {
-    print('유저 이메일: $email');
-
     return PopScope(
       canPop: false,
       child: BackgroundGradient(
@@ -43,7 +44,7 @@ class RegisterProfilePage extends StatelessWidget {
                     children: [
                       Gap.size24,
                       ValueListenableBuilder<String>(
-                        valueListenable: registerProfileViewModel.profilePicUrl,
+                        valueListenable: editProfileInfoViewModel.profilePicUrl,
                         builder: (context, backgroundImage, _) {
                           return ProfileCircleImage(
                             radius: MediaQuery.of(context).size.width / 6,
@@ -53,14 +54,14 @@ class RegisterProfilePage extends StatelessWidget {
                       ),
                       Gap.size16,
                       ValueListenableBuilder<String>(
-                        valueListenable: registerProfileViewModel.nickname,
+                        valueListenable: editProfileInfoViewModel.nickname,
                         builder: (context, value, _) {
                           return Text(value, style: AppTextStyle.titleLarge());
                         },
                       ),
                     ],
                   ),
-      
+
                   //! 버튼
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -78,23 +79,27 @@ class RegisterProfilePage extends StatelessWidget {
                             ),
                             (Route<dynamic> route) => false,
                           );
-                          
+
                           await registerProfileViewModel.registerUserData(
-                              email: email);
+                              userEmail: userEmail,
+                              nickname: editProfileInfoViewModel.nickname.value,
+                              profilePicUrl:
+                                  editProfileInfoViewModel.profilePicUrl.value);
                         },
                       ),
-      
+
                       // 프로필 변경 버튼
                       CustomElevatedButton(
-                          backgroundColor: Colors.transparent,
-                          text: '♻️ 프로필 변경',
-                          textColor: AppColor.neutrals20,
-                          borderSideColor: AppColor.primaryBlue,
-                          onPressed: () {
-                            registerProfileViewModel.generateRandomNickname();
-                            registerProfileViewModel.generateRandomProfileImage();
-                          }),
-      
+                        backgroundColor: Colors.transparent,
+                        text: '♻️ 프로필 변경',
+                        textColor: AppColor.neutrals20,
+                        borderSideColor: AppColor.primaryBlue,
+                        onPressed: () {
+                          editProfileInfoViewModel.generateRandomNickname();
+                          editProfileInfoViewModel.generateRandomProfileImage();
+                        },
+                      ),
+
                       Gap.size24,
                     ],
                   ),

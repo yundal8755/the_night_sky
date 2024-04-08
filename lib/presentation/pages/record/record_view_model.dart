@@ -16,18 +16,20 @@ class RecordViewModel with ChangeNotifier {
 
     // 오디오 재생 완료 리스너 추가
     // 해당 코드 덕분에 재생, 일시정지 상태가 계속 유지됨
-    audioPlayer.onPlayerComplete.listen((event) {
-      isPlaying = false;
-      isPlayingNotifier.value = false;
-      notifyListeners();
-    });
+    audioPlayer.onPlayerComplete.listen(
+      (event) {
+        isPlaying = false;
+        isPlayingNotifier.value = false;
+        notifyListeners();
+      },
+    );
   }
 
   // 녹음 관련 변수
   final record = AudioRecorder();
   final ValueNotifier<RecordStatus> recordingStatusNotifier =
       ValueNotifier<RecordStatus>(RecordStatus.before);
-  String? _audioFilePath;
+  String? audioFilePath;
 
   // Timer 변수
   Timer? _countdownTimer;
@@ -50,13 +52,13 @@ class RecordViewModel with ChangeNotifier {
 
         // 녹음 시작
         await record.start(const RecordConfig(), path: path);
-        _audioFilePath = path;
+        audioFilePath = path;
         recordingStatusNotifier.value = RecordStatus.recording;
 
         notifyListeners();
         print('음성 녹음 시작!');
         print('음성 녹음 상태: ${recordingStatusNotifier.value}');
-        print('음성 녹음 파일 경로: $_audioFilePath');
+        print('음성 녹음 파일 경로: $audioFilePath');
 
         // 타이머 시작
         _startTimer();
@@ -90,14 +92,14 @@ class RecordViewModel with ChangeNotifier {
     try {
       // 녹음을 중지하고, 녹음 파일 경로 반환받기
       final path = await record.stop();
-      _audioFilePath = path;
+      audioFilePath = path;
       _countdownTimer?.cancel();
       recordingStatusNotifier.value = RecordStatus.complete;
 
       notifyListeners();
       print('음성 녹음 완료!');
       print('음성 녹음 상태: ${recordingStatusNotifier.value}');
-      print('음성 녹음 파일 경로: $_audioFilePath');
+      print('음성 녹음 파일 경로: $audioFilePath');
 
       // 타이머 시간 리셋
       remainingTimeNotifier.value = 30;
@@ -108,7 +110,7 @@ class RecordViewModel with ChangeNotifier {
 
   //! 음성 재생, 일시정지
   Future<void> audioPlay() async {
-    if (_audioFilePath == null) {
+    if (audioFilePath == null) {
       print('오디오 파일 경로가 설정되지 않았습니다.');
       return;
     }
@@ -118,7 +120,7 @@ class RecordViewModel with ChangeNotifier {
       await audioPlayer.pause();
     } else {
       // 오디오 파일 재생
-      await audioPlayer.play(UrlSource('file://$_audioFilePath'));
+      await audioPlayer.play(UrlSource('file://$audioFilePath'));
     }
 
     // 재생 상태를 토글하고, 이 변경을 알립니다.
@@ -136,12 +138,12 @@ class RecordViewModel with ChangeNotifier {
       isPlayingNotifier.value = false;
     }
 
-    _audioFilePath = null;
+    audioFilePath = null;
     recordingStatusNotifier.value = RecordStatus.before;
 
     notifyListeners();
     print('음성 녹음 삭제 완료!');
     print('음성 녹음 상태: ${recordingStatusNotifier.value}');
-    print('음성 녹음 파일 경로: $_audioFilePath');
+    print('음성 녹음 파일 경로: $audioFilePath');
   }
 }

@@ -55,7 +55,7 @@ class LoginPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RegisterProfilePage(email: user.email!,),
+                    builder: (context) => RegisterProfilePage(userEmail: user.email!,),
                   ),
                 );
               }
@@ -88,7 +88,7 @@ class LoginPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RegisterProfilePage(email: user.email!,),
+                      builder: (context) => RegisterProfilePage(userEmail: user.email!,),
                     ),
                   );
                 }

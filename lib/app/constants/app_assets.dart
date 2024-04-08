@@ -17,8 +17,9 @@ abstract class AppAssets {
   static const String playDefault32 = 'assets/icons/play_default_32.svg';
   static const String playDefault56 = 'assets/icons/play_default_56.svg';
   static const String popDefault24 = 'assets/icons/pop_default_24.svg';
-  static const String pushDefault24 = 'assets/icons/push_default_24.svg';
   static const String postDefault32 = 'assets/icons/post_default_32.svg';
+  static const String pushDefault24 = 'assets/icons/push_default_24.svg';
+  static const String refreshDefault32 = 'assets/icons/refresh_default_32.svg';
   static const String seeMoreDefault24 = 'assets/icons/see_more_default_24.svg';
 
   //! Images

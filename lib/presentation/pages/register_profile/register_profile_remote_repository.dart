@@ -7,9 +7,9 @@ class RegisterProfileRemoteRepository {
   final currentUserEmail = FirestoreData().currentUserEmail;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> registerUserData(UserModel userdata) async {
+  Future<void> registerUserData(UserModel userModel) async {
     DocumentReference userRef = _firestore.collection('user').doc(currentUserEmail);
 
-    await userRef.set(userdata.toMap());
+    await userRef.set(userModel.toMap());
   }
 }

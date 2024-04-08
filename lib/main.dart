@@ -1,6 +1,8 @@
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:everyones_tone/presentation/pages/edit_profile_info/edit_profile_info_view_model.dart';
 import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
+import 'package:everyones_tone/presentation/pages/record/record_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +17,8 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LoginProvider()),
+        ChangeNotifierProvider(create: (context) => RecordViewModel()),
+        ChangeNotifierProvider(create: (context) => EditProfileInfoViewModel()),
       ],
       child: const MyApp(),
     ),

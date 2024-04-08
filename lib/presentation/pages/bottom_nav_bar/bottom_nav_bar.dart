@@ -3,6 +3,8 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
+import 'package:everyones_tone/app/utils/firestore_data.dart';
+import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/widgets/background_gradient.dart';
 import 'package:everyones_tone/presentation/pages/home/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
@@ -20,6 +22,7 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+  final _currentUser = FirestoreData().currentUser;
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomePage(),
@@ -60,20 +63,26 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
                 //! PostPage
                 IconButton(
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    icon: _currentIndex == 1
-                        ? SvgPicture.asset(AppAssets.postDefault32)
-                        : SvgPicture.asset(AppAssets.postDefault32),
-                    color: _currentIndex == 1
-                        ? AppColor.neutrals20
-                        : AppColor.neutrals60,
-                    onPressed: () {
-                      bottomSheet(
-                          context: context,
-                          child: PostPage(),
-                          bottomSheetType: BottomSheetType.postPage);
-                    }),
+                  splashColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  icon: _currentIndex == 1
+                      ? SvgPicture.asset(AppAssets.postDefault32)
+                      : SvgPicture.asset(AppAssets.postDefault32),
+                  color: _currentIndex == 1
+                      ? AppColor.neutrals20
+                      : AppColor.neutrals60,
+                  onPressed: () {
+                    _currentUser == null
+                        ? bottomSheet(
+                            context: context,
+                            child: LoginPage(),
+                            bottomSheetType: BottomSheetType.loginPage)
+                        : bottomSheet(
+                            context: context,
+                            child: PostPage(),
+                            bottomSheetType: BottomSheetType.postPage);
+                  },
+                ),
 
                 //! ChatPage
                 IconButton(
@@ -86,9 +95,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
-                    setState(() {
-                      _currentIndex = 2;
-                    });
+                    _currentUser == null
+                        ? bottomSheet(
+                            context: context,
+                            child: LoginPage(),
+                            bottomSheetType: BottomSheetType.loginPage)
+                        : setState(() {
+                            _currentIndex = 2;
+                          });
                   },
                 ),
               ],

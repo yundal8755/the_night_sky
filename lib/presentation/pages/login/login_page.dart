@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/pages/register_profile/register_profile_page.dart';
@@ -47,7 +47,7 @@ class LoginPage extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BottomNavBar(),
+                    builder: (context) => BottomNavBarPage(),
                   ),
                   (Route<dynamic> route) => false,
                 );
@@ -80,7 +80,7 @@ class LoginPage extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BottomNavBar(),
+                      builder: (context) => BottomNavBarPage(),
                     ),
                     (Route<dynamic> route) => false,
                   );

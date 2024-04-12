@@ -6,7 +6,7 @@ import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_data.dart';
-import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar.dart';
+import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
@@ -18,7 +18,6 @@ import 'package:provider/provider.dart';
 
 class MyProfilePage extends StatelessWidget {
   final FirestoreData firestoreData = FirestoreData();
-  final _currentUser = FirestoreData().currentUser;
   final LoginViewModel loginViewModel = LoginViewModel();
 
   MyProfilePage({super.key});
@@ -44,7 +43,7 @@ class MyProfilePage extends StatelessWidget {
             Gap.size24,
 
             FutureBuilder(
-              future: firestoreData.fetchUserData(),
+              future: FirestoreData.fetchUserData(),
               builder: (context, snapshot) {
                 String? profilePicUrl = snapshot.data?['profilePicUrl'] ??
                     AppAssets.profileRandomImage1;
@@ -117,7 +116,7 @@ class MyProfilePage extends StatelessWidget {
             ),
             Gap.size24,
 
-            if (_currentUser != null)
+            if (FirestoreData.currentUser != null)
               ElevatedButton(
                 child: Text('로그아웃',
                     style: AppTextStyle.bodyMedium(AppColor.neutrals80)),
@@ -130,7 +129,7 @@ class MyProfilePage extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BottomNavBar(),
+                      builder: (context) => BottomNavBarPage(),
                     ),
                     (Route<dynamic> route) => false,
                   );

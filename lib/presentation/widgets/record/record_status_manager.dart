@@ -7,10 +7,10 @@ import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 
-class RecordViewModel with ChangeNotifier {
+class RecordStatusManager with ChangeNotifier {
   // 클래스 생성자에서 audioPlayer 초기화
   // 초기화하는 이유는 LateInitializationError를 방지하기 위해
-  RecordViewModel() {
+  RecordStatusManager() {
     // AudioPlayer 객체 초기화
     audioPlayer = AudioPlayer();
 

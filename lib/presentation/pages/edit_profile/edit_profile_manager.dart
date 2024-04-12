@@ -1,10 +1,11 @@
 import 'dart:math';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/utils/firestore_data.dart';
 import 'package:flutter/material.dart';
 
-class EditProfileInfoViewModel extends ChangeNotifier {
-
-  //! 리스트 모움잡
+class EditProfileManager extends ChangeNotifier {
+  //! 랜덤 리스트
   List<String> adjectiveWords = [
     '행복한',
     '즐거운',
@@ -77,14 +78,17 @@ class EditProfileInfoViewModel extends ChangeNotifier {
     AppAssets.profileRandomImage5,
   ];
 
+  //! 변수 설정
   ValueNotifier<String> nickname = ValueNotifier<String>('');
   ValueNotifier<String> profilePicUrl = ValueNotifier<String>('');
 
-  EditProfileInfoViewModel() {
+  //! Constructor
+  EditProfileManager() {
     generateRandomNickname();
-    generateRandomProfileImage(); // 초기 프로필 이미지 설정
+    generateRandomProfileImage();
   }
 
+  //!
   void generateRandomNickname() {
     final random = Random();
     final adjective = adjectiveWords[random.nextInt(adjectiveWords.length)];
@@ -96,5 +100,24 @@ class EditProfileInfoViewModel extends ChangeNotifier {
     final random = Random();
     profilePicUrl.value =
         randomProfileImages[random.nextInt(randomProfileImages.length)];
+  }
+
+  //!
+  Future<void> editUserData({
+    required String nickname,
+    required String profilePicUrl,
+  }) async {
+    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+    DocumentReference userRef =
+        _firestore.collection('user').doc(FirestoreData.currentUserEmail);
+
+    // nickname과 profilePicUrl 필드만 업데이트합니다.
+    await userRef.update({
+      'nickname': nickname,
+      'profilePicUrl': profilePicUrl,
+    });
+
+    notifyListeners();
   }
 }

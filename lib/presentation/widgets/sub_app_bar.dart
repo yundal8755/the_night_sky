@@ -1,9 +1,11 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:everyones_tone/app/enums/record_status.dart';
-import 'package:everyones_tone/presentation/pages/record/record_view_model.dart';
+import 'package:everyones_tone/presentation/widgets/record/record_status_manager.dart';
 
 class SubAppBar extends StatelessWidget {
   final String title;
@@ -19,7 +21,7 @@ class SubAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ViewModel을 context에서 읽어오기
-    final recordViewModel = Provider.of<RecordViewModel>(context);
+    final recordStatusManager = Provider.of<RecordStatusManager>(context);
 
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 16.0),
@@ -48,7 +50,7 @@ class SubAppBar extends StatelessWidget {
 
           // 완료 버튼
           // 음성 녹음 파일 있으면 완료 버튼 활성화하기
-          Consumer<RecordViewModel>(
+          Consumer<RecordStatusManager>(
             builder: (context, model, child) {
               return TextButton(
                 onPressed: model.recordingStatusNotifier.value == RecordStatus.complete

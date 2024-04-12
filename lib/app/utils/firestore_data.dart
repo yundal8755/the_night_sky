@@ -4,10 +4,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirestoreData {
-  final currentUser = FirebaseAuth.instance.currentUser;
-  final currentUserEmail = FirebaseAuth.instance.currentUser?.email!;
+  static final currentUser = FirebaseAuth.instance.currentUser;
+  static final currentUserEmail = FirebaseAuth.instance.currentUser?.email!;
 
-  Future<Map<String, dynamic>?> fetchUserData() async {
+  static Future<Map<String, dynamic>?> fetchUserData() async {
     if (currentUser != null) {
       final userDoc =
           FirebaseFirestore.instance.collection('user').doc(currentUserEmail);

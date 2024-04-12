@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  final FirestoreData firestoreData = FirestoreData();
 
   MainAppBar({super.key, required this.title});
 
@@ -36,7 +35,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                   bottomSheetType: BottomSheetType.profilePage);
             },
             child: FutureBuilder(
-              future: firestoreData.fetchUserData(),
+              future: FirestoreData.fetchUserData(),
               builder: (context, snapshot) {
                 String? profilePicUrl = snapshot.data?['profilePicUrl'] ??
                     AppAssets.profileBasicImage;

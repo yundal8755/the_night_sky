@@ -1,9 +1,9 @@
-import 'package:everyones_tone/presentation/pages/record/record_view_model.dart';
+import 'package:everyones_tone/presentation/widgets/record/record_status_manager.dart';
 import 'package:flutter/material.dart';
 
 class AudioPlayButton extends StatelessWidget {
-  final RecordViewModel recordViewModel;
-  const AudioPlayButton({super.key, required this.recordViewModel});
+  final RecordStatusManager recordStatusManager;
+  const AudioPlayButton({super.key, required this.recordStatusManager});
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +23,10 @@ class AudioPlayButton extends StatelessWidget {
               shape: const CircleBorder(),
               padding: const EdgeInsets.all(24),
             ),
-            onPressed: recordViewModel.audioPlay,
+            onPressed: recordStatusManager.audioPlay,
             child: ValueListenableBuilder<bool>(
               valueListenable:
-                  recordViewModel.isPlayingNotifier, // isPlaying 상태를 listen
+                  recordStatusManager.isPlayingNotifier, // isPlaying 상태를 listen
               builder: (context, isPlaying, child) {
                 return Icon(isPlaying ? Icons.pause : Icons.play_arrow);
               },
@@ -39,7 +39,7 @@ class AudioPlayButton extends StatelessWidget {
             width: 55,
             height: 55,
             child: TextButton(
-              onPressed: () => recordViewModel.resetRecording(),
+              onPressed: () => recordStatusManager.resetRecording(),
               child: const Icon(Icons.undo),
             ),
           ),

@@ -16,13 +16,12 @@ import '../chat/chat_page.dart';
 /// 왼쪽부터 오른쪽 순으로 HomePage, PostPage, ChatPage를 표시하는 BottomNavBar입니다.
 ///
 
-class BottomNavBar extends StatefulWidget {
+class BottomNavBarPage extends StatefulWidget {
   @override
-  _BottomNavBarState createState() => _BottomNavBarState();
+  _BottomNavBarPageState createState() => _BottomNavBarPageState();
 }
 
-class _BottomNavBarState extends State<BottomNavBar> {
-  final _currentUser = FirestoreData().currentUser;
+class _BottomNavBarPageState extends State<BottomNavBarPage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     HomePage(),
@@ -72,7 +71,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
-                    _currentUser == null
+                    FirestoreData.currentUser == null
                         ? bottomSheet(
                             context: context,
                             child: LoginPage(),
@@ -95,7 +94,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
-                    _currentUser == null
+                    FirestoreData.currentUser == null
                         ? bottomSheet(
                             context: context,
                             child: LoginPage(),

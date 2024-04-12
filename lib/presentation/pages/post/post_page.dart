@@ -4,8 +4,9 @@ import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/enums/record_status.dart';
 import 'package:everyones_tone/app/utils/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/post/post_view_model.dart';
-import 'package:everyones_tone/presentation/pages/record/record_page.dart';
-import 'package:everyones_tone/presentation/pages/record/record_view_model.dart';
+import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_status_card.dart';
+import 'package:everyones_tone/presentation/widgets/record/record_status_button_page.dart';
+import 'package:everyones_tone/presentation/widgets/record/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/custom_text_field.dart';
 import 'package:everyones_tone/presentation/widgets/sub_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +19,8 @@ class PostPage extends StatelessWidget {
   Widget build(BuildContext context) {
     const String hintText = '제목을 입력해주세요!';
     final PostViewModel postViewModel = PostViewModel();
-    final FirestoreData firestoreData = FirestoreData();
-    final recordViewModel =
-        Provider.of<RecordViewModel>(context, listen: false);
+    final recordStatusManager =
+        Provider.of<RecordStatusManager>(context, listen: false);
     final textEditingController = TextEditingController();
 
     return SafeArea(
@@ -54,21 +54,21 @@ class PostPage extends StatelessWidget {
                       ? hintText
                       : textEditingController.text;
                   // 오디오 URL
-                  String audioUrl = recordViewModel.audioFilePath!;
+                  String localAudioUrl = recordStatusManager.audioFilePath!;
 
                   // Firestore에 저장된 User의 Data
                   Map<String, dynamic>? userData =
-                      await firestoreData.fetchUserData();
+                      await FirestoreData.fetchUserData();
 
                   await postViewModel.uploadPost(
                       postTitle: postTitle,
-                      audioUrl: audioUrl,
+                      localAudioUrl: localAudioUrl,
                       userData: userData!);
 
                   //! RecordStatus, audioUrl 초기화
-                  recordViewModel.recordingStatusNotifier.value =
+                  recordStatusManager.recordingStatusNotifier.value =
                       RecordStatus.before;
-                  recordViewModel.audioFilePath = null;
+                  recordStatusManager.audioFilePath = null;
 
                   //! Route
                   Navigator.pop(context); // 다이얼로그 닫기
@@ -76,12 +76,13 @@ class PostPage extends StatelessWidget {
                 },
               ),
               CustomTextField(
-                hintText: hintText,
+                hintText: '제목을 입력해주세요!',
                 textEditingController: textEditingController,
               ),
+              EditProfileStatusCard()
             ],
           ),
-          RecordPage()
+          RecordStatusButtonPage()
         ],
       ),
     );

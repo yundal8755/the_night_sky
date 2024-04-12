@@ -6,12 +6,11 @@ import 'package:everyones_tone/presentation/widgets/main_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
-  final _currentUser = FirestoreData().currentUser;
   ChatPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    if (_currentUser == null) {
+    if (FirestoreData.currentUser == null) {
       bottomSheet(
           context: context,
           child: LoginPage(),
@@ -43,8 +42,8 @@ class ChatPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                if (_currentUser == null) const Text('로그인 해주세요!'),
-                if (_currentUser != null)
+                if (FirestoreData.currentUser == null) const Text('로그인 해주세요!'),
+                if (FirestoreData.currentUser != null)
                   Column(children: [
                     Text(
                       '당신의 음색을 녹음해주세요!',

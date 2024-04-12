@@ -1,11 +1,11 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/presentation/pages/record/record_view_model.dart';
+import 'package:everyones_tone/presentation/widgets/record/record_status_manager.dart';
 import 'package:flutter/material.dart';
 
 class RecordingButton extends StatelessWidget {
-  final RecordViewModel recordViewModel;
-  const RecordingButton({super.key, required this.recordViewModel});
+  final RecordStatusManager recordStatusManager;
+  const RecordingButton({super.key, required this.recordStatusManager});
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +16,9 @@ class RecordingButton extends StatelessWidget {
         backgroundColor: Colors.transparent,
         side: const BorderSide(color: AppColor.primaryBlue, width: 2.0),
       ),
-      onPressed: recordViewModel.stopRecording,
+      onPressed: recordStatusManager.stopRecording,
       child: ValueListenableBuilder<int>(
-        valueListenable: recordViewModel.remainingTimeNotifier,
+        valueListenable: recordStatusManager.remainingTimeNotifier,
         builder: (context, value, child) {
           return Center(
             child: SizedBox(

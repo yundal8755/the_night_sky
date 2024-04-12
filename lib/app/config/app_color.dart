@@ -24,6 +24,6 @@ abstract class AppColor {
   static const backgroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFF02121e), AppColor.neutrals80],
+    colors: [Color(0xFF02121e), Colors.black87],
   );
 }

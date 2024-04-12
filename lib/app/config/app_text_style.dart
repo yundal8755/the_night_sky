@@ -32,7 +32,7 @@ abstract class AppTextStyle {
   /// ProfilePage -> 닉네임
   static TextStyle titleLarge([Color color = AppColor.neutrals20]) => TextStyle(
         fontFamily: 'PretendardVariable',
-        fontSize: 18,
+        fontSize: 22,
         fontWeight: FontWeight.bold,
         color: color,
         letterSpacing: -0.2,
@@ -47,7 +47,7 @@ abstract class AppTextStyle {
         fontSize: 16,
         fontWeight: FontWeight.w600,
         color: color,
-        letterSpacing: 0.2,
+        letterSpacing: 0,
       );
 
   //! 중요도가 비교적 낮은 일반적인 텍스트에 주로 사용된다
@@ -61,7 +61,7 @@ abstract class AppTextStyle {
       fontSize: 16,
       fontWeight: FontWeight.w500,
       color: color,
-      letterSpacing: 0.2);
+      letterSpacing: 0);
 
   //! 이용약관에 주로 사용된다
   /// SnsLoginPage -> 이용약관

@@ -1,28 +1,61 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/presentation/widgets/main_app_bar.dart';
+import 'package:everyones_tone/presentation/widgets/posting_card.dart';
 import 'package:flutter/material.dart';
-
-///
-/// 사용자의 게시물을 ListViewBuilder 형식으로 나열하는 페이지입니다.
-/// Firestore의 메타데이터 정보를 화면에 보여주는 역할을 합니다.
-/// 현재는 한 페이지 당 하나의 게시물만 볼 수 있도록 구성할 계획입니다.
-///
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: MainAppBar(title: '홈'),
-        body: const SafeArea(
-          child: Center(
-              child: Card(
-            color: AppColor.neutrals80,
-          )),
+    final postCollection = FirebaseFirestore.instance.collection('post');
+
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      appBar: MainAppBar(title: '홈'),
+      body: SafeArea(
+        child: StreamBuilder<QuerySnapshot>(
+          stream: postCollection.snapshots(),
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  color: AppColor.primaryBlue,
+                ),
+              );
+            } else if (snapshot.hasError) {
+              return const Center(
+                child: Text(
+                  '에러가 발생했습니다',
+                  style: TextStyle(color: AppColor.neutrals20),
+                ),
+              );
+            }
+
+            // 스냅샷에서 문서 데이터를 추출
+            List<DocumentSnapshot> docs = snapshot.data!.docs;
+
+            return PageView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: docs.length,
+              itemBuilder: (context, index) {
+                var post = docs[index].data() as Map<String, dynamic>;
+                String audioUrl = post['audioUrl'];
+                String nickname = post['nickname'];
+                String postTitle = post['postTitle'];
+                String profilePicUrl = post['profilePicUrl'];
+
+                return Center(
+                    child: PostingCard(
+                  audioUrl: audioUrl,
+                  profilePicUrl: profilePicUrl,
+                  nickname: nickname,
+                  postTitle: postTitle,
+                ));
+              },
+            );
+          },
         ),
       ),
     );

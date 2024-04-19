@@ -17,7 +17,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class MyProfilePage extends StatelessWidget {
-  final FirestoreData firestoreData = FirestoreData();
   final LoginViewModel loginViewModel = LoginViewModel();
 
   MyProfilePage({super.key});

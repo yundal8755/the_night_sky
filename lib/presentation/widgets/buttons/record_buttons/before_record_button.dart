@@ -1,6 +1,6 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/presentation/widgets/record/record_status_manager.dart';
+import 'package:everyones_tone/presentation/pages/record/record_status_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

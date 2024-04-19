@@ -20,7 +20,7 @@ class TonePlayer extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         ProfileCircleImage(
-          radius: MediaQuery.of(context).size.width / 3,
+          radius: MediaQuery.of(context).size.width / 2.75,
           opacity: 0.3,
           backgroundImage: backgroundImage,
         ),

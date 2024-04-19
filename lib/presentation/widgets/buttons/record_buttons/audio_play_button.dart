@@ -1,4 +1,4 @@
-import 'package:everyones_tone/presentation/widgets/record/record_status_manager.dart';
+import 'package:everyones_tone/presentation/pages/record/record_status_manager.dart';
 import 'package:flutter/material.dart';
 
 class AudioPlayButton extends StatelessWidget {

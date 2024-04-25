@@ -1,13 +1,13 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/models/post_model.dart';
-import 'package:everyones_tone/presentation/pages/post/post_remote_repository.dart';
+import 'package:everyones_tone/presentation/pages/post/post_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:intl/intl.dart';
 
 class PostViewModel {
-  final PostRemoteRepository postRemoteRepository = PostRemoteRepository();
+  final PostRepository postRemoteRepository = PostRepository();
 
   FirebaseStorage storage = FirebaseStorage.instance;
 
@@ -53,8 +53,8 @@ class PostViewModel {
     String nickname = userData['nickname'] ?? '';
     String userEmail = userData['userEmail'] ?? '';
     String profilePicUrl = userData['profilePicUrl'] ?? '';
-
-    Timestamp dateCreated = Timestamp.fromDate(DateTime.now());
+    String dateCreated = DateFormat("yyyy'년' MM'월' dd'일' HH'시' mm'분' ss'초'")
+        .format(DateTime.now());
 
     PostModel postModel = PostModel(
       nickname: nickname,
@@ -66,6 +66,6 @@ class PostViewModel {
     );
 
     print('PostViewModel 실행 완료!');
-    await postRemoteRepository.uploadPost(postModel);
+    await postRemoteRepository.uploadPostRemote(postModel);
   }
 }

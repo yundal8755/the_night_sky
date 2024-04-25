@@ -4,8 +4,9 @@ import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/repository/database_helper.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
-import 'package:everyones_tone/app/utils/firestore_data.dart';
+import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
@@ -66,8 +67,8 @@ class MyProfilePage extends StatelessWidget {
                   );
                 } else if (snapshot.hasError) {
                   return Center(child: Text('오류가 발생했습니다.'));
-                } 
-                
+                }
+
                 //! 로그인 상태
                 else {
                   return Column(
@@ -148,6 +149,17 @@ class MyProfilePage extends StatelessWidget {
                   style: AppTextStyle.bodyMedium(AppColor.neutrals80),
                 ),
               ),
+
+            ElevatedButton(
+              onPressed: () async {
+                final databaseHelper = DatabaseHelper();
+                await databaseHelper.deleteDatabaseFile();
+              },
+              child: Text(
+                'DB 파일 삭제',
+                style: AppTextStyle.bodyMedium(AppColor.neutrals80),
+              ),
+            ),
           ],
         ));
   }

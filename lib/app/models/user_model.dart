@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserModel {
   final String nickname;
   final String profilePicUrl;
   final String userEmail;
-  final Timestamp dateCreated;
+  final String dateCreated;
 
   UserModel({
     required this.nickname,

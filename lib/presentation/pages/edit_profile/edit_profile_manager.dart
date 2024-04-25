@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/app/utils/firestore_data.dart';
+import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:flutter/material.dart';
 
 class EditProfileManager extends ChangeNotifier {

@@ -15,8 +15,7 @@ class RegisterProfilePage extends StatelessWidget {
   final String userEmail;
   final RegisterProfileViewModel registerProfileViewModel =
       RegisterProfileViewModel();
-  final EditProfileManager editProfileInfoViewModel =
-      EditProfileManager();
+  final EditProfileManager editProfileInfoViewModel = EditProfileManager();
   RegisterProfilePage({super.key, required this.userEmail});
 
   @override

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PostModel {
   final String postTitle;
@@ -6,7 +5,7 @@ class PostModel {
   final String userEmail;
   final String nickname;
   final String profilePicUrl;
-  final Timestamp dateCreated;
+  final String dateCreated;
 
   PostModel({
     required this.postTitle,

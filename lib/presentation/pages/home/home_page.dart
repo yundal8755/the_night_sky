@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/repository/database_helper.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/profile_page_button.dart';
 import 'package:everyones_tone/presentation/widgets/posting_card.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,16 @@ class _HomePageState extends State<HomePage> {
   final postCollection = FirebaseFirestore.instance.collection('post');
   String currentDocumentId = '';
   int currentPageIndex = 0;
+  final DatabaseHelper databaseHelper = DatabaseHelper();
+
+  @override
+  void initState() {
+    setState(() {
+      // 테이블 조회
+       databaseHelper.fetchTableData();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

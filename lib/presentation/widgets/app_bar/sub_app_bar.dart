@@ -24,7 +24,7 @@ class SubAppBar extends StatelessWidget {
     final recordStatusManager = Provider.of<RecordStatusManager>(context);
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: const BoxDecoration(
         border: Border(
           bottom: BorderSide(color: AppColor.neutrals60, width: 0.5),

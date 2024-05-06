@@ -7,7 +7,7 @@ import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_manager.dart';
 import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_page.dart';
-import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';

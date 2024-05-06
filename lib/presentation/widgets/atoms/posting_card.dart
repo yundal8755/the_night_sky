@@ -4,7 +4,7 @@ import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_page.dart';
-import 'package:everyones_tone/presentation/widgets/tone_player.dart';
+import 'package:everyones_tone/presentation/widgets/atoms/tone_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -39,11 +39,13 @@ class PostingCard extends StatelessWidget {
           children: <Widget>[
             // 음성 재생 버튼
             TonePlayer(
-                audioUrl: audioUrl,
-                backgroundImage: profilePicUrl,
-                pauseIconSize: AppAssets.pauseDefault56,
-                playIconSize: AppAssets.playDefault56),
-      
+              audioUrl: audioUrl,
+              backgroundImage: profilePicUrl,
+              pauseIconSize: AppAssets.pauseDefault56,
+              playIconSize: AppAssets.playDefault56,
+              radius: MediaQuery.of(context).size.width / 2.75,
+            ),
+
             // 게시글 정보
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -64,7 +66,7 @@ class PostingCard extends StatelessWidget {
                 ),
               ],
             ),
-      
+
             // 답장 버튼
             Container(
               alignment: Alignment.centerRight,

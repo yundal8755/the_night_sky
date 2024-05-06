@@ -11,8 +11,8 @@ import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
-import 'package:everyones_tone/presentation/widgets/bottom_sheet_indicator.dart';
-import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/atoms/bottom_sheet_indicator.dart';
+import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';

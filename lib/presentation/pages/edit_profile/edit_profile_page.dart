@@ -3,9 +3,9 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
+import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_button.dart';
 import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_manager.dart';
-import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatelessWidget {

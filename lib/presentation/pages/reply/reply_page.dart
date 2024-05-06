@@ -7,7 +7,7 @@ import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_stat
 import 'package:everyones_tone/presentation/pages/reply/reply_view_model.dart';
 import 'package:everyones_tone/presentation/pages/record/record_status_button_page.dart';
 import 'package:everyones_tone/presentation/pages/record/record_status_manager.dart';
-import 'package:everyones_tone/presentation/widgets/sub_app_bar.dart';
+import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

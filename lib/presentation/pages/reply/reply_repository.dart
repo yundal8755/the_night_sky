@@ -9,7 +9,19 @@ class ReplyRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
   final DatabaseHelper databaseHelper = DatabaseHelper();
 
-  //! Firestore
+  //! Firestore - myChat SubCollection method
+  Future<void> createUserChatSubcollection(
+      String userEmail, String chatId) async {
+    final DocumentReference userRef =
+        firestore.collection('user').doc(userEmail);
+    final CollectionReference myChatRef = userRef.collection('myChat');
+    final DocumentReference newDocRef = myChatRef.doc(chatId);
+    await newDocRef.set({
+      'chatId': chatId,
+    });
+  }
+
+  //! Firestore - chat Collection method
   Future<void> uploadReplyRemote(ChatModel chatModel,
       MessageModel postMessageModel, MessageModel replyMessageModel) async {
     /// Chat Doc 생성 및 ID 할당
@@ -26,12 +38,16 @@ class ReplyRepository {
     postMessageModel.messageId = postMessageRef.id;
     await postMessageRef.set(postMessageModel.toMap());
 
+    await createUserChatSubcollection(postMessageModel.userEmail, chatRef.id);
+
     /// Reply Message 정보 저장 및 ID 할당
     final DocumentReference replyMessageRef =
         chatRef.collection('message').doc();
     replyMessageModel.chatId = chatRef.id;
     replyMessageModel.messageId = replyMessageRef.id;
     await replyMessageRef.set(replyMessageModel.toMap());
+
+    await createUserChatSubcollection(replyMessageModel.userEmail, chatRef.id);
   }
 
   //! SQflite

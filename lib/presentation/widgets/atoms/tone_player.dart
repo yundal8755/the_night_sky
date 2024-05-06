@@ -1,5 +1,5 @@
+import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/play_icon_button.dart';
-import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 
 class TonePlayer extends StatelessWidget {
@@ -7,12 +7,15 @@ class TonePlayer extends StatelessWidget {
   final String audioUrl;
   final String pauseIconSize;
   final String playIconSize;
+  final double radius;
   const TonePlayer(
       {super.key,
       required this.audioUrl,
       required this.backgroundImage,
       required this.pauseIconSize,
-      required this.playIconSize});
+      required this.playIconSize,
+      required this.radius
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class TonePlayer extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         ProfileCircleImage(
-          radius: MediaQuery.of(context).size.width / 2.75,
+          radius: radius,
           opacity: 0.3,
           backgroundImage: backgroundImage,
         ),

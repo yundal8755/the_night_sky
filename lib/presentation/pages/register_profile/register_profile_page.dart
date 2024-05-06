@@ -6,9 +6,9 @@ import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_manager.dart';
 import 'package:everyones_tone/presentation/pages/register_profile/register_profile_view_model.dart';
-import 'package:everyones_tone/presentation/widgets/background_gradient.dart';
+import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/layout/background_gradient.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_button.dart';
-import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 
 class RegisterProfilePage extends StatelessWidget {

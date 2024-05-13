@@ -8,6 +8,7 @@ abstract class AppColor {
   static const neutrals40 = Color(0xFFAAAAAA);
   static const neutrals60 = Color(0xFF626262);
   static const neutrals80 = Color(0xFF1F1F1F);
+  static const neutrals90 = Color(0xFF131313);
 
   // 메인색
   static const primaryBlue = Color(0xFF118EEF);
@@ -19,6 +20,11 @@ abstract class AppColor {
 
   // 보조색
   static const secondaryRed = Color(0xFFfc325d);
+  static const secondaryOrange = Color(0xFFFF9800);
+  static const secondaryYellow = Color(0xFFFFEB3B);
+  static const secondaryGreen = Color(0xFF4CAF50);
+  static const secondaryIndigo = Color(0xFF3F51B5);
+  static const secondaryPurple = Color(0xFF9C27B0);
 
   // 배경색
   static const backgroundGradient = LinearGradient(

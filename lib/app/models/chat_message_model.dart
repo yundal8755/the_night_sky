@@ -1,11 +1,11 @@
-class MessageModel {
+class ChatMessageModel {
   String? chatId;
   String? messageId;
   String audioUrl;
   String dateCreated;
   String userEmail;
 
-  MessageModel({
+  ChatMessageModel({
     this.chatId,
     this.messageId,
     required this.audioUrl,

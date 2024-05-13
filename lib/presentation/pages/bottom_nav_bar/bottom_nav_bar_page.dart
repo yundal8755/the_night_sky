@@ -10,7 +10,7 @@ import 'package:everyones_tone/presentation/pages/home/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../chat/chat_page.dart';
+import '../chat_thumbnail/chat_thumbnail_page.dart';
 
 ///
 /// 왼쪽부터 오른쪽 순으로 HomePage, PostPage, ChatPage를 표시하는 BottomNavBar입니다.
@@ -26,7 +26,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   final List<Widget> _children = [
     HomePage(),
     PostPage(),
-    ChatPage(),
+    ChatThumbnailPage(),
   ];
 
   @override

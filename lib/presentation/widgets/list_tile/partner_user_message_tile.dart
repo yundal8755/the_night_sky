@@ -1,22 +1,23 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/tone_player.dart';
+import 'package:everyones_tone/presentation/widgets/audio_player/circle_audio_player.dart';
 import 'package:flutter/material.dart';
 
-class ChatMessageTile extends StatelessWidget {
-  // final String audioUrl;
+class PartnerUserMessageTile extends StatelessWidget {
+  final String audioUrl;
   final String backgroundImage;
   final String nickname;
+  final String dateCreated;
 
-  const ChatMessageTile({
-    super.key,
-    // required this.audioUrl,
-    required this.backgroundImage,
-    required this.nickname,
-  });
+  const PartnerUserMessageTile(
+      {super.key,
+      required this.audioUrl,
+      required this.backgroundImage,
+      required this.nickname,
+      required this.dateCreated});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,8 @@ class ChatMessageTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              TonePlayer(
-                audioUrl: 'abc',
+              CircleAudioPlayer(
+                audioUrl: audioUrl,
                 backgroundImage: backgroundImage,
                 pauseIconSize: AppAssets.pauseDefault32,
                 playIconSize: AppAssets.playDefault32,
@@ -45,8 +46,8 @@ class ChatMessageTile extends StatelessWidget {
                     nickname,
                     style: AppTextStyle.bodyMedium(),
                   ),
-                  const Text('안녕하세요',
-                      style: TextStyle(color: AppColor.neutrals20))
+                  Text(dateCreated,
+                      style: TextStyle(color: AppColor.neutrals60))
                 ],
               )
             ],

@@ -3,7 +3,8 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/models/chat_model.dart';
-import 'package:everyones_tone/app/models/message_model.dart';
+import 'package:everyones_tone/app/models/chat_message_model.dart';
+import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
@@ -58,31 +59,56 @@ class ReplyViewModel {
     String replyUserNickname = replyUserData['nickname'] ?? '';
     String replyUserEmail = replyUserData['userEmail'] ?? '';
     String replyUserProfilePicUrl = replyUserData['profilePicUrl'] ?? '';
-    String dateCreated = DateFormat("yyyy'년' MM'월' dd'일' HH'시' mm'분' ss'초'")
-        .format(DateTime.now());
+    String dateCreated = DateFormat("MM/dd HH:mm").format(DateTime.now());
 
     /// 최초 메신저의 post data 가져오기
-    DocumentSnapshot postUserInfo =
+    DocumentSnapshot postUserData =
         await firestore.collection('post').doc(replyDocmentId).get();
 
-    /// Chat Model 생성
+    bool isCurrentUserPostUser =
+        FirestoreData.currentUserEmail == postUserData['userEmail'];
+
     ChatModel chatModel = ChatModel(
-        postUserNickname: postUserInfo['nickname'],
-        postUserEmail: postUserInfo['userEmail'],
-        postUserProfilePicUrl: postUserInfo['profilePicUrl'],
-        postTitle: postUserInfo['postTitle'],
-        replyUserNickname: replyUserNickname,
-        replyUserEmail: replyUserEmail,
-        replyUserProfilePicUrl: replyUserProfilePicUrl,
-        dateCreated: dateCreated);
+      currentUserNickname: isCurrentUserPostUser
+          ? postUserData['nickname']
+          : replyUserData['nickname'],
+
+      currentUserEmail: isCurrentUserPostUser
+          ? postUserData['userEmail']
+          : replyUserData['userEmail'],
+
+      currentUserProfilePicUrl: isCurrentUserPostUser
+          ? postUserData['profilePicUrl']
+          : replyUserData['profilePicUrl'],
+
+      dateCreated: dateCreated,
+
+      partnerUserNickname: isCurrentUserPostUser
+          ? replyUserData['nickname']
+          : postUserData['nickname'],
+      partnerUserEmail: isCurrentUserPostUser
+          ? replyUserData['userEmail']
+          : postUserData['userEmail'],
+      partnerUserProfilePicUrl: isCurrentUserPostUser
+          ? replyUserData['profilePicUrl']
+          : postUserData['profilePicUrl'],
+
+      postUserNickname: postUserData['nickname'],
+      postUserEmail: postUserData['userEmail'],
+      postUserProfilePicUrl: postUserData['profilePicUrl'],
+      postTitle: postUserData['postTitle'],
+      replyUserNickname: replyUserNickname,
+      replyUserEmail: replyUserEmail,
+      replyUserProfilePicUrl: replyUserProfilePicUrl,
+    );
 
     /// Post Message Model 생성
-    MessageModel postMessageModel = MessageModel(
-        audioUrl: postUserInfo['audioUrl'],
-        dateCreated: postUserInfo['dateCreated'],
-        userEmail: postUserInfo['userEmail']);
+    ChatMessageModel postMessageModel = ChatMessageModel(
+        audioUrl: postUserData['audioUrl'],
+        dateCreated: postUserData['dateCreated'],
+        userEmail: postUserData['userEmail']);
 
-    MessageModel replyMessageModel = MessageModel(
+    ChatMessageModel replyMessageModel = ChatMessageModel(
         audioUrl: replyUserAudioUrl,
         dateCreated: dateCreated,
         userEmail: replyUserEmail);
@@ -94,7 +120,7 @@ class ReplyViewModel {
         chatModel, postMessageModel, replyMessageModel);
 
     /// SQflite 업로드
-    await replyRemoteRepository.uploadReplyLocal(
-        chatModel, postMessageModel, replyMessageModel);
+    // await replyRemoteRepository.uploadReplyLocal(
+    //     chatModel, postMessageModel, replyMessageModel);
   }
 }

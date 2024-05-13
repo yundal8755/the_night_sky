@@ -1,14 +1,13 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
 
 import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/enums/record_status.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/post/post_view_model.dart';
 import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_status_card.dart';
-import 'package:everyones_tone/presentation/pages/record/record_status_button_page.dart';
-import 'package:everyones_tone/presentation/pages/record/record_status_manager.dart';
+import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/custom_text_field.dart';
+import 'package:everyones_tone/presentation/widgets/buttons/record_buttons/record_status_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -65,10 +64,7 @@ class PostPage extends StatelessWidget {
                       localAudioUrl: localAudioUrl,
                       userData: userData!);
 
-                  //! RecordStatus, audioUrl 초기화
-                  recordStatusManager.recordingStatusNotifier.value =
-                      RecordStatus.before;
-                  recordStatusManager.audioFilePath = null;
+                  recordStatusManager.resetToBefore();
 
                   //! Route
                   Navigator.pop(context); // 다이얼로그 닫기
@@ -82,7 +78,7 @@ class PostPage extends StatelessWidget {
               EditProfileStatusCard()
             ],
           ),
-          RecordStatusButtonPage()
+          RecordStatusButton()
         ],
       ),
     );

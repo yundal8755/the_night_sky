@@ -146,4 +146,11 @@ class RecordStatusManager with ChangeNotifier {
     print('음성 녹음 상태: ${recordingStatusNotifier.value}');
     print('음성 녹음 파일 경로: $audioFilePath');
   }
+
+  // RecordStatusManager 클래스 내에 추가
+  void resetToBefore() {
+    audioFilePath = null;
+    recordingStatusNotifier.value = RecordStatus.before;
+    notifyListeners(); // 이 메소드는 클래스 내부에서 호출됩니다.
+  }
 }

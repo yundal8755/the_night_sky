@@ -1,6 +1,6 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/presentation/pages/record/record_status_manager.dart';
+import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:flutter/material.dart';
 
 class RecordingButton extends StatelessWidget {

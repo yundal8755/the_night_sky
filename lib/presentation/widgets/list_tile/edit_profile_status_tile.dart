@@ -12,29 +12,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class EditProfileStatusCard extends StatefulWidget {
-  const EditProfileStatusCard({super.key});
+class EditProfileStatusTile extends StatefulWidget {
+  const EditProfileStatusTile({super.key});
 
   @override
-  State<EditProfileStatusCard> createState() => _EditProfileStatusCardState();
+  State<EditProfileStatusTile> createState() => _EditProfileStatusTileState();
 }
 
-class _EditProfileStatusCardState extends State<EditProfileStatusCard> {
+class _EditProfileStatusTileState extends State<EditProfileStatusTile> {
   final EditProfileManager editProfileManager = EditProfileManager();
   final recordingStatusNotifier =
       ValueNotifier<RecordStatus>(RecordStatus.before);
-  String _getMessageText(RecordStatus status) {
-    switch (status) {
-      case RecordStatus.before:
-        return '음성을 녹음해주세요!';
-      case RecordStatus.recording:
-        return '음성을 녹음중이에요!';
-      case RecordStatus.complete:
-        return '음성 녹음이 완료됐어요!';
-      default:
-        return '';
-    }
-  }
 
   Map<String, dynamic> userData = {};
   String profilePicUrl = AppAssets.profileBasicImage;
@@ -64,7 +52,6 @@ class _EditProfileStatusCardState extends State<EditProfileStatusCard> {
   @override
   Widget build(BuildContext context) {
     final editProfileManager = Provider.of<EditProfileManager>(context);
-    RecordStatus recordStatus = recordingStatusNotifier.value;
     return Container(
       margin: const EdgeInsets.all(16),
       child: Row(
@@ -90,9 +77,8 @@ class _EditProfileStatusCardState extends State<EditProfileStatusCard> {
                   ValueListenableBuilder<RecordStatus>(
                     valueListenable: recordingStatusNotifier,
                     builder: (context, status, child) {
-                      String messageText = _getMessageText(recordStatus);
                       return Text(
-                        messageText,
+                        '음성을 녹음해주세요!',
                         style: AppTextStyle.labelMedium(AppColor.primaryBlue),
                       );
                     },
@@ -108,7 +94,7 @@ class _EditProfileStatusCardState extends State<EditProfileStatusCard> {
             onPressed: () {
               bottomSheet(
                   context: context,
-                  child: EditProfilePage(),
+                  child: const EditProfilePage(),
                   bottomSheetType: BottomSheetType.postPage);
             },
             icon: SvgPicture.asset(AppAssets.refreshDefault32),

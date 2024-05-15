@@ -24,7 +24,7 @@ class EditProfilePage extends StatelessWidget {
             children: [
               //! AppBar
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 16.0),
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

@@ -2,7 +2,7 @@
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_status_card.dart';
+import 'package:everyones_tone/presentation/widgets/list_tile/edit_profile_status_tile.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_view_model.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
@@ -68,7 +68,7 @@ class ReplyPage extends StatelessWidget {
                   Navigator.pop(context); // Home으로 이동
                 },
               ),
-              EditProfileStatusCard()
+              EditProfileStatusTile()
             ],
           ),
           RecordStatusButton()

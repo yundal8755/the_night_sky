@@ -21,6 +21,6 @@ class RegisterProfileViewModel {
 
     // Repository에 Model Instance 전달
     await repository.registerUserDataRemote(userModel);
-    await repository.registerUserDataLocal(userModel);
+    // await repository.registerUserDataLocal(userModel);
   }
 }

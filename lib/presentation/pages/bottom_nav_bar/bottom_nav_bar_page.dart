@@ -1,20 +1,17 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, file_names, library_private_types_in_public_api
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, file_names, library_private_types_in_public_api, avoid_print
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/widgets/layout/background_gradient.dart';
 import 'package:everyones_tone/presentation/pages/home/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import '../chat_thumbnail/chat_thumbnail_page.dart';
-
-///
-/// 왼쪽부터 오른쪽 순으로 HomePage, PostPage, ChatPage를 표시하는 BottomNavBar입니다.
-///
 
 class BottomNavBarPage extends StatefulWidget {
   @override
@@ -31,6 +28,8 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   @override
   Widget build(BuildContext context) {
+    final userData = Provider.of<FirestoreUserProvider>(context).userData;
+
     return BackgroundGradient(
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -71,7 +70,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
-                    FirestoreData.currentUser == null
+                    userData == null
                         ? bottomSheet(
                             context: context,
                             child: LoginPage(),
@@ -94,7 +93,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
-                    FirestoreData.currentUser == null
+                    userData == null
                         ? bottomSheet(
                             context: context,
                             child: LoginPage(),

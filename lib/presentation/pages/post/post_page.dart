@@ -3,7 +3,7 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/post/post_view_model.dart';
-import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_status_card.dart';
+import 'package:everyones_tone/presentation/widgets/list_tile/edit_profile_status_tile.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/custom_text_field.dart';
@@ -75,7 +75,7 @@ class PostPage extends StatelessWidget {
                 hintText: '제목을 입력해주세요!',
                 textEditingController: textEditingController,
               ),
-              EditProfileStatusCard()
+              EditProfileStatusTile()
             ],
           ),
           RecordStatusButton()

@@ -16,7 +16,7 @@ class ProfilePageButton extends StatelessWidget {
         onTap: () {
           bottomSheet(
               context: context,
-              child: MyProfilePage(),
+              child: ProfilePage(),
               bottomSheetType: BottomSheetType.profilePage);
         },
         child: FutureBuilder(

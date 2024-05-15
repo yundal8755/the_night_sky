@@ -27,7 +27,7 @@ class ChatRoomViewModel {
     });
   }
 
-  //! 메시지 순서 메소드
+  //! Order
   void fetchMessageOrder(String chatId) {
     // Firestore 인스턴스 생성
     FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -36,7 +36,7 @@ class ChatRoomViewModel {
     CollectionReference messages = firestore
         .collection('chatCollection')
         .doc(chatId)
-        .collection('messages');
+        .collection('message');
 
     // dateCreated 필드를 기준으로 내림차순으로 메시지 정렬
     messages
@@ -53,7 +53,7 @@ class ChatRoomViewModel {
     });
   }
 
-  //! uploadChatMessage
+  //! Upload
   Future<void> uploadChatMessage(String chatId, String localAudioUrl,
       String dateCreated, String userEmail) async {
     ChatMessageModel messageModel = ChatMessageModel(
@@ -65,6 +65,7 @@ class ChatRoomViewModel {
     await chatRoomRepository.uploadChatMessage(messageModel);
   }
 
+  //! Delete
   Future<void> deleteChatRoom(Map<String, dynamic> chatData) async {
     try {
       // Firestore 인스턴스

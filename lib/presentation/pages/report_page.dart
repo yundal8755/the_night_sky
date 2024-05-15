@@ -1,5 +1,6 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
+import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
 import 'package:flutter/material.dart';
 
 class ReportPage extends StatelessWidget {
@@ -32,7 +33,7 @@ class ReportPage extends StatelessWidget {
                         ),
                       ),
                       Text('신고 되었어요', style: AppTextStyle.headlineMedium()),
-                      const Text('신고된 내용은 검토 후 조치할 예정이에요.')
+                      const Text('신고된 내용은 검토 후 조치할 예정이에요.', style: TextStyle(color: AppColor.neutrals40))
                     ],
                   ),
                 ),
@@ -40,7 +41,8 @@ class ReportPage extends StatelessWidget {
                 //! 페이지 닫기 버튼
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pop();
+                   Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (_) => BottomNavBarPage()));
                   },
                   child: Container(
                       width: MediaQuery.of(context).size.width,

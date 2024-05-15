@@ -46,7 +46,7 @@ class ChatRoomSliverAppBar extends StatelessWidget {
           var top = constraints.biggest.height;
           return FlexibleSpaceBar(
             centerTitle: true,
-            titlePadding: EdgeInsets.only(bottom: 16.0),
+            titlePadding: const EdgeInsets.only(bottom: 16.0),
             title: top == MediaQuery.of(context).padding.top + kToolbarHeight
                 ? Text(
                     FirestoreData.currentUserEmail ==

@@ -39,6 +39,7 @@ dependencies:
   provider: ^6.1.2
   path_provider: ^2.1.2
   intl: ^0.19.0
+  webview_flutter: ^4.4.4
 
   # Audio record/player
   record: ^5.0.5

@@ -5,162 +5,128 @@ import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/repository/database_helper.dart';
-import 'package:everyones_tone/app/utils/bottom_sheet.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
-import 'package:everyones_tone/presentation/pages/login/login_page.dart';
-import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
-import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/bottom_sheet_indicator.dart';
+import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
+import 'package:everyones_tone/presentation/pages/profile/profile_edit_page.dart';
+import 'package:everyones_tone/presentation/pages/web_view_page.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/list_tile/profile_page_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
-class MyProfilePage extends StatelessWidget {
-  final LoginViewModel loginViewModel = LoginViewModel();
-
-  MyProfilePage({super.key});
-
-  // ListTile 메소드
-  Widget buildListTile(BuildContext context, String title, VoidCallback onTap) {
-    return ListTile(
-        title: Text(title, style: AppTextStyle.bodyMedium()),
-        trailing: SvgPicture.asset(AppAssets.pushDefault24),
-        onTap: onTap);
-  }
+class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.transparent,
-        child: Column(
-          children: [
-            const BottomSheetIndicator(),
+    final userData = Provider.of<FirestoreUserProvider>(context).userData;
 
-            // 페이지 제목
-            Text('내 정보', style: AppTextStyle.headlineMedium()),
-            Gap.size24,
+    return Scaffold(
+      backgroundColor: AppColor.neutrals90,
+      appBar: AppBar(
+          leading: BackButton(
+            color: AppColor.neutrals20,
+          ),
+          backgroundColor: AppColor.neutrals90,
+          title: Text('내 정보', style: TextStyle(color: AppColor.neutrals20))),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          child: Column(
+            children: [
+              //! 프로필 사진, 닉네임
+              Column(
+                children: [
+                  Gap.size12,
+                  // 프로필 사진
+                  ProfileCircleImage(
+                    radius: MediaQuery.of(context).size.width / 6,
+                    backgroundImage:  userData == null 
+                    ? AppAssets.profileBasicImage
+                    : userData['profilePicUrl'],
+                    
+                    
+                  ),
+                  Gap.size12,
+                  // 닉네임
+                  Text(
+                    userData == null ? '로그인을 해주세요' : userData['nickname'],
+                    style: AppTextStyle.titleLarge(),
+                  ),
+                  Gap.size48,
+                ],
+              ),
 
-            FutureBuilder(
-              future: FirestoreData.fetchUserData(),
-              builder: (context, snapshot) {
-                String? profilePicUrl = snapshot.data?['profilePicUrl'] ??
-                    AppAssets.profileRandomImage1;
-                String? nickname = snapshot.data?['nickname'] ?? '로그인을 해주세요!';
+              //! 프로필
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text('프로필',
+                          style: AppTextStyle.labelLarge(AppColor.neutrals60))),
+                  ProfilePageTile(
+                    title: '프로필 수정',
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileEditPage()));
+                    },
+                  ),
+                ],
+              ),
+              Gap.size24,
 
-                //! 로그아웃 상태
-                if (!snapshot.hasData) {
-                  return Column(
-                    children: [
-                      // 프로필 사진
-                      ProfileCircleImage(
-                        radius: MediaQuery.of(context).size.width / 6,
-                        backgroundImage: AppAssets.profileBasicImage,
-                      ),
-                      Gap.size12,
+              //! 고객센터
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Text('고객센터',
+                          style: AppTextStyle.labelLarge(AppColor.neutrals60))),
+                  ProfilePageTile(
+                      title: '공지사항',
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewPage()));
+                      }),
+                  ProfilePageTile(
+                      title: '자주 묻는 질문',
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewPage()));
+                      }),
+                  ProfilePageTile(
+                      title: '서비스 이용약관',
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WebViewPage()));
+                      }),
+                ],
+              ),
+              Gap.size24,
 
-                      // 닉네임
-                      Text('로그인을 해주세요!', style: AppTextStyle.titleLarge()),
-                      Gap.size48,
-                    ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('오류가 발생했습니다.'));
-                }
-
-                //! 로그인 상태
-                else {
-                  return Column(
-                    children: [
-                      // 프로필 사진
-                      ProfileCircleImage(
-                        radius: MediaQuery.of(context).size.width / 6,
-                        backgroundImage: profilePicUrl!,
-                      ),
-                      Gap.size12,
-
-                      // 닉네임
-                      Text(nickname!, style: AppTextStyle.titleLarge()),
-                      Gap.size48,
-                    ],
-                  );
-                }
-              },
-            ),
-            // 프로필 라벨
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text('프로필',
-                        style: AppTextStyle.labelLarge(AppColor.neutrals60))),
-                buildListTile(context, '프로필 수정', () {}),
-              ],
-            ),
-            Gap.size24,
-
-            // 고객센터 라벨
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Text('고객센터',
-                        style: AppTextStyle.labelLarge(AppColor.neutrals60))),
-                buildListTile(context, '공지사항', () {}),
-                buildListTile(context, '자주 묻는 질문', () {}),
-                buildListTile(context, '서비스 이용약관', () {}),
-              ],
-            ),
-            Gap.size24,
-
-            if (FirestoreData.currentUser != null)
               ElevatedButton(
-                child: Text('로그아웃',
-                    style: AppTextStyle.bodyMedium(AppColor.neutrals80)),
                 onPressed: () async {
-                  await loginViewModel.signOut();
-                  // UserProvider에서 사용자를 null로 설정합니다.
-                  Provider.of<LoginProvider>(context, listen: false)
-                      .setUserData(null);
-
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BottomNavBarPage(),
-                    ),
-                    (Route<dynamic> route) => false,
-                  );
-                },
-              )
-            else
-              ElevatedButton(
-                onPressed: () {
-                  bottomSheet(
-                    context: context,
-                    bottomSheetType: BottomSheetType.loginPage,
-                    child: LoginPage(),
-                  );
+                  final databaseHelper = DatabaseHelper();
+                  await databaseHelper.deleteDatabaseFile();
                 },
                 child: Text(
-                  '로그인',
+                  'DB 파일 삭제',
                   style: AppTextStyle.bodyMedium(AppColor.neutrals80),
                 ),
               ),
-
-            ElevatedButton(
-              onPressed: () async {
-                final databaseHelper = DatabaseHelper();
-                await databaseHelper.deleteDatabaseFile();
-              },
-              child: Text(
-                'DB 파일 삭제',
-                style: AppTextStyle.bodyMedium(AppColor.neutrals80),
-              ),
-            ),
-          ],
-        ));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

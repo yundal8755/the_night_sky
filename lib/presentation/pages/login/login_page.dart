@@ -5,13 +5,11 @@ import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
-import 'package:everyones_tone/presentation/pages/login/login_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/pages/register_profile/register_profile_page.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/bottom_sheet_indicator.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/sns_login_button.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   final LoginViewModel loginViewModel = LoginViewModel();
@@ -41,9 +39,6 @@ class LoginPage extends StatelessWidget {
               if (isRegistered) {
                 print('사용자 정보를 업데이트 합니다.');
 
-                // 사용자 정보를 UserProvider에 업데이트
-                Provider.of<LoginProvider>(context, listen: false)
-                    .setUserData(user);
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -55,7 +50,9 @@ class LoginPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RegisterProfilePage(userEmail: user.email!,),
+                    builder: (context) => RegisterProfilePage(
+                      userEmail: user.email!,
+                    ),
                   ),
                 );
               }
@@ -74,9 +71,6 @@ class LoginPage extends StatelessWidget {
                 bool isRegistered =
                     await loginViewModel.isUserRegistered(user.email!);
                 if (isRegistered) {
-                  // 사용자 정보를 UserProvider에 업데이트
-                  Provider.of<LoginProvider>(context, listen: false)
-                      .setUserData(user);
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
@@ -88,7 +82,9 @@ class LoginPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => RegisterProfilePage(userEmail: user.email!,),
+                      builder: (context) => RegisterProfilePage(
+                        userEmail: user.email!,
+                      ),
                     ),
                   );
                 }

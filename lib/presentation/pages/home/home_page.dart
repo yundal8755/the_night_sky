@@ -5,6 +5,7 @@ import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/repository/database_helper.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/posting_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,11 +24,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
+    // FirebaseAuth의 userChanges 스트림을 구독
+    FirebaseAuth.instance.userChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
+
     setState(() {
       // 테이블 조회
       // databaseHelper.fetchTableData();
     });
-    super.initState();
   }
 
   @override

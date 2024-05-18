@@ -4,7 +4,7 @@ import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/chat_room_dialog_box.dart';
+import 'package:everyones_tone/presentation/widgets/dialog/chat_room_dialog_box.dart';
 import 'package:everyones_tone/presentation/widgets/audio_player/ractangel_audio_player.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +31,7 @@ class ChatRoomSliverAppBar extends StatelessWidget {
               bottomSheet(
                   context: context,
                   child: ChatRoomDialogBox(chatData:  chatData),
-                  bottomSheetType: BottomSheetType.dialogBox);
+                  bottomSheetType: BottomSheetType.dialogBoxTwoButton);
             },
             icon: const Icon(
               Icons.more_vert,

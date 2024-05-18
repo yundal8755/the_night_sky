@@ -46,6 +46,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
                 child: ProfileCircleImage(
                     radius: 16,
+                    opacity: 0.2,
                     backgroundImage: userData == null
                         ? AppAssets.profileBasicImage
                         : userData['profilePicUrl'] ??

@@ -30,7 +30,7 @@ class ProfilePage extends StatelessWidget {
           title: Text('내 정보', style: TextStyle(color: AppColor.neutrals20))),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: Column(
             children: [
               //! 프로필 사진, 닉네임
@@ -61,7 +61,7 @@ class ProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      margin: const EdgeInsets.symmetric(horizontal: 6),
                       child: Text('프로필',
                           style: AppTextStyle.labelLarge(AppColor.neutrals60))),
                   ProfilePageTile(
@@ -82,7 +82,7 @@ class ProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 8),
+                      margin: const EdgeInsets.symmetric(horizontal: 6),
                       child: Text('고객센터',
                           style: AppTextStyle.labelLarge(AppColor.neutrals60))),
                   ProfilePageTile(

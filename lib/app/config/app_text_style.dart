@@ -12,7 +12,7 @@ abstract class AppTextStyle {
         fontSize: 22,
         fontWeight: FontWeight.bold,
         color: color,
-        letterSpacing: -0.2,
+        letterSpacing: 0.2,
       );
 
   //! Bottom Sheet의 제목이 되는 텍스트에 주로 사용한다
@@ -23,7 +23,7 @@ abstract class AppTextStyle {
         fontSize: 20,
         fontWeight: FontWeight.bold,
         color: color,
-        letterSpacing: -0.2,
+        letterSpacing: 0.2,
       );
 
   //! 페이지에서 강조하고 싶은 텍스트에 주로 사용된다
@@ -88,7 +88,7 @@ abstract class AppTextStyle {
   static TextStyle labelMedium([Color color = AppColor.neutrals20]) =>
       TextStyle(
         fontFamily: 'PretendardVariable',
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: FontWeight.w500,
         color: color,
         letterSpacing: 0.2,

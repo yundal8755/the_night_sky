@@ -23,16 +23,47 @@ abstract class AppAssets {
   static const String seeMoreDefault24 = 'assets/icons/see_more_default_24.svg';
 
   //! Images
-  static const String profileRandomImage1 =
-      'assets/images/profile_random_image_1.jpeg';
-  static const String profileRandomImage2 =
-      'assets/images/profile_random_image_2.jpeg';
-  static const String profileRandomImage3 =
-      'assets/images/profile_random_image_3.jpeg';
-  static const String profileRandomImage4 =
-      'assets/images/profile_random_image_4.jpeg';
-  static const String profileRandomImage5 =
-      'assets/images/profile_random_image_5.jpeg';
   static const String profileBasicImage =
       'assets/images/profile_basic_image.png';
+
+  static const String profileRandomImage01 =
+      'assets/images/profile_random_image_01.jpeg';
+  static const String profileRandomImage02 =
+      'assets/images/profile_random_image_02.jpeg';
+  static const String profileRandomImage03 =
+      'assets/images/profile_random_image_03.jpeg';
+  static const String profileRandomImage04 =
+      'assets/images/profile_random_image_04.jpeg';
+  static const String profileRandomImage05 =
+      'assets/images/profile_random_image_05.jpeg';
+  static const String profileRandomImage06 =
+      'assets/images/profile_random_image_06.jpeg';
+  static const String profileRandomImage07 =
+      'assets/images/profile_random_image_07.jpeg';
+  static const String profileRandomImage08 =
+      'assets/images/profile_random_image_08.jpeg';
+  static const String profileRandomImage09 =
+      'assets/images/profile_random_image_09.jpeg';
+  static const String profileRandomImage10 =
+      'assets/images/profile_random_image_10.jpeg';
+  static const String profileRandomImage11 =
+      'assets/images/profile_random_image_11.jpeg';
+  static const String profileRandomImage12 =
+      'assets/images/profile_random_image_12.jpeg';
+  static const String profileRandomImage13 =
+      'assets/images/profile_random_image_13.jpeg';
+  static const String profileRandomImage14 =
+      'assets/images/profile_random_image_14.jpeg';
+  static const String profileRandomImage15 =
+      'assets/images/profile_random_image_15.jpeg';
+  static const String profileRandomImage16 =
+      'assets/images/profile_random_image_16.jpeg';
+  static const String profileRandomImage17 =
+      'assets/images/profile_random_image_17.jpeg';
+  static const String profileRandomImage18 =
+      'assets/images/profile_random_image_18.jpeg';
+  static const String profileRandomImage19 =
+      'assets/images/profile_random_image_19.jpeg';
+  static const String profileRandomImage20 =
+      'assets/images/profile_random_image_20.jpeg';
 }

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/repository/database_helper.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/posting_card.dart';
+import 'package:everyones_tone/presentation/widgets/posting_card/full_size_posting_card%20copy.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -96,13 +96,15 @@ class _HomePageState extends State<HomePage> {
                     String nickname = post['nickname'];
                     String postTitle = post['postTitle'];
                     String profilePicUrl = post['profilePicUrl'];
+                    String postUserEmail = post['userEmail'];
 
-                    return PostingCard(
+                    return FullSizePostingCard(
                       audioUrl: audioUrl,
                       profilePicUrl: profilePicUrl,
                       nickname: nickname,
                       postTitle: postTitle,
                       replyDocmentId: currentDocumentId,
+                      postUserEmail: postUserEmail,
                     );
                   },
                 );

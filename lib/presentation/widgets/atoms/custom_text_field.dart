@@ -15,8 +15,6 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final titleController = TextEditingController();
-
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -28,7 +26,7 @@ class CustomTextField extends StatelessWidget {
           ),
           TextField(
             cursorColor: AppColor.primaryBlue,
-            controller: titleController,
+            controller: textEditingController,
             inputFormatters: [
               LengthLimitingTextInputFormatter(20), // 입력 길이를 20자로 제한
             ],

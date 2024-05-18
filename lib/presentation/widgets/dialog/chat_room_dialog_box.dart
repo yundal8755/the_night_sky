@@ -5,7 +5,7 @@ import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_
 import 'package:everyones_tone/presentation/pages/chat_room/chat_room_view_model.dart';
 import 'package:everyones_tone/presentation/pages/report_page.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_button.dart';
-import 'package:everyones_tone/presentation/widgets/custom_dialog.dart';
+import 'package:everyones_tone/presentation/widgets/dialog/custom_dialog.dart';
 import 'package:flutter/material.dart';
 
 class ChatRoomDialogBox extends StatelessWidget {

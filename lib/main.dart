@@ -16,11 +16,11 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => RecordStatusManager()),
-        ChangeNotifierProvider(create: (context) => EditProfileManager()),
-        ChangeNotifierProvider(create: (context) => AudioPlayProvider()),
-        ChangeNotifierProvider(create: (context) => EditProfileManager()),
-        ChangeNotifierProvider(create: (context) => FirestoreUserProvider()),
+        ChangeNotifierProvider(create: (_) => RecordStatusManager()),
+        ChangeNotifierProvider(create: (_) => EditProfileManager()),
+        ChangeNotifierProvider(create: (_) => AudioPlayProvider()),
+        ChangeNotifierProvider(create: (_) => EditProfileManager()),
+        ChangeNotifierProvider(create: (_) => FirestoreUserProvider()),
       ],
       child: const MyApp(),
     ),

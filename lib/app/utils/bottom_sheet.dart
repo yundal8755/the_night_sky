@@ -1,13 +1,22 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:flutter/material.dart';
 
-enum BottomSheetType { loginPage, replyPage, postPage, profilePage, dialogBox }
+enum BottomSheetType {
+  loginPage,
+  replyPage,
+  postPage,
+  profilePage,
+  dialogBoxTwoButton,
+  dialogBoxOneButton
+}
 
 extension ModalSizeExtension on BottomSheetType {
   // 디바이스 전체 높이에 대한 요소의 높이 비율
   double get heightFactor {
     switch (this) {
-      case BottomSheetType.dialogBox:
+      case BottomSheetType.dialogBoxOneButton:
+        return 0.125;
+      case BottomSheetType.dialogBoxTwoButton:
         return 0.20;
       case BottomSheetType.loginPage:
         return 0.30;

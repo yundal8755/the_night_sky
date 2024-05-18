@@ -1,10 +1,6 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:flutter/material.dart';
 
-/// 
-/// 메인 그라데이션 배경 Layout
-/// 
-
 class BackgroundGradient extends StatelessWidget {
   final Widget child;
   const BackgroundGradient({super.key, required this.child});
@@ -22,3 +18,21 @@ class BackgroundGradient extends StatelessWidget {
     );
   }
 }
+
+      // child: Stack(
+      //   children: [
+      //     Container(
+      //       decoration: BoxDecoration(
+      //         image: DecorationImage(
+      //           image: AssetImage(AppAssets.profileRandomImage11),
+      //           fit: BoxFit.cover,
+      //           colorFilter: ColorFilter.mode(
+      //             Colors.black.withOpacity(0.20), // 5% 투명도의 검정색 오버레이
+      //             BlendMode.dstATop,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //     child
+      //   ],
+      // ),

@@ -9,7 +9,7 @@ import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
-import 'package:everyones_tone/presentation/widgets/custom_dialog.dart';
+import 'package:everyones_tone/presentation/widgets/dialog/custom_dialog.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_button.dart';
 import 'package:flutter/material.dart';

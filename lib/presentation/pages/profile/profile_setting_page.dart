@@ -15,8 +15,8 @@ import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_butt
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProfileEditPage extends StatelessWidget {
-  const ProfileEditPage({super.key});
+class ProfileSettingPage extends StatelessWidget {
+  const ProfileSettingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,9 @@ class ProfileEditPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColor.neutrals90,
         leading: const BackButton(color: AppColor.neutrals20),
-        title: const Text(
-          '프로필 수정',
-          style: TextStyle(color: AppColor.neutrals20),
+        title: Text(
+          '프로필 설정',
+          style: AppTextStyle.headlineMedium(),
         ),
       ),
       backgroundColor: AppColor.neutrals90,
@@ -132,7 +132,7 @@ class ProfileEditPage extends StatelessWidget {
                     },
                     child: Text(
                       '회원탈퇴',
-                      style: AppTextStyle.bodyLarge(AppColor.neutrals60),
+                      style: AppTextStyle.titleMedium(AppColor.neutrals60),
                     )),
               ],
             ),

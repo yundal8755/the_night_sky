@@ -34,6 +34,7 @@ class ReplyPage extends StatelessWidget {
                 onPressed: () async {
                   //! Progress Indicator
                   showDialog(
+                    barrierColor: AppColor.neutrals90.withOpacity(0.95),
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {

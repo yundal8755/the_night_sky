@@ -3,7 +3,9 @@ import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
+import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_page.dart';
 import 'package:everyones_tone/presentation/pages/report_page.dart';
 import 'package:everyones_tone/presentation/widgets/buttons/play_icon_button.dart';
@@ -12,6 +14,7 @@ import 'package:everyones_tone/presentation/widgets/dialog/custom_dialog.dart';
 import 'package:everyones_tone/presentation/widgets/dialog/warning_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class FullSizePostingCard extends StatelessWidget {
   final String profilePicUrl;
@@ -94,10 +97,10 @@ class FullSizePostingCard extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Text(postTitle,
-                                    style: AppTextStyle.titleLarge()),
+                                    style: AppTextStyle.headlineLarge()),
                                 Text(
                                   nickname,
-                                  style: AppTextStyle.bodyMedium(
+                                  style: AppTextStyle.bodyLarge(
                                       AppColor.neutrals40),
                                 ),
                               ],
@@ -123,22 +126,34 @@ class FullSizePostingCard extends StatelessWidget {
                                   alignment: Alignment.centerRight,
                                   child: IconButton(
                                     onPressed: () {
-                                      postUserEmail ==
-                                              FirestoreData.currentUserEmail
-                                          ? showDialog(
+                                      Provider.of<AudioPlayProvider>(context,
+                                              listen: false)
+                                          .stopPlaying();
+                                      FirestoreData.currentUser == null
+                                          ? bottomSheet(
                                               context: context,
-                                              builder: (context) =>
-                                                  const WarningDialog(
-                                                      text:
-                                                          '자기 자신에게는\n 메시지를 보낼 수 없습니다.'))
-                                          : bottomSheet(
-                                              context: context,
-                                              child: ReplyPage(
-                                                  replyDocmentId:
-                                                      replyDocmentId),
+                                              child: LoginPage(),
                                               bottomSheetType:
-                                                  BottomSheetType.replyPage,
-                                            );
+                                                  BottomSheetType.loginPage)
+                                          : postUserEmail ==
+                                                  FirestoreData.currentUserEmail
+                                              ? showDialog(
+                                                  barrierColor: AppColor
+                                                      .neutrals90
+                                                      .withOpacity(0.95),
+                                                  context: context,
+                                                  builder: (context) =>
+                                                      const WarningDialog(
+                                                          text:
+                                                              '자신에게는 메시지를 보낼 수 없습니다.'))
+                                              : bottomSheet(
+                                                  context: context,
+                                                  child: ReplyPage(
+                                                      replyDocmentId:
+                                                          replyDocmentId),
+                                                  bottomSheetType:
+                                                      BottomSheetType.replyPage,
+                                                );
                                     },
                                     icon: SvgPicture.asset(
                                         AppAssets.messageDefault32),
@@ -148,40 +163,55 @@ class FullSizePostingCard extends StatelessWidget {
                                 // 신고 버튼
                                 IconButton(
                                   onPressed: () {
-                                    bottomSheet(
-                                      context: context,
-                                      child: SafeArea(
-                                        child: CustomElevatedButton(
-                                          backgroundColor: AppColor.neutrals90,
-                                          text: '신고',
-                                          textColor: AppColor.secondaryRed,
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
+                                    Provider.of<AudioPlayProvider>(context,
+                                            listen: false)
+                                        .stopPlaying();
+                                    FirestoreData.currentUser == null
+                                        ? bottomSheet(
+                                            context: context,
+                                            child: LoginPage(),
+                                            bottomSheetType:
+                                                BottomSheetType.loginPage)
+                                        : bottomSheet(
+                                            context: context,
+                                            child: SafeArea(
+                                              child: CustomElevatedButton(
+                                                backgroundColor:
+                                                    AppColor.neutrals90,
+                                                text: '신고',
+                                                textColor:
+                                                    AppColor.secondaryRed,
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
 
-                                            showDialog(
-                                              barrierColor: AppColor.neutrals90
-                                                  .withOpacity(0.95),
-                                              context: context,
-                                              builder: (BuildContext context) =>
-                                                  CustomDialog(
-                                                title: '신고하기',
-                                                message: '해당 이용자를 신고하시겠습니까?',
-                                                mainButtonTitle: '신고하기',
-                                                onConfirm: () async {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const ReportPage()));
+                                                  showDialog(
+                                                    barrierColor: AppColor
+                                                        .neutrals90
+                                                        .withOpacity(0.95),
+                                                    context: context,
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        CustomDialog(
+                                                      title: '신고하기',
+                                                      message:
+                                                          '해당 게시글을 신고하시겠습니까?',
+                                                      mainButtonTitle: '신고하기',
+                                                      onConfirm: () async {
+                                                        Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        const ReportPage()));
+                                                      },
+                                                    ),
+                                                  );
                                                 },
                                               ),
-                                            );
-                                          },
-                                        ),
-                                      ),
-                                      bottomSheetType:
-                                          BottomSheetType.dialogBoxOneButton,
-                                    );
+                                            ),
+                                            bottomSheetType: BottomSheetType
+                                                .dialogBoxOneButton,
+                                          );
                                   },
                                   icon: const Icon(
                                     Icons.more_vert_rounded,

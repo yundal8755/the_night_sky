@@ -1,6 +1,7 @@
 // ignore_for_file: file_names
 
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/presentation/pages/chat_room/chat_room_page.dart';
 import 'package:everyones_tone/presentation/pages/chat_thumbnail/chat_thumbnail_view_model.dart';
@@ -32,7 +33,7 @@ class ChatThumbnailTile extends StatelessWidget {
             ));
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -45,6 +46,7 @@ class ChatThumbnailTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(partnerNickname, style: AppTextStyle.bodyLarge()),
+                    Gap.size02,
                     FutureBuilder<int>(
                       future: ChatThumbnailViewModel()
                           .fetchMessageCount(chatData['chatId']),
@@ -59,7 +61,8 @@ class ChatThumbnailTile extends StatelessWidget {
                               style: TextStyle(color: AppColor.neutrals40));
                         }
                         return Text('전체 메시지: ${snapshot.data}개',
-                            style: const TextStyle(color: AppColor.neutrals40));
+                            style:
+                                AppTextStyle.labelMedium(AppColor.neutrals40));
                       },
                     )
                   ],

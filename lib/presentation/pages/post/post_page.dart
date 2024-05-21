@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, avoid_print
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
@@ -29,10 +29,10 @@ class PostPage extends StatelessWidget {
           Column(
             children: [
               SubAppBar(
-                title: '음색 업로드',
+                title: '게시글 업로드',
                 onPressed: () async {
-                  //! Progress Indicator
                   showDialog(
+                    barrierColor: AppColor.neutrals90.withOpacity(0.95),
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
@@ -46,16 +46,10 @@ class PostPage extends StatelessWidget {
                       );
                     },
                   );
-
-                  // ! 업로드에 필요한 포스팅 정보 확보하기
-                  // 글 제목
                   String postTitle = textEditingController.text.isEmpty
                       ? hintText
                       : textEditingController.text;
-                  // 오디오 URL
                   String localAudioUrl = recordStatusManager.audioFilePath!;
-
-                  // Firestore에 저장된 User의 Data
                   Map<String, dynamic>? userData =
                       await FirestoreData.fetchUserData();
 
@@ -65,8 +59,6 @@ class PostPage extends StatelessWidget {
                       userData: userData!);
 
                   recordStatusManager.resetToBefore();
-
-                  //! Route
                   Navigator.pop(context); // 다이얼로그 닫기
                   Navigator.pop(context); // Home으로 이동
                 },

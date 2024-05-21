@@ -33,7 +33,7 @@ class AudioPlayButton extends StatelessWidget {
                     onPressed: onPressed,
                     child: Text(
                       '완료',
-                      style: AppTextStyle.bodyLarge(AppColor.primaryBlue),
+                      style: AppTextStyle.titleMedium(AppColor.primaryBlue),
                     ),
                   ),
                 ),

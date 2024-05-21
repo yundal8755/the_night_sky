@@ -9,7 +9,6 @@ import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_mana
 import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_page.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class EditProfileStatusTile extends StatefulWidget {
@@ -72,7 +71,8 @@ class _EditProfileStatusTileState extends State<EditProfileStatusTile> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 닉네임
-                  Text(nickname, style: AppTextStyle.bodyMedium()),
+                  Text(nickname, style: AppTextStyle.bodyLarge()),
+                  Gap.size02,
                   // 녹음 상태 메시지
                   ValueListenableBuilder<RecordStatus>(
                     valueListenable: recordingStatusNotifier,
@@ -97,7 +97,8 @@ class _EditProfileStatusTileState extends State<EditProfileStatusTile> {
                   child: const EditProfilePage(),
                   bottomSheetType: BottomSheetType.postPage);
             },
-            icon: SvgPicture.asset(AppAssets.refreshDefault32),
+            icon:
+                const Icon(Icons.arrow_forward_ios, color: AppColor.neutrals40),
           )
         ],
       ),

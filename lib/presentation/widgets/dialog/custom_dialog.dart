@@ -23,58 +23,64 @@ class CustomDialog extends StatelessWidget {
       contentPadding: const EdgeInsets.all(20),
       backgroundColor: AppColor.neutrals80,
       content: SizedBox(
-        width: MediaQuery.of(context).size.width / 6,
-        height: MediaQuery.of(context).size.height / 5.5,
+        width: MediaQuery.of(context).size.width / 1.5,
+        height: 140,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             //! 안내 문구
             Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(title, style: AppTextStyle.bodyLarge()),
-                Gap.size4,
+                Text(title, style: AppTextStyle.titleLarge()),
+                Gap.size04,
                 Text(
                   message,
-                  style: AppTextStyle.bodyMedium(AppColor.neutrals20),
+                  style: AppTextStyle.bodyLarge(AppColor.neutrals20),
                 ),
               ],
             ),
 
             //! 버튼
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: onConfirm,
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: AppColor.primaryBlue,
-                    ),
-                    child: Center(
-                      child: Text(
-                        mainButtonTitle,
-                        style: AppTextStyle.bodyMedium(),
+                Expanded(
+                  child: GestureDetector(
+                    onTap: onConfirm,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColor.primaryBlue,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '확인',
+                         // mainButtonTitle,
+                          style: AppTextStyle.titleSmall(),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: Colors.transparent,
-                    child: Center(
-                      child: Text(
-                        '닫기',
-                        style: AppTextStyle.bodyMedium(),
+                Gap.size10,
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: AppColor.neutrals60,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '취소',
+                          style: AppTextStyle.titleSmall(),
+                        ),
                       ),
                     ),
                   ),
@@ -90,6 +96,7 @@ class CustomDialog extends StatelessWidget {
 
 void showLogoutDialog(BuildContext context, VoidCallback onConfirm) {
   showDialog(
+    barrierColor: AppColor.neutrals90.withOpacity(0.95),
     context: context,
     builder: (BuildContext context) => CustomDialog(
       title: '로그아웃',

@@ -1,10 +1,12 @@
 // ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/presentation/widgets/audio_player/circle_audio_player.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PartnerUserMessageTile extends StatelessWidget {
   final String audioUrl;
@@ -21,6 +23,15 @@ class PartnerUserMessageTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 날짜 포매팅을 위해 DateFormat 사용
+    DateFormat inputFormat = DateFormat('MM/dd HH:mm:ss');
+    DateFormat outputFormat = DateFormat('MM/dd HH:mm');
+
+    // dateCreated 문자열을 DateTime 객체로 파싱
+    DateTime dateTime = inputFormat.parse(dateCreated);
+    // 새로운 포맷으로 날짜 포맷팅
+    String formattedDate = outputFormat.format(dateTime);
+
     return Container(
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
@@ -44,10 +55,11 @@ class PartnerUserMessageTile extends StatelessWidget {
                 children: [
                   Text(
                     nickname,
-                    style: AppTextStyle.bodyMedium(),
+                    style: AppTextStyle.bodyLarge(),
                   ),
-                  Text(dateCreated,
-                      style: TextStyle(color: AppColor.neutrals60))
+                  Gap.size02,
+                  Text(formattedDate,
+                      style: AppTextStyle.labelMedium(AppColor.neutrals60))
                 ],
               )
             ],

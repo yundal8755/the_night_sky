@@ -24,7 +24,7 @@ class RecordingButton extends StatelessWidget {
             child: SizedBox(
               child: Text(
                 '$value',
-                style: AppTextStyle.headlineLarge()
+                style: AppTextStyle.headlineMedium()
               ),
             ),
           );

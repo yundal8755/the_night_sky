@@ -33,20 +33,20 @@ class EditProfilePage extends StatelessWidget {
                       onPressed: () => Navigator.pop(context),
                       child: Text(
                         '취소',
-                        style: AppTextStyle.bodyMedium(),
+                        style: AppTextStyle.bodyLarge(),
                       ),
                     ),
 
                     // 모달 제목
                     Text(
-                      '프로필 수정',
+                      '프로필 변경',
                       style: AppTextStyle.headlineMedium(),
                     ),
 
                     TextButton(
                       child: Text(
                         '완료',
-                        style: AppTextStyle.bodyLarge(AppColor.primaryBlue),
+                        style: AppTextStyle.titleMedium(AppColor.primaryBlue),
                       ),
                       onPressed: () async {
                         //! EditProfileManager에 변경된 내용 Firestore의 userData에 전달하기

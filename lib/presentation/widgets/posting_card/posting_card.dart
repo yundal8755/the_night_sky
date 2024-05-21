@@ -57,118 +57,124 @@ class BasicRoundPostingCard extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
                 color: AppColor.neutrals40.withOpacity(0.2),
-                child:               Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  // player, 게시글 정보
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 6),
-                    child: Column(
-                      children: [
-                        // 음성 재생 버튼
-                        CircleAudioPlayer(
-                          audioUrl: audioUrl,
-                          backgroundImage: profilePicUrl,
-                          pauseIconSize: AppAssets.pauseDefault56,
-                          playIconSize: AppAssets.playDefault56,
-                          radius: MediaQuery.of(context).size.width / 2.75,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    // player, 게시글 정보
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 6, horizontal: 6),
+                      child: Column(
+                        children: [
+                          // 음성 재생 버튼
+                          CircleAudioPlayer(
+                            audioUrl: audioUrl,
+                            backgroundImage: profilePicUrl,
+                            pauseIconSize: AppAssets.pauseDefault56,
+                            playIconSize: AppAssets.playDefault56,
+                            radius: MediaQuery.of(context).size.width / 2.75,
+                          ),
 
-                        Gap.size20,
-                        // 게시글 정보
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Text(
-                              '모두의 음색',
-                              style: AppTextStyle.labelMedium(AppColor.primaryBlue),
-                            ),
-                            Text(
-                              postTitle,
-                              style: AppTextStyle.titleLarge(),
-                            ),
-                            Text(
-                              nickname,
-                              style: AppTextStyle.bodyMedium(AppColor.neutrals40),
-                            ),
-                          ],
-                        ),
-                      ],
+                          Gap.size20,
+                          // 게시글 정보
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              Text(
+                                '모두의 음색',
+                                style: AppTextStyle.labelMedium(
+                                    AppColor.primaryBlue),
+                              ),
+                              Text(
+                                postTitle,
+                                style: AppTextStyle.headlineLarge(),
+                              ),
+                              Text(
+                                nickname,
+                                style: AppTextStyle.bodyLarge(
+                                    AppColor.neutrals40),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
 
-                  // 답장 버튼
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 2.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            postUserEmail == FirestoreData.currentUserEmail
-                                ? showDialog(
-                                    context: context,
-                                    builder: (context) => const WarningDialog(
-                                        text: '자기 자신한테는 \n메시지를 보낼 수 없습니다.'))
-                                : bottomSheet(
-                                    context: context,
-                                    child: ReplyPage(replyDocmentId: replyDocmentId),
-                                    bottomSheetType: BottomSheetType.replyPage,
-                                  );
-                          },
-                          icon: SvgPicture.asset(AppAssets.messageDefault32),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            bottomSheet(
-                              context: context,
-                              child: SafeArea(
-                                child: CustomElevatedButton(
-                                  backgroundColor: AppColor.neutrals90,
-                                  text: '신고',
-                                  textColor: AppColor.secondaryRed,
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-
-                                    showDialog(
+                    // 답장 버튼
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 2.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              postUserEmail == FirestoreData.currentUserEmail
+                                  ? showDialog(
                                       barrierColor:
                                           AppColor.neutrals90.withOpacity(0.95),
                                       context: context,
-                                      builder: (BuildContext context) => CustomDialog(
-                                        title: '신고하기',
-                                        message: '해당 이용자를 신고하시겠습니까?',
-                                        mainButtonTitle: '신고하기',
-                                        onConfirm: () async {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const ReportPage()));
-                                        },
-                                      ),
+                                      builder: (context) => const WarningDialog(
+                                          text: '자신에게는 메시지를 보낼 수 없습니다.'))
+                                  : bottomSheet(
+                                      context: context,
+                                      child: ReplyPage(
+                                          replyDocmentId: replyDocmentId),
+                                      bottomSheetType:
+                                          BottomSheetType.replyPage,
                                     );
-                                  },
-                                ),
-                              ),
-                              bottomSheetType: BottomSheetType.dialogBoxOneButton,
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.more_vert_rounded,
-                            size: 32,
-                            color: AppColor.neutrals40,
+                            },
+                            icon: SvgPicture.asset(AppAssets.messageDefault32),
                           ),
-                        ),
-                      ],
+                          IconButton(
+                            onPressed: () {
+                              bottomSheet(
+                                context: context,
+                                child: SafeArea(
+                                  child: CustomElevatedButton(
+                                    backgroundColor: AppColor.neutrals90,
+                                    text: '신고',
+                                    textColor: AppColor.secondaryRed,
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+
+                                      showDialog(
+                                        barrierColor: AppColor.neutrals90
+                                            .withOpacity(0.95),
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            CustomDialog(
+                                          title: '신고하기',
+                                          message: '해당 이용자를 신고하시겠습니까?',
+                                          mainButtonTitle: '신고하기',
+                                          onConfirm: () async {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const ReportPage()));
+                                          },
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                                bottomSheetType:
+                                    BottomSheetType.dialogBoxOneButton,
+                              );
+                            },
+                            icon: const Icon(
+                              Icons.more_vert_rounded,
+                              size: 32,
+                              color: AppColor.neutrals40,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              )
-
-
-              ),
+                  ],
+                ),
+              )),
         ),
       ),
     );

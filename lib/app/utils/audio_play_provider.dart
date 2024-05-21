@@ -32,4 +32,11 @@ class AudioPlayProvider with ChangeNotifier {
     }
     notifyListeners();
   }
+
+    Future<void> stopPlaying() async {
+    await _audioPlayer.stop();
+    _isPlaying = false;
+    _currentPlayingUrl = null;
+    notifyListeners();
+  }
 }

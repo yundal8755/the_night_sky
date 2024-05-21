@@ -30,7 +30,7 @@ class RegisterProfilePage extends StatelessWidget {
             backgroundColor: Colors.transparent,
             title: Text(
               '회원가입',
-              style: AppTextStyle.headlineLarge(),
+              style: AppTextStyle.headlineMedium(),
             ),
           ),
           body: SafeArea(

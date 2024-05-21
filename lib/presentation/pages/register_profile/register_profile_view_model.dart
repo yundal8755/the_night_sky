@@ -8,7 +8,7 @@ class RegisterProfileViewModel {
     required String nickname,
     required String profilePicUrl,
   }) async {
-    String dateCreated = DateFormat("MM/dd HH:mm").format(DateTime.now());
+    String dateCreated = DateFormat("MM/dd HH:mm:ss").format(DateTime.now());
     UserModel userModel = UserModel(
       nickname: nickname,
       profilePicUrl: profilePicUrl,

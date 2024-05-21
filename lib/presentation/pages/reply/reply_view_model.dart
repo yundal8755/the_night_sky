@@ -59,7 +59,7 @@ class ReplyViewModel {
     String replyUserNickname = replyUserData['nickname'] ?? '';
     String replyUserEmail = replyUserData['userEmail'] ?? '';
     String replyUserProfilePicUrl = replyUserData['profilePicUrl'] ?? '';
-    String dateCreated = DateFormat("MM/dd HH:mm").format(DateTime.now());
+    String dateCreated = DateFormat("MM/dd HH:mm:ss").format(DateTime.now());
 
     /// 최초 메신저의 post data 가져오기
     DocumentSnapshot postUserData =

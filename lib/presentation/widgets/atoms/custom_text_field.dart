@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -30,10 +30,11 @@ class CustomTextField extends StatelessWidget {
             inputFormatters: [
               LengthLimitingTextInputFormatter(20), // 입력 길이를 20자로 제한
             ],
-            style: AppTextStyle.headlineMedium(),
+            style: AppTextStyle.headlineLarge(),
             decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
               hintText: hintText,
-              hintStyle: AppTextStyle.headlineMedium(AppColor.neutrals60),
+              hintStyle: AppTextStyle.headlineLarge(AppColor.neutrals60),
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
             ),

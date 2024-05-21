@@ -54,7 +54,7 @@ class ReportPage extends StatelessWidget {
                       child: Center(
                           child: Text(
                         '페이지 닫기',
-                        style: AppTextStyle.bodyLarge(),
+                        style: AppTextStyle.titleMedium(),
                       ))),
                 ),
               ],

@@ -1,5 +1,7 @@
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum BottomSheetType {
   loginPage,
@@ -39,9 +41,9 @@ Future<void> bottomSheet({
 }) {
   return showModalBottomSheet<void>(
     context: context,
+    isScrollControlled: true,
     backgroundColor: AppColor.neutrals80,
     barrierColor: Colors.black.withOpacity(0.75),
-    isScrollControlled: true,
     isDismissible: true, // 밖의 영역 터치시 자동으로 창이 닫힘
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
@@ -54,5 +56,7 @@ Future<void> bottomSheet({
           padding: const EdgeInsets.all(2),
           child: child);
     },
-  );
+  ).then((_) {
+    Provider.of<RecordStatusManager>(context, listen: false).resetToBefore();
+  });
 }

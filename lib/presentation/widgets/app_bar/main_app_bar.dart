@@ -1,6 +1,7 @@
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
@@ -28,12 +29,13 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           const Padding(padding: EdgeInsets.only(left: 20), child: Gap.size32),
           Text(
             title,
-            style: AppTextStyle.headlineLarge(),
+            style: AppTextStyle.headlineMedium(),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20),
             child: GestureDetector(
                 onTap: () {
+                  Provider.of<AudioPlayProvider>(context, listen: false).stopPlaying();
                   userData == null
                       ? bottomSheet(
                           context: context,

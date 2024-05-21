@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 abstract class Gap {
   const Gap._();
 
-  static const size2 = SizedBox(width: 2, height: 2);
-  static const size4 = SizedBox(width: 4, height: 4);
-  static const size6 = SizedBox(width: 6, height: 6);
-  static const size8 = SizedBox(width: 8, height: 8);
+  static const size02 = SizedBox(width: 2, height: 2);
+  static const size04 = SizedBox(width: 4, height: 4);
+  static const size06 = SizedBox(width: 6, height: 6);
+  static const size08 = SizedBox(width: 8, height: 8);
   static const size10 = SizedBox(width: 10, height: 10);
   static const size12 = SizedBox(width: 12, height: 12);
   static const size14 = SizedBox(width: 14, height: 14);

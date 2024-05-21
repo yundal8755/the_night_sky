@@ -6,7 +6,7 @@ import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/repository/database_helper.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
-import 'package:everyones_tone/presentation/pages/profile/profile_edit_page.dart';
+import 'package:everyones_tone/presentation/pages/profile/profile_setting_page.dart';
 import 'package:everyones_tone/presentation/pages/web_view_page.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/widgets/list_tile/profile_page_tile.dart';
@@ -27,10 +27,10 @@ class ProfilePage extends StatelessWidget {
             color: AppColor.neutrals20,
           ),
           backgroundColor: AppColor.neutrals90,
-          title: Text('내 정보', style: TextStyle(color: AppColor.neutrals20))),
+          title: Text('내 정보', style: AppTextStyle.headlineMedium())),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             children: [
               //! 프로필 사진, 닉네임
@@ -40,11 +40,9 @@ class ProfilePage extends StatelessWidget {
                   // 프로필 사진
                   ProfileCircleImage(
                     radius: MediaQuery.of(context).size.width / 6,
-                    backgroundImage:  userData == null 
-                    ? AppAssets.profileBasicImage
-                    : userData['profilePicUrl'],
-                    
-                    
+                    backgroundImage: userData == null
+                        ? AppAssets.profileBasicImage
+                        : userData['profilePicUrl'],
                   ),
                   Gap.size12,
                   // 닉네임
@@ -62,15 +60,14 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   Container(
                       margin: const EdgeInsets.symmetric(horizontal: 6),
-                      child: Text('프로필',
-                          style: AppTextStyle.labelLarge(AppColor.neutrals60))),
+                      child: Text('프로필', style: AppTextStyle.labelLarge())),
                   ProfilePageTile(
-                    title: '프로필 수정',
+                    title: '프로필 설정',
                     onTap: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProfileEditPage()));
+                              builder: (context) => ProfileSettingPage()));
                     },
                   ),
                 ],
@@ -83,8 +80,7 @@ class ProfilePage extends StatelessWidget {
                 children: [
                   Container(
                       margin: const EdgeInsets.symmetric(horizontal: 6),
-                      child: Text('고객센터',
-                          style: AppTextStyle.labelLarge(AppColor.neutrals60))),
+                      child: Text('고객센터', style: AppTextStyle.labelLarge())),
                   ProfilePageTile(
                       title: '공지사항',
                       onTap: () {
@@ -120,7 +116,7 @@ class ProfilePage extends StatelessWidget {
                 },
                 child: Text(
                   'DB 파일 삭제',
-                  style: AppTextStyle.bodyMedium(AppColor.neutrals80),
+                  style: AppTextStyle.bodyLarge(AppColor.neutrals80),
                 ),
               ),
             ],

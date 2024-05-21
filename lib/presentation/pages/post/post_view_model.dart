@@ -53,7 +53,7 @@ class PostViewModel {
     String nickname = userData['nickname'] ?? '';
     String userEmail = userData['userEmail'] ?? '';
     String profilePicUrl = userData['profilePicUrl'] ?? '';
-    String dateCreated = DateFormat("MM/dd HH:mm").format(DateTime.now());
+    String dateCreated = DateFormat("MM/dd HH:mm:ss").format(DateTime.now());
     PostModel postModel = PostModel(
       nickname: nickname,
       postTitle: postTitle,

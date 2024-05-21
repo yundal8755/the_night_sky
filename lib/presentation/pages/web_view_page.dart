@@ -1,4 +1,5 @@
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -39,9 +40,9 @@ class _WebViewPageState extends State<WebViewPage> {
       appBar: AppBar(
         backgroundColor: AppColor.neutrals90,
         leading: const BackButton(color: AppColor.neutrals20),
-        title: const Text(
+        title: Text(
           '웹뷰',
-          style: TextStyle(color: AppColor.neutrals20),
+          style: AppTextStyle.headlineMedium()
         ),
       ),
       body: SizedBox(

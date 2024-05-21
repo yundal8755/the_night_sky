@@ -27,7 +27,7 @@ class SubAppBar extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: const BoxDecoration(
         border: Border(
-          bottom: BorderSide(color: AppColor.neutrals60, width: 0.5),
+          bottom: BorderSide(color: AppColor.neutrals60, width: 0.25),
         ),
       ),
       child: Row(
@@ -38,14 +38,14 @@ class SubAppBar extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
             child: Text(
               "취소",
-              style: AppTextStyle.bodyMedium(AppColor.neutrals40),
+              style: AppTextStyle.bodyLarge(AppColor.neutrals40),
             ),
           ),
 
           // 모달 제목
           Text(
             title,
-            style: AppTextStyle.headlineMedium(),
+            style: AppTextStyle.titleLarge(),
           ),
 
           // 완료 버튼
@@ -58,7 +58,7 @@ class SubAppBar extends StatelessWidget {
                     : null, // RecordStatus가 complete일 때만 onPressed 활성화
                 child: Text(
                   "완료",
-                  style: AppTextStyle.bodyLarge(
+                  style: AppTextStyle.titleMedium(
                     model.recordingStatusNotifier.value == RecordStatus.complete
                         ? AppColor.primaryBlue 
                         : AppColor.neutrals60, 

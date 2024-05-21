@@ -2,6 +2,7 @@
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
@@ -32,6 +33,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
     return BackgroundGradient(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         body: _children[_currentIndex],
         bottomNavigationBar: SafeArea(
@@ -53,6 +55,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
+                    Provider.of<AudioPlayProvider>(context, listen: false).stopPlaying();
                     setState(() {
                       _currentIndex = 0;
                     });
@@ -70,6 +73,9 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
+                    Provider.of<AudioPlayProvider>(context, listen: false)
+                        .stopPlaying();
+
                     userData == null
                         ? bottomSheet(
                             context: context,
@@ -93,6 +99,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
+                    Provider.of<AudioPlayProvider>(context, listen: false).stopPlaying();
                     userData == null
                         ? bottomSheet(
                             context: context,

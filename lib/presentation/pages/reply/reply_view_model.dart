@@ -45,17 +45,19 @@ class ReplyViewModel {
   Future<void> uploadReply(
       {required String localAudioUrl,
       required Map<String, dynamic> replyUserData,
-      required String replyDocmentId}) async {
-    /// Firestore 객체 생성
+      required String replyDocumentId}) async {
+    // Firestore 객체 생성
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-    /// ReplyUser 변수 설정
+    // 오디오 URL 변환
     String replyUserAudioUrl =
         await convertLocalAudioToStorageUrl(localAudioUrl);
     if (replyUserAudioUrl.isEmpty) {
       print('오디오 파일 업로드 실패');
       return;
     }
+
+    // Reply User 데이터 설정
     String replyUserNickname = replyUserData['nickname'] ?? '';
     String replyUserEmail = replyUserData['userEmail'] ?? '';
     String replyUserProfilePicUrl = replyUserData['profilePicUrl'] ?? '';
@@ -63,7 +65,7 @@ class ReplyViewModel {
 
     /// 최초 메신저의 post data 가져오기
     DocumentSnapshot postUserData =
-        await firestore.collection('post').doc(replyDocmentId).get();
+        await firestore.collection('post').doc(replyDocumentId).get();
 
     bool isCurrentUserPostUser =
         FirestoreData.currentUserEmail == postUserData['userEmail'];
@@ -117,7 +119,7 @@ class ReplyViewModel {
 
     /// Firestore 업로드
     await replyRemoteRepository.uploadReplyRemote(
-        chatModel, postMessageModel, replyMessageModel);
+        chatModel, postMessageModel, replyMessageModel, replyDocumentId);
 
     /// SQflite 업로드
     // await replyRemoteRepository.uploadReplyLocal(

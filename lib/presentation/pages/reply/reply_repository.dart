@@ -13,7 +13,8 @@ class ReplyRepository {
   Future<void> uploadReplyRemote(
       ChatModel chatModel,
       ChatMessageModel postMessageModel,
-      ChatMessageModel replyMessageModel) async {
+      ChatMessageModel replyMessageModel,
+      String replyDocmentId) async {
     /// Chat Doc 생성 및 ID 할당
     final DocumentReference chatRef = firestore.collection('chat').doc();
     chatModel.chatId = chatRef.id;
@@ -28,7 +29,8 @@ class ReplyRepository {
     postMessageModel.messageId = postMessageRef.id;
     await postMessageRef.set(postMessageModel.toMap());
 
-    await createUserChatSubcollection(postMessageModel.userEmail, chatRef.id);
+    await createUserChatSubcollection(
+        postMessageModel.userEmail, chatRef.id);
 
     /// Reply Message 정보 저장 및 ID 할당
     final DocumentReference replyMessageRef =
@@ -38,17 +40,38 @@ class ReplyRepository {
     await replyMessageRef.set(replyMessageModel.toMap());
 
     await createUserChatSubcollection(replyMessageModel.userEmail, chatRef.id);
+    await createPreviousRepliesSubcollection(replyMessageModel.userEmail, chatRef.id, replyDocmentId);
   }
 
-  //! Firestore - myChat SubCollection method
+  //! Firestore - Create myChat SubCollection
   Future<void> createUserChatSubcollection(
-      String userEmail, String chatId) async {
+      String userEmail, String chatId, ) async {
     final DocumentReference userRef =
         firestore.collection('user').doc(userEmail);
+
+    // myChat SubCollection
     final CollectionReference myChatRef = userRef.collection('myChat');
-    final DocumentReference newDocRef = myChatRef.doc(chatId);
-    await newDocRef.set({
+    final DocumentReference myChatNewDocRef = myChatRef.doc(chatId);
+
+    await myChatNewDocRef.set({
       'chatId': chatId,
+    });
+  }
+
+    //! Firestore - Create previousReplies SubCollection
+  Future<void> createPreviousRepliesSubcollection(
+      String userEmail, String chatId, String replyDocumentId) async {
+    final DocumentReference userRef =
+        firestore.collection('user').doc(userEmail);
+
+    // previousReplies SubCollection
+    final CollectionReference previousRepliesRef =
+        userRef.collection('previousReplies');
+    final DocumentReference previousRepliesNewDocRef =
+        previousRepliesRef.doc(replyDocumentId);
+
+    await previousRepliesNewDocRef.set({
+      'previousReplyDocumentId': replyDocumentId,
     });
   }
 

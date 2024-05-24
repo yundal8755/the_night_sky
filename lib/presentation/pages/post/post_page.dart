@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, avoid_print
 
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/post/post_view_model.dart';
-import 'package:everyones_tone/presentation/widgets/list_tile/edit_profile_status_tile.dart';
+import 'package:everyones_tone/presentation/widgets/atoms/anonymousProfileSwitch.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/custom_text_field.dart';
@@ -22,6 +23,9 @@ class PostPage extends StatelessWidget {
         Provider.of<RecordStatusManager>(context, listen: false);
     final textEditingController = TextEditingController();
 
+    String currentNickname = '';
+    String currentProfilePicUrl = AppAssets.profileBasicImage;
+
     return SafeArea(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +36,7 @@ class PostPage extends StatelessWidget {
                 title: '게시글 업로드',
                 onPressed: () async {
                   showDialog(
-                    barrierColor: AppColor.neutrals90.withOpacity(0.95),
+                    barrierColor: AppColor.neutrals90.withOpacity(0.5),
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
@@ -53,10 +57,13 @@ class PostPage extends StatelessWidget {
                   Map<String, dynamic>? userData =
                       await FirestoreData.fetchUserData();
 
+                  userData!['nickname'] = currentNickname;
+                  userData['profilePicUrl'] = currentProfilePicUrl;
+
                   await postViewModel.uploadPost(
                       postTitle: postTitle,
                       localAudioUrl: localAudioUrl,
-                      userData: userData!);
+                      userData: userData);
 
                   recordStatusManager.resetToBefore();
                   Navigator.pop(context); // 다이얼로그 닫기
@@ -67,7 +74,12 @@ class PostPage extends StatelessWidget {
                 hintText: '제목을 입력해주세요!',
                 textEditingController: textEditingController,
               ),
-              EditProfileStatusTile()
+              AnonymousProfileSwitch(
+                onProfileChanged: (nickname, profilePicUrl) {
+                  currentNickname = nickname;
+                  currentProfilePicUrl = profilePicUrl;
+                },
+              ),
             ],
           ),
           RecordStatusButton()

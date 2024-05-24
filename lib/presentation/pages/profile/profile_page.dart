@@ -9,7 +9,7 @@ import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/profile/profile_setting_page.dart';
 import 'package:everyones_tone/presentation/pages/web_view_page.dart';
 import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
-import 'package:everyones_tone/presentation/widgets/list_tile/profile_page_tile.dart';
+import 'package:everyones_tone/presentation/widgets/tile/profile_page_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

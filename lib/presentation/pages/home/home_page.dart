@@ -5,7 +5,7 @@ import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/repository/database_helper.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
-import 'package:everyones_tone/presentation/widgets/posting_card/full_size_posting_card%20copy.dart';
+import 'package:everyones_tone/presentation/widgets/posting_card/full_size_posting_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

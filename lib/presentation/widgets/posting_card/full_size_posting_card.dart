@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
@@ -125,35 +127,51 @@ class FullSizePostingCard extends StatelessWidget {
                                 Container(
                                   alignment: Alignment.centerRight,
                                   child: IconButton(
-                                    onPressed: () {
+                                    onPressed: () async {
                                       Provider.of<AudioPlayProvider>(context,
                                               listen: false)
                                           .stopPlaying();
-                                      FirestoreData.currentUser == null
-                                          ? bottomSheet(
+
+                                      if (FirestoreData.currentUser == null) {
+                                        bottomSheet(
+                                            context: context,
+                                            child: LoginPage(),
+                                            bottomSheetType:
+                                                BottomSheetType.loginPage);
+                                      } else if (postUserEmail ==
+                                          FirestoreData.currentUserEmail) {
+                                        showDialog(
+                                            barrierColor: AppColor.neutrals90
+                                                .withOpacity(0.95),
+                                            context: context,
+                                            builder: (context) =>
+                                                const WarningDialog(
+                                                    text:
+                                                        '자신에게는 메시지를 보낼 수 없습니다.'));
+                                      } else {
+                                        bool hasReplied = await FirestoreData
+                                            .hasRepliedBefore(
+                                                FirestoreData.currentUserEmail!,
+                                                replyDocmentId);
+                                        if (hasReplied) {
+                                          showDialog(
+                                              barrierColor: AppColor.neutrals90
+                                                  .withOpacity(0.95),
                                               context: context,
-                                              child: LoginPage(),
-                                              bottomSheetType:
-                                                  BottomSheetType.loginPage)
-                                          : postUserEmail ==
-                                                  FirestoreData.currentUserEmail
-                                              ? showDialog(
-                                                  barrierColor: AppColor
-                                                      .neutrals90
-                                                      .withOpacity(0.95),
-                                                  context: context,
-                                                  builder: (context) =>
-                                                      const WarningDialog(
-                                                          text:
-                                                              '자신에게는 메시지를 보낼 수 없습니다.'))
-                                              : bottomSheet(
-                                                  context: context,
-                                                  child: ReplyPage(
-                                                      replyDocmentId:
-                                                          replyDocmentId),
-                                                  bottomSheetType:
-                                                      BottomSheetType.replyPage,
-                                                );
+                                              builder: (context) =>
+                                                  const WarningDialog(
+                                                      text:
+                                                          '이미 답장을 보냈던 게시글입니다.'));
+                                        } else {
+                                          bottomSheet(
+                                            context: context,
+                                            child: ReplyPage(
+                                                replyDocmentId: replyDocmentId),
+                                            bottomSheetType:
+                                                BottomSheetType.replyPage,
+                                          );
+                                        }
+                                      }
                                     },
                                     icon: SvgPicture.asset(
                                         AppAssets.messageDefault32),

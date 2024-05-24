@@ -7,7 +7,7 @@ import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/chat_thumbnail/chat_thumbnail_view_model.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
-import 'package:everyones_tone/presentation/widgets/list_tile/chat_thumbnail_tile.dart';
+import 'package:everyones_tone/presentation/widgets/tile/chat_thumbnail_tile.dart';
 import 'package:flutter/material.dart';
 
 class ChatThumbnailPage extends StatelessWidget {

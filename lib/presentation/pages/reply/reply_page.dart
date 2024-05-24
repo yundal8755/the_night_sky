@@ -2,7 +2,7 @@
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/presentation/widgets/list_tile/edit_profile_status_tile.dart';
+import 'package:everyones_tone/presentation/widgets/tile/edit_profile_status_tile.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_view_model.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
@@ -34,7 +34,7 @@ class ReplyPage extends StatelessWidget {
                 onPressed: () async {
                   //! Progress Indicator
                   showDialog(
-                    barrierColor: AppColor.neutrals90.withOpacity(0.95),
+                    barrierColor: AppColor.neutrals90.withOpacity(0.5),
                     context: context,
                     barrierDismissible: false,
                     builder: (BuildContext context) {
@@ -60,7 +60,7 @@ class ReplyPage extends StatelessWidget {
                   await replyViewModel.uploadReply(
                       localAudioUrl: localAudioUrl,
                       replyUserData: replyUserData!,
-                      replyDocmentId: replyDocmentId);
+                      replyDocumentId: replyDocmentId);
 
                   recordStatusManager.resetToBefore();
 

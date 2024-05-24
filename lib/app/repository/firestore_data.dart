@@ -11,10 +11,29 @@ class FirestoreData {
   static Future<Map<String, dynamic>?> fetchUserData() async {
     final userEmail = currentUserEmail;
     if (userEmail != null) {
-      final userDoc = FirebaseFirestore.instance.collection('user').doc(userEmail);
+      final userDoc =
+          FirebaseFirestore.instance.collection('user').doc(userEmail);
       final doc = await userDoc.get();
       return doc.data();
     }
     return null;
+  }
+
+  static Future<bool> hasRepliedBefore(
+      String userEmail, String replyDocumentId) async {
+    final userDoc = await FirebaseFirestore.instance
+        .collection('user')
+        .doc(userEmail)
+        .get();
+    if (userDoc.exists) {
+      final previousReplies =
+          await userDoc.reference.collection('previousReplies').get();
+      for (var doc in previousReplies.docs) {
+        if (doc.id == replyDocumentId) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }

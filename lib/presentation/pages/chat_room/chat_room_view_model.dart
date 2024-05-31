@@ -1,12 +1,16 @@
 // ignore_for_file: avoid_print
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/models/chat_message_model.dart';
 import 'package:everyones_tone/presentation/pages/chat_room/chat_room_repository.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class ChatRoomViewModel {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final ChatRoomRepository chatRoomRepository = ChatRoomRepository();
+  FirebaseStorage storage = FirebaseStorage.instance;
 
   Stream<List<ChatMessageModel>> chatMessagesStream(String chatId) {
     return _firestore
@@ -56,9 +60,17 @@ class ChatRoomViewModel {
   //! Upload
   Future<void> uploadChatMessage(String chatId, String localAudioUrl,
       String dateCreated, String userEmail) async {
+    /// 오디오 URL 변환
+    String replyUserAudioUrl =
+        await convertLocalAudioToStorageUrl(localAudioUrl);
+    if (replyUserAudioUrl.isEmpty) {
+      print('오디오 파일 업로드 실패');
+      return;
+    }
+
     ChatMessageModel messageModel = ChatMessageModel(
         chatId: chatId,
-        audioUrl: localAudioUrl,
+        audioUrl: replyUserAudioUrl,
         dateCreated: dateCreated,
         userEmail: userEmail);
 
@@ -97,6 +109,34 @@ class ChatRoomViewModel {
       print("채팅방 및 메시지 삭제 성공: ${chatData['chatId']}");
     } catch (e) {
       print("채팅방 삭제 에러: $e");
+    }
+  }
+
+  //! localAudioUrl을 Firebase Storage Url로 변경
+  Future<String> convertLocalAudioToStorageUrl(String localAudioUrl) async {
+    File file = File(localAudioUrl);
+    try {
+      // Firebase Storage에 업로드할 파일의 경로를 지정
+      String fileName =
+          'audio_url/${DateTime.now().millisecondsSinceEpoch}.m4a';
+      Reference ref = storage.ref().child(fileName);
+
+      // 파일 업로드 수행
+      UploadTask uploadTask = ref.putFile(file);
+
+      // 업로드 완료까지 대기
+      await uploadTask.whenComplete(() => null);
+
+      // 업로드된 파일의 URL 가져오기
+      String downloadURL = await ref.getDownloadURL();
+
+      print('downloadURL: $downloadURL');
+
+      return downloadURL;
+    } catch (e) {
+      // 에러 처리
+      print("오디오 파일 업로드 중 에러 발생: $e");
+      return '';
     }
   }
 }

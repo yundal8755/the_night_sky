@@ -2,7 +2,7 @@ import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/profile/profile_page.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePageButton extends StatelessWidget {
@@ -17,7 +17,7 @@ class ProfilePageButton extends StatelessWidget {
           bottomSheet(
               context: context,
               child: ProfilePage(),
-              bottomSheetType: BottomSheetType.profilePage);
+              bottomSheetType: BottomSheetHeight.profilePage);
         },
         child: FutureBuilder(
           future: FirestoreData.fetchUserData(),

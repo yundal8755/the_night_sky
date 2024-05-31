@@ -7,7 +7,7 @@ import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/chat_thumbnail/chat_thumbnail_view_model.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
-import 'package:everyones_tone/presentation/widgets/tile/chat_thumbnail_tile.dart';
+import 'package:everyones_tone/presentation/widgets/tiles/chat_thumbnail_tile.dart';
 import 'package:flutter/material.dart';
 
 class ChatThumbnailPage extends StatelessWidget {
@@ -21,7 +21,7 @@ class ChatThumbnailPage extends StatelessWidget {
       bottomSheet(
           context: context,
           child: LoginPage(),
-          bottomSheetType: BottomSheetType.postPage);
+          bottomSheetType: BottomSheetHeight.postPage);
     }
 
     return PopScope(
@@ -36,7 +36,10 @@ class ChatThumbnailPage extends StatelessWidget {
                 stream: chatThumbnailViewModel.fetchChatInfoStream(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return Center(
+                        child: CircularProgressIndicator(
+                      backgroundColor: AppColor.primaryBlue,
+                    ));
                   }
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return Center(
@@ -46,12 +49,17 @@ class ChatThumbnailPage extends StatelessWidget {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
-                      var chatRoomInfo = snapshot.data![index];
+                      var chatData = snapshot.data![index];
                       return ChatThumbnailTile(
-                        chatData: chatRoomInfo,
-                        partnerNickname: chatRoomInfo['partnerUserNickname'],
-                        partnerProfilePicUrl:
-                            chatRoomInfo['partnerUserProfilePicUrl'],
+                        chatData: chatData,
+                        nickname: FirestoreData.currentUserEmail ==
+                                chatData['postUserEmail']
+                            ? chatData['replyUserNickname']
+                            : chatData['postUserNickname'],
+                        profilePicUrl: FirestoreData.currentUserEmail ==
+                                chatData['postUserEmail']
+                            ? chatData['replyUserProfilePicUrl']
+                            : chatData['postUserProfilePicUrl'],
                       );
                     },
                   );

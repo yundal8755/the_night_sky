@@ -1,5 +1,5 @@
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/play_icon_button.dart';
+import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/custom_buttons/play_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class CircleAudioPlayer extends StatelessWidget {

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {
-  const WebViewPage({super.key});
+  final String page;
+  final String title;
+  const WebViewPage({super.key, required this.page, required this.title});
 
   @override
   State<WebViewPage> createState() => _WebViewPageState();
@@ -12,7 +14,6 @@ class WebViewPage extends StatefulWidget {
 
 class _WebViewPageState extends State<WebViewPage> {
   late WebViewController _webViewController;
-  final String notionPage = 'https://equable-jitterbug-e9a.notion.site/7b94d449c8af4511a4bba304f3a9a44e';
 
   @override
   void initState() {
@@ -22,15 +23,13 @@ class _WebViewPageState extends State<WebViewPage> {
       ..setBackgroundColor(const Color(0x00000000))
       ..setNavigationDelegate(
         NavigationDelegate(
-          onProgress: (int progress) {
-            // Update loading bar.
-          },
+          onProgress: (int progress) {},
           onPageStarted: (String url) {},
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
         ),
       )
-      ..loadRequest(Uri.parse(notionPage));
+      ..loadRequest(Uri.parse(widget.page));
   }
 
   @override
@@ -40,10 +39,7 @@ class _WebViewPageState extends State<WebViewPage> {
       appBar: AppBar(
         backgroundColor: AppColor.neutrals90,
         leading: const BackButton(color: AppColor.neutrals20),
-        title: Text(
-          '웹뷰',
-          style: AppTextStyle.headlineMedium()
-        ),
+        title: Text(widget.title, style: AppTextStyle.headlineMedium()),
       ),
       body: SizedBox(
         width: size.width,

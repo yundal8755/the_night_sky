@@ -26,6 +26,11 @@ abstract class AppAssets {
   static const String profileBasicImage =
       'assets/images/profile_basic_image.png';
 
+  static const String mainBackgroundImage =
+      'assets/images/main_background_image.jpeg';
+  static const String mainAppIconImage =
+      'assets/images/main_app_icon_image.png';
+
   static const String profileRandomImage01 =
       'assets/images/profile_random_image_01.jpeg';
   static const String profileRandomImage02 =

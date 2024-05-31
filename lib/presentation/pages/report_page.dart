@@ -1,6 +1,8 @@
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';
 import 'package:flutter/material.dart';
 
 class ReportPage extends StatelessWidget {
@@ -20,8 +22,7 @@ class ReportPage extends StatelessWidget {
               children: [
                 //! 안내 문구
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 36),
-                  height: MediaQuery.of(context).size.height / 4.25,
+                  margin: const EdgeInsets.symmetric(vertical: 36),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -32,31 +33,22 @@ class ReportPage extends StatelessWidget {
                           color: AppColor.neutrals20,
                         ),
                       ),
+                      Gap.size08,
                       Text('신고 되었어요', style: AppTextStyle.headlineMedium()),
-                      const Text('신고된 내용은 검토 후 조치할 예정이에요.', style: TextStyle(color: AppColor.neutrals40))
+                      Gap.size04,
+                      const Text('신고된 내용은 검토 후 조치할 예정이에요.',
+                          style: TextStyle(color: AppColor.neutrals40))
                     ],
                   ),
                 ),
-        
+
                 //! 페이지 닫기 버튼
-                GestureDetector(
-                  onTap: () {
-                   Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (_) => BottomNavBarPage()));
-                  },
-                  child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.symmetric(horizontal: 12),
-                      padding: const EdgeInsets.all(14.0),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: AppColor.primaryBlue),
-                      child: Center(
-                          child: Text(
-                        '페이지 닫기',
-                        style: AppTextStyle.titleMedium(),
-                      ))),
-                ),
+                MainButton(
+                    backgroundColor: AppColor.primaryBlue,
+                    text: '페이지 닫기',
+                    textColor: AppColor.neutrals20,
+                    onPressed: () => Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (_) => BottomNavBarPage())))
               ],
             ),
           ),

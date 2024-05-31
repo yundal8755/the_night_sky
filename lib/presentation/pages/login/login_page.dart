@@ -4,11 +4,14 @@ import 'dart:io';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/app/constants/app_sites.dart';
+import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/pages/register_profile/register_profile_page.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/bottom_sheet_indicator.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/sns_login_button.dart';
+import 'package:everyones_tone/presentation/pages/web_view_page.dart';
+import 'package:everyones_tone/presentation/widgets/bottom_sheet_indicator.dart';
+import 'package:everyones_tone/presentation/widgets/custom_buttons/sns_login_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
@@ -95,22 +98,75 @@ class LoginPage extends StatelessWidget {
         Gap.size16,
 
         //! 이용약관
-        Container(
-            margin: const EdgeInsets.symmetric(horizontal: 20),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Flexible(
+                Expanded(
                   child: RichText(
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      text: TextSpan(
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 3,
+                    text: TextSpan(
+                      text: '계속하면 당사의 ',
+                      style: AppTextStyle.bodySmall(),
+                      children: [
+                        TextSpan(
+                          text: '서비스 약관',
+                          style: AppTextStyle.bodySmall().copyWith(
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const WebViewPage(
+                                    page: AppSites.termsOfUsePage,
+                                    title: '서비스 이용약관',
+                                  ),
+                                ),
+                              );
+                            },
+                        ),
+                        TextSpan(
+                          text: '에 동의하고, ',
+                          style: AppTextStyle.bodySmall(),
+                        ),
+                        TextSpan(
+                          text: '개인정보 처리방침',
+                          style: AppTextStyle.bodySmall().copyWith(
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.underline,
+                          ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const WebViewPage(
+                                    page: AppSites.privacyPolicy,
+                                    title: '개인정보 처리방침',
+                                  ),
+                                ),
+                              );
+                            },
+                        ),
+                        TextSpan(
                           text:
-                              '계속하면 당사의 서비스 약관에 동의하고, 개인정보 처리방침을(를) 읽어 당사의 데이터 수집, 사용, 공유 방법을 확인했음을 인정하는 것입니다.',
-                          style: AppTextStyle.bodySmall())),
-                )
+                              '을(를) 읽어 당사의 데이터 수집, 사용, 공유 방법을 확인했음을 인정하는 것입니다.',
+                          style: AppTextStyle.bodySmall(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
-            )),
+            ),
+          ),
+        ),
       ],
     );
   }

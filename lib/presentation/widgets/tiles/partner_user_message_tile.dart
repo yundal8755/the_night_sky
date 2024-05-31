@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, prefer_const_constructors
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
@@ -8,16 +8,16 @@ import 'package:everyones_tone/presentation/widgets/audio_player/circle_audio_pl
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class CurrentUserMessageTile extends StatelessWidget {
+class PartnerUserMessageTile extends StatelessWidget {
   final String audioUrl;
-  final String backgroundImage;
+  final String profilePicUrl;
   final String nickname;
   final String dateCreated;
 
-  const CurrentUserMessageTile(
+  const PartnerUserMessageTile(
       {super.key,
       required this.audioUrl,
-      required this.backgroundImage,
+      required this.profilePicUrl,
       required this.nickname,
       required this.dateCreated});
 
@@ -36,12 +36,20 @@ class CurrentUserMessageTile extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
+              CircleAudioPlayer(
+                audioUrl: audioUrl,
+                backgroundImage: profilePicUrl,
+                pauseIconSize: AppAssets.pauseDefault32,
+                playIconSize: AppAssets.playDefault32,
+                radius: 32,
+              ),
+              Gap.size16,
               Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     nickname,
@@ -51,17 +59,7 @@ class CurrentUserMessageTile extends StatelessWidget {
                   Text(formattedDate,
                       style: AppTextStyle.labelMedium(AppColor.neutrals60))
                 ],
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              CircleAudioPlayer(
-                audioUrl: audioUrl,
-                backgroundImage: backgroundImage,
-                pauseIconSize: AppAssets.pauseDefault32,
-                playIconSize: AppAssets.playDefault32,
-                radius: 32,
-              ),
+              )
             ],
           ),
         ],

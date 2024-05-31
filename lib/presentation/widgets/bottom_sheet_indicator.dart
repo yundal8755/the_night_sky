@@ -7,7 +7,7 @@ class BottomSheetIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 12.0),
+      margin: const EdgeInsets.only(top: 8.0, bottom: 4.0),
       width: 40,
       height: 4,
       decoration: BoxDecoration(

@@ -40,6 +40,7 @@ class RecordStatusManager with ChangeNotifier {
   ValueNotifier<bool> isPlayingNotifier = ValueNotifier<bool>(false);
   late AudioPlayer audioPlayer;
 
+
   //! 녹음 시작
   Future<void> startRecording() async {
     try {
@@ -47,11 +48,14 @@ class RecordStatusManager with ChangeNotifier {
         // 녹음 파일을 앱 전용 디렉토리에 저장하기
         final directory = await getApplicationDocumentsDirectory();
         final String fileName =
-            '녹음_${DateTime.now().millisecondsSinceEpoch}.mp4';
+            '녹음_${DateTime.now().millisecondsSinceEpoch}.m4a';
         final path = '${directory.path}/$fileName';
 
         // 녹음 시작
-        await record.start(const RecordConfig(), path: path);
+        await record.start(
+            const RecordConfig(
+                bitRate: 96000, sampleRate: 44100, encoder: AudioEncoder.aacLc),
+            path: path);
         audioFilePath = path;
         recordingStatusNotifier.value = RecordStatus.recording;
 

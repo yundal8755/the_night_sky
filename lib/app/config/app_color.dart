@@ -7,6 +7,7 @@ abstract class AppColor {
   static const neutrals20 = Color(0xFFE1E1E1);
   static const neutrals40 = Color(0xFFAAAAAA);
   static const neutrals60 = Color(0xFF626262);
+  static const neutrals70 = Color(0xFF282828);
   static const neutrals80 = Color(0xFF1F1F1F);
   static const neutrals90 = Color(0xFF131313);
 

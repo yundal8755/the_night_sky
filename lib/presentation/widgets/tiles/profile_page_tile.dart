@@ -13,7 +13,7 @@ class ProfilePageTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        //color: AppColor.primaryBlue,
+        color: Colors.transparent,
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 6),

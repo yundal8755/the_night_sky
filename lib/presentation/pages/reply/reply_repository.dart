@@ -7,7 +7,7 @@ import 'package:everyones_tone/app/repository/database_helper.dart';
 
 class ReplyRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final DatabaseHelper databaseHelper = DatabaseHelper();
+  // final DatabaseHelper databaseHelper = DatabaseHelper();
 
   //! Firestore - chat Collection method
   Future<void> uploadReplyRemote(
@@ -29,8 +29,8 @@ class ReplyRepository {
     postMessageModel.messageId = postMessageRef.id;
     await postMessageRef.set(postMessageModel.toMap());
 
-    await createUserChatSubcollection(
-        postMessageModel.userEmail, chatRef.id);
+    /// user - myChat SubCollection 생성
+    await createUserChatSubcollection(postMessageModel.userEmail, chatRef.id);
 
     /// Reply Message 정보 저장 및 ID 할당
     final DocumentReference replyMessageRef =
@@ -40,12 +40,15 @@ class ReplyRepository {
     await replyMessageRef.set(replyMessageModel.toMap());
 
     await createUserChatSubcollection(replyMessageModel.userEmail, chatRef.id);
-    await createPreviousRepliesSubcollection(replyMessageModel.userEmail, chatRef.id, replyDocmentId);
+    await createPreviousRepliesSubcollection(
+        replyMessageModel.userEmail, chatRef.id, replyDocmentId);
   }
 
   //! Firestore - Create myChat SubCollection
   Future<void> createUserChatSubcollection(
-      String userEmail, String chatId, ) async {
+    String userEmail,
+    String chatId,
+  ) async {
     final DocumentReference userRef =
         firestore.collection('user').doc(userEmail);
 
@@ -58,7 +61,7 @@ class ReplyRepository {
     });
   }
 
-    //! Firestore - Create previousReplies SubCollection
+  //! Firestore - Create previousReplies SubCollection
   Future<void> createPreviousRepliesSubcollection(
       String userEmail, String chatId, String replyDocumentId) async {
     final DocumentReference userRef =
@@ -76,19 +79,19 @@ class ReplyRepository {
   }
 
   //! SQflite
-  Future<void> uploadReplyLocal(
-      ChatModel chatModel,
-      ChatMessageModel postMessageModel,
-      ChatMessageModel replyMessageModel) async {
-    final db = await databaseHelper.database;
+  // Future<void> uploadReplyLocal(
+  //     ChatModel chatModel,
+  //     ChatMessageModel postMessageModel,
+  //     ChatMessageModel replyMessageModel) async {
+  //   final db = await databaseHelper.database;
 
-    // Chat 정보 저장
-    await db.insert('chat', chatModel.toMap());
+  //   // Chat 정보 저장
+  //   await db.insert('chat', chatModel.toMap());
 
-    // Post Message 정보 저장
-    await db.insert('message', postMessageModel.toMap());
+  //   // Post Message 정보 저장
+  //   await db.insert('message', postMessageModel.toMap());
 
-    // Reply Message 정보 저장
-    await db.insert('message', replyMessageModel.toMap());
-  }
+  //   // Reply Message 정보 저장
+  //   await db.insert('message', replyMessageModel.toMap());
+  // }
 }

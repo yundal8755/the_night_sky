@@ -6,13 +6,13 @@ import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
-import 'package:everyones_tone/presentation/widgets/layout/background_gradient.dart';
-import 'package:everyones_tone/presentation/pages/home/home_page.dart';
+import 'package:everyones_tone/presentation/pages/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
+import 'package:everyones_tone/presentation/widgets/layout/main_background_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import '../chat_thumbnail/chat_thumbnail_page.dart';
+import 'chat_thumbnail/chat_thumbnail_page.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   @override
@@ -31,7 +31,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   Widget build(BuildContext context) {
     final userData = Provider.of<FirestoreUserProvider>(context).userData;
 
-    return BackgroundGradient(
+    return MainBackgroundLayout(
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
@@ -80,11 +80,11 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                         ? bottomSheet(
                             context: context,
                             child: LoginPage(),
-                            bottomSheetType: BottomSheetType.loginPage)
+                            bottomSheetType: BottomSheetHeight.loginPage)
                         : bottomSheet(
                             context: context,
                             child: PostPage(),
-                            bottomSheetType: BottomSheetType.postPage);
+                            bottomSheetType: BottomSheetHeight.postPage);
                   },
                 ),
 
@@ -104,7 +104,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                         ? bottomSheet(
                             context: context,
                             child: LoginPage(),
-                            bottomSheetType: BottomSheetType.loginPage)
+                            bottomSheetType: BottomSheetHeight.loginPage)
                         : setState(() {
                             _currentIndex = 2;
                           });

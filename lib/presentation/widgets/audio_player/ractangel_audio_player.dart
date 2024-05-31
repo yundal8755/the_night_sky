@@ -1,4 +1,4 @@
-import 'package:everyones_tone/presentation/widgets/buttons/play_icon_button.dart';
+import 'package:everyones_tone/presentation/widgets/custom_buttons/play_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class RectangleAudioPlayer extends StatelessWidget {

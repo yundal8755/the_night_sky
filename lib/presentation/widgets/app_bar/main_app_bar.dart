@@ -6,7 +6,7 @@ import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/pages/profile/profile_page.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,7 +40,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ? bottomSheet(
                           context: context,
                           child: LoginPage(),
-                          bottomSheetType: BottomSheetType.loginPage)
+                          bottomSheetType: BottomSheetHeight.loginPage)
                       : Navigator.push(
                           context,
                           MaterialPageRoute(

@@ -17,11 +17,14 @@ class PostViewModel {
     try {
       // Firebase Storage에 업로드할 파일의 경로를 지정
       String fileName =
-          'audio_url/${DateTime.now().millisecondsSinceEpoch}.mp4';
+          'audio_url/${DateTime.now().millisecondsSinceEpoch}.m4a';
       Reference ref = storage.ref().child(fileName);
 
+      // 업로드 시 Metadata에 MIME 타입 설정
+      SettableMetadata metadata = SettableMetadata(contentType: 'audio/x-m4a');
+
       // 파일 업로드 수행
-      UploadTask uploadTask = ref.putFile(file);
+      UploadTask uploadTask = ref.putFile(file, metadata);
 
       // 업로드 완료까지 대기
       await uploadTask.whenComplete(() => null);

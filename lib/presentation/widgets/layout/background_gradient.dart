@@ -7,7 +7,6 @@ class BackgroundGradient extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // backgroundPaint를 BoxDecoration의 gradient로 변환
     const backgroundDecoration = BoxDecoration(
       gradient: AppColor.backgroundGradient,
     );
@@ -18,21 +17,3 @@ class BackgroundGradient extends StatelessWidget {
     );
   }
 }
-
-      // child: Stack(
-      //   children: [
-      //     Container(
-      //       decoration: BoxDecoration(
-      //         image: DecorationImage(
-      //           image: AssetImage(AppAssets.profileRandomImage11),
-      //           fit: BoxFit.cover,
-      //           colorFilter: ColorFilter.mode(
-      //             Colors.black.withOpacity(0.20), // 5% 투명도의 검정색 오버레이
-      //             BlendMode.dstATop,
-      //           ),
-      //         ),
-      //       ),
-      //     ),
-      //     child
-      //   ],
-      // ),

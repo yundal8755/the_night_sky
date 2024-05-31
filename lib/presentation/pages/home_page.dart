@@ -2,10 +2,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/repository/database_helper.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
-import 'package:everyones_tone/presentation/widgets/posting_card/full_size_posting_card.dart';
+import 'package:everyones_tone/presentation/widgets/posting_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,25 +22,20 @@ class _HomePageState extends State<HomePage> {
       .orderBy('dateCreated', descending: true);
   String currentDocumentId = '';
   int currentPageIndex = 0;
-  final DatabaseHelper databaseHelper = DatabaseHelper();
   final _controller = PageController();
 
   @override
   void initState() {
     super.initState();
-    // FirebaseAuth의 userChanges 스트림을 구독
-    FirebaseAuth.instance.userChanges().listen((User? user) {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        print('User is signed in!');
-      }
-    });
-
-    setState(() {
-      // 테이블 조회
-      // databaseHelper.fetchTableData();
-    });
+    FirebaseAuth.instance.userChanges().listen(
+      (User? user) {
+        if (user == null) {
+          print('User is currently signed out!');
+        } else {
+          print('User is signed in!');
+        }
+      },
+    );
   }
 
   @override
@@ -54,7 +48,7 @@ class _HomePageState extends State<HomePage> {
         body: SafeArea(
           child: Column(
             children: [
-              const MainAppBar(title: '모두의 음색'),
+              const MainAppBar(title: '밤하늘'),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
                   stream: postCollection.snapshots(),
@@ -74,35 +68,42 @@ class _HomePageState extends State<HomePage> {
                       );
                     }
                     List<DocumentSnapshot> docs = snapshot.data!.docs;
-      
+
                     return PageView.builder(
                       controller: _controller,
                       scrollDirection: Axis.vertical,
                       itemCount: docs.length,
+
+                      //! 페이지 변경시
                       onPageChanged: (index) async {
                         var post = docs[index].data() as Map<String, dynamic>;
                         String audioUrl = post['audioUrl'];
                         Provider.of<AudioPlayProvider>(context, listen: false)
                             .togglePlay(audioUrl);
-                        String documentId = docs[index].id;
-                        currentPageIndex = index;
-                        currentDocumentId = docs[index].id;
-                        print("현재 페이지의 문서 ID: $documentId");
+                        setState(() {
+                          currentDocumentId = docs[index].id;
+                        });
                       },
+
+                      //! 아이템 빌더
                       itemBuilder: (context, index) {
-                        var post = docs[index].data() as Map<String, dynamic>;
+                        var postData =
+                            docs[index].data() as Map<String, dynamic>;
                         // 최초 페이지 로드 시 한 번만 실행
-                        if (index == 0 && currentPageIndex == 0) {
+                        if (index == 0 && currentDocumentId == '') {
                           currentDocumentId = docs[0].id;
+                          print('초기 화면의 Doc ID : $currentDocumentId');
                         }
-      
-                        String audioUrl = post['audioUrl'];
-                        String nickname = post['nickname'];
-                        String postTitle = post['postTitle'];
-                        String profilePicUrl = post['profilePicUrl'];
-                        String postUserEmail = post['userEmail'];
-      
-                        return FullSizePostingCard(
+
+                        print('CurrentDocument ID : $currentDocumentId');
+
+                        String audioUrl = postData['audioUrl'];
+                        String nickname = postData['nickname'];
+                        String postTitle = postData['postTitle'];
+                        String profilePicUrl = postData['profilePicUrl'];
+                        String postUserEmail = postData['userEmail'];
+
+                        return PostingCard(
                           audioUrl: audioUrl,
                           profilePicUrl: profilePicUrl,
                           nickname: nickname,

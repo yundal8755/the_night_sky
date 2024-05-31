@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously, avoid_print
 
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/config/app_gap.dart';
+import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/presentation/widgets/tile/edit_profile_status_tile.dart';
+import 'package:everyones_tone/presentation/widgets/anonymousProfileSwitch.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_view_model.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/record_buttons/record_status_button.dart';
+import 'package:everyones_tone/presentation/widgets/record_buttons/record_status_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +22,9 @@ class ReplyPage extends StatelessWidget {
     final ReplyViewModel replyViewModel = ReplyViewModel();
     final recordStatusManager =
         Provider.of<RecordStatusManager>(context, listen: false);
+
+    String currentNickname = '';
+    String currentProfilePicUrl = AppAssets.profileBasicImage;
 
     print('Reply CurrentDocumentId : $replyDocmentId');
 
@@ -57,9 +62,12 @@ class ReplyPage extends StatelessWidget {
                   Map<String, dynamic>? replyUserData =
                       await FirestoreData.fetchUserData();
 
+                  replyUserData!['nickname'] = currentNickname;
+                  replyUserData['profilePicUrl'] = currentProfilePicUrl;
+
                   await replyViewModel.uploadReply(
                       localAudioUrl: localAudioUrl,
-                      replyUserData: replyUserData!,
+                      replyUserData: replyUserData,
                       replyDocumentId: replyDocmentId);
 
                   recordStatusManager.resetToBefore();
@@ -69,7 +77,12 @@ class ReplyPage extends StatelessWidget {
                   Navigator.pop(context); // Home으로 이동
                 },
               ),
-              EditProfileStatusTile()
+              Gap.size06,
+              AnonymousProfileSwitch(
+                  onProfileChanged: (nickname, profilePicUrl) {
+                currentNickname = nickname;
+                currentProfilePicUrl = profilePicUrl;
+              })
             ],
           ),
           RecordStatusButton()

@@ -5,9 +5,9 @@ import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/enums/record_status.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_manager.dart';
-import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_page.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
+import 'package:everyones_tone/app/utils/edit_profile_manager.dart';
+import 'package:everyones_tone/presentation/pages/profile/edit_profile_page.dart';
+import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -95,7 +95,7 @@ class _EditProfileStatusTileState extends State<EditProfileStatusTile> {
               bottomSheet(
                   context: context,
                   child: const EditProfilePage(),
-                  bottomSheetType: BottomSheetType.postPage);
+                  bottomSheetType: BottomSheetHeight.postPage);
             },
             icon:
                 const Icon(Icons.arrow_forward_ios, color: AppColor.neutrals40),

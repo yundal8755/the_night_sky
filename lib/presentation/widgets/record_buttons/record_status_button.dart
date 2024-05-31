@@ -1,8 +1,8 @@
 import 'package:everyones_tone/app/enums/record_status.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/record_buttons/audio_play_button.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/record_buttons/before_record_button.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/record_buttons/recording_button.dart';
+import 'package:everyones_tone/presentation/widgets/record_buttons/audio_play_button.dart';
+import 'package:everyones_tone/presentation/widgets/record_buttons/before_record_button.dart';
+import 'package:everyones_tone/presentation/widgets/record_buttons/recording_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -6,7 +6,7 @@ import 'package:everyones_tone/app/repository/database_helper.dart';
 
 class RegisterProfileRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
-  final DatabaseHelper databaseHelper = DatabaseHelper();
+  // final DatabaseHelper databaseHelper = DatabaseHelper();
 
   //! Firestore
   Future<void> registerUserDataRemote(UserModel userModel) async {
@@ -16,10 +16,10 @@ class RegisterProfileRepository {
   }
 
   //! SQflite
-  Future<int> registerUserDataLocal(UserModel userModel) async {
-    final db = await databaseHelper.database;
+  // Future<int> registerUserDataLocal(UserModel userModel) async {
+  //   final db = await databaseHelper.database;
 
-    print('===== user Table 만들기 성공! =====');
-    return await db.insert('user', userModel.toMap());
-  }
+  //   print('===== user Table 만들기 성공! =====');
+  //   return await db.insert('user', userModel.toMap());
+  // }
 }

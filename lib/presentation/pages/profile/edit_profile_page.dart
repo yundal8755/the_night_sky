@@ -3,9 +3,9 @@
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_button.dart';
-import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_manager.dart';
+import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';
+import 'package:everyones_tone/app/utils/edit_profile_manager.dart';
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatelessWidget {
@@ -87,7 +87,7 @@ class EditProfilePage extends StatelessWidget {
           Container(
             width: MediaQuery.of(context).size.width,
             margin: const EdgeInsets.symmetric(vertical: 20),
-            child: CustomElevatedButton(
+            child: MainButton(
               backgroundColor: Colors.transparent,
               text: '♻️ 프로필 변경',
               textColor: AppColor.neutrals20,

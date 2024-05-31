@@ -1,15 +1,13 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:flutter/material.dart';
 
-class CustomElevatedButton extends StatelessWidget {
+class MainButton extends StatelessWidget {
   Color backgroundColor;
   String text;
   Color textColor;
   Color borderSideColor;
   VoidCallback? onPressed;
-  CustomElevatedButton(
+  MainButton(
       {super.key,
       required this.backgroundColor,
       required this.text,
@@ -21,17 +19,20 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          side: BorderSide(color: borderSideColor),
-          backgroundColor: backgroundColor,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+      child: GestureDetector(
+        onTap: onPressed,
+        child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            border: Border.all(color: borderSideColor),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Center(
+            child: Text(text, style: AppTextStyle.titleMedium(textColor)),
+          ),
         ),
-        child: Text(text, style: AppTextStyle.titleMedium(textColor)),
       ),
     );
   }

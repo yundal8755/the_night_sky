@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/models/chat_model.dart';
 import 'package:everyones_tone/app/models/chat_message_model.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +18,7 @@ class ReplyViewModel {
     try {
       // Firebase Storage에 업로드할 파일의 경로를 지정
       String fileName =
-          'audio_url/${DateTime.now().millisecondsSinceEpoch}.mp4';
+          'audio_url/${DateTime.now().millisecondsSinceEpoch}.m4a';
       Reference ref = storage.ref().child(fileName);
 
       // 파일 업로드 수행
@@ -46,10 +45,12 @@ class ReplyViewModel {
       {required String localAudioUrl,
       required Map<String, dynamic> replyUserData,
       required String replyDocumentId}) async {
-    // Firestore 객체 생성
+    /// 데이터 가져오기
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    DocumentSnapshot postUserData =
+        await firestore.collection('post').doc(replyDocumentId).get();
 
-    // 오디오 URL 변환
+    /// 오디오 URL 변환
     String replyUserAudioUrl =
         await convertLocalAudioToStorageUrl(localAudioUrl);
     if (replyUserAudioUrl.isEmpty) {
@@ -57,59 +58,39 @@ class ReplyViewModel {
       return;
     }
 
-    // Reply User 데이터 설정
-    String replyUserNickname = replyUserData['nickname'] ?? '';
-    String replyUserEmail = replyUserData['userEmail'] ?? '';
-    String replyUserProfilePicUrl = replyUserData['profilePicUrl'] ?? '';
+    /// Post User 데이터 설정
+    String postAudioUrl = postUserData['audioUrl'];
+    String postDateCreated = postUserData['dateCreated'];
+    String postTitle = postUserData['postTitle'];
+    String postUserEmail = postUserData['userEmail'];
+    String postUserNickname = postUserData['nickname'];
+    String postUserProfilePicUrl = postUserData['profilePicUrl'];
+
+    /// Reply User 데이터 설정
+    String replyUserEmail = replyUserData['userEmail'];
+    String replyUserNickname = replyUserData['nickname'];
+    String replyUserProfilePicUrl = replyUserData['profilePicUrl'];
     String dateCreated = DateFormat("MM/dd HH:mm:ss").format(DateTime.now());
 
-    /// 최초 메신저의 post data 가져오기
-    DocumentSnapshot postUserData =
-        await firestore.collection('post').doc(replyDocumentId).get();
-
-    bool isCurrentUserPostUser =
-        FirestoreData.currentUserEmail == postUserData['userEmail'];
-
+    /// Chat Model 생성
     ChatModel chatModel = ChatModel(
-      currentUserNickname: isCurrentUserPostUser
-          ? postUserData['nickname']
-          : replyUserData['nickname'],
-
-      currentUserEmail: isCurrentUserPostUser
-          ? postUserData['userEmail']
-          : replyUserData['userEmail'],
-
-      currentUserProfilePicUrl: isCurrentUserPostUser
-          ? postUserData['profilePicUrl']
-          : replyUserData['profilePicUrl'],
-
       dateCreated: dateCreated,
-
-      partnerUserNickname: isCurrentUserPostUser
-          ? replyUserData['nickname']
-          : postUserData['nickname'],
-      partnerUserEmail: isCurrentUserPostUser
-          ? replyUserData['userEmail']
-          : postUserData['userEmail'],
-      partnerUserProfilePicUrl: isCurrentUserPostUser
-          ? replyUserData['profilePicUrl']
-          : postUserData['profilePicUrl'],
-
-      postUserNickname: postUserData['nickname'],
-      postUserEmail: postUserData['userEmail'],
-      postUserProfilePicUrl: postUserData['profilePicUrl'],
-      postTitle: postUserData['postTitle'],
-      replyUserNickname: replyUserNickname,
+      postTitle: postTitle,
+      postUserEmail: postUserEmail,
+      postUserNickname: postUserNickname,
+      postUserProfilePicUrl: postUserProfilePicUrl,
       replyUserEmail: replyUserEmail,
+      replyUserNickname: replyUserNickname,
       replyUserProfilePicUrl: replyUserProfilePicUrl,
     );
 
     /// Post Message Model 생성
     ChatMessageModel postMessageModel = ChatMessageModel(
-        audioUrl: postUserData['audioUrl'],
-        dateCreated: postUserData['dateCreated'],
-        userEmail: postUserData['userEmail']);
+        audioUrl: postAudioUrl,
+        dateCreated: postDateCreated,
+        userEmail: postUserEmail);
 
+    /// Reply Message Model 생성
     ChatMessageModel replyMessageModel = ChatMessageModel(
         audioUrl: replyUserAudioUrl,
         dateCreated: dateCreated,
@@ -120,9 +101,5 @@ class ReplyViewModel {
     /// Firestore 업로드
     await replyRemoteRepository.uploadReplyRemote(
         chatModel, postMessageModel, replyMessageModel, replyDocumentId);
-
-    /// SQflite 업로드
-    // await replyRemoteRepository.uploadReplyLocal(
-    //     chatModel, postMessageModel, replyMessageModel);
   }
 }

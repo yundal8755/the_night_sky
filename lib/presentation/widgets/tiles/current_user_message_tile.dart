@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, prefer_const_constructors
+// ignore_for_file: file_names
 
 import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
@@ -8,13 +8,13 @@ import 'package:everyones_tone/presentation/widgets/audio_player/circle_audio_pl
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class PartnerUserMessageTile extends StatelessWidget {
+class CurrentUserMessageTile extends StatelessWidget {
   final String audioUrl;
   final String backgroundImage;
   final String nickname;
   final String dateCreated;
 
-  const PartnerUserMessageTile(
+  const CurrentUserMessageTile(
       {super.key,
       required this.audioUrl,
       required this.backgroundImage,
@@ -36,22 +36,12 @@ class PartnerUserMessageTile extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
           Row(
             children: [
-              CircleAudioPlayer(
-                audioUrl: audioUrl,
-                backgroundImage: backgroundImage,
-                pauseIconSize: AppAssets.pauseDefault32,
-                playIconSize: AppAssets.playDefault32,
-                radius: 32,
-              ),
-              const SizedBox(
-                width: 20,
-              ),
               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     nickname,
@@ -61,7 +51,15 @@ class PartnerUserMessageTile extends StatelessWidget {
                   Text(formattedDate,
                       style: AppTextStyle.labelMedium(AppColor.neutrals60))
                 ],
-              )
+              ),
+              Gap.size16,
+              CircleAudioPlayer(
+                audioUrl: audioUrl,
+                backgroundImage: backgroundImage,
+                pauseIconSize: AppAssets.pauseDefault32,
+                playIconSize: AppAssets.playDefault32,
+                radius: 32,
+              ),
             ],
           ),
         ],

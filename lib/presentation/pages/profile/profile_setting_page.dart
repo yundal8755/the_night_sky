@@ -6,12 +6,12 @@ import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
-import 'package:everyones_tone/presentation/pages/bottom_nav_bar/bottom_nav_bar_page.dart';
-import 'package:everyones_tone/presentation/pages/edit_profile/edit_profile_page.dart';
+import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/presentation/pages/profile/edit_profile_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
-import 'package:everyones_tone/presentation/widgets/dialog/custom_dialog.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
-import 'package:everyones_tone/presentation/widgets/buttons/custom_elevated_button.dart';
+import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';
+import 'package:everyones_tone/presentation/widgets/dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -39,7 +39,6 @@ class ProfileSettingPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             //! 프로필 사진, 닉네임
-
             Column(
               children: [
                 Gap.size12,
@@ -63,7 +62,7 @@ class ProfileSettingPage extends StatelessWidget {
             Column(
               children: [
                 // 프로필 변경 버튼
-                CustomElevatedButton(
+                MainButton(
                   backgroundColor: AppColor.primaryBlue,
                   text: '프로필 변경',
                   textColor: AppColor.neutrals20,
@@ -71,69 +70,60 @@ class ProfileSettingPage extends StatelessWidget {
                     bottomSheet(
                       context: context,
                       child: const EditProfilePage(),
-                      bottomSheetType: BottomSheetType.postPage,
+                      bottomSheetType: BottomSheetHeight.postPage,
                     );
                   },
                 ),
 
                 // 로그아웃 버튼
-                CustomElevatedButton(
+                MainButton(
                   backgroundColor: Colors.transparent,
                   text: '로그아웃',
                   textColor: AppColor.neutrals20,
                   borderSideColor: AppColor.primaryBlue,
-                  onPressed: () {
-                    showDialog(
-                      barrierColor: AppColor.neutrals90.withOpacity(0.95),
-                      context: context,
-                      builder: (BuildContext context) => CustomDialog(
-                        title: '로그아웃',
-                        message: '정말 로그아웃 하시겠습니까?',
-                        onConfirm: () async {
-                          loginViewModel.signOut();
+                  onPressed: () => DialogWidget.showTwoOptionDialog(
+                    context: context,
+                    title: '로그아웃',
+                    message: '정말 로그아웃 하시겠습니까?',
+                    onTap: () async {
+                      loginViewModel.signOut();
 
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BottomNavBarPage(),
-                            ),
-                            (Route<dynamic> route) => false,
-                          );
-                        },
-                        mainButtonTitle: '로그아웃',
-                      ),
-                    );
-                  },
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BottomNavBarPage(),
+                        ),
+                        (Route<dynamic> route) => false,
+                      );
+                    },
+                  ),
                 ),
 
                 // 회원탈퇴 버튼
                 TextButton(
-                    onPressed: () {
-                      showDialog(
-                        barrierColor: AppColor.neutrals90.withOpacity(0.95),
-                        context: context,
-                        builder: (BuildContext context) => CustomDialog(
-                          title: '정말 탈퇴하시겠어요?',
-                          message: '계정은 삭제되며 복구되지 않습니다.',
-                          onConfirm: () async {
-                            await loginViewModel.deleteUserAccount();
+                  onPressed: () {
+                    DialogWidget.showTwoOptionDialog(
+                      context: context,
+                      title: '정말 탈퇴하시겠어요?',
+                      message: '계정은 삭제되며 복구되지 않습니다.',
+                      onTap: () async {
+                        await loginViewModel.deleteUserAccount();
 
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BottomNavBarPage(),
-                              ),
-                              (Route<dynamic> route) => false,
-                            );
-                          },
-                          mainButtonTitle: '회원탈퇴',
-                        ),
-                      );
-                    },
-                    child: Text(
-                      '회원탈퇴',
-                      style: AppTextStyle.titleMedium(AppColor.neutrals60),
-                    )),
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BottomNavBarPage(),
+                          ),
+                          (Route<dynamic> route) => false,
+                        );
+                      },
+                    );
+                  },
+                  child: Text(
+                    '회원탈퇴',
+                    style: AppTextStyle.titleMedium(AppColor.neutrals60),
+                  ),
+                ),
               ],
             ),
           ],

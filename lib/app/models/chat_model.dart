@@ -1,12 +1,6 @@
 class ChatModel {
   String? chatId;
-  String currentUserNickname;
-  String currentUserEmail;
-  String currentUserProfilePicUrl;
   String dateCreated;
-  String partnerUserNickname;
-  String partnerUserEmail;
-  String partnerUserProfilePicUrl;
   String postTitle;
   String postUserNickname;
   String postUserEmail;
@@ -17,13 +11,7 @@ class ChatModel {
 
   ChatModel({
     this.chatId,
-    required this.currentUserNickname,
-    required this.currentUserEmail,
-    required this.currentUserProfilePicUrl,
     required this.dateCreated,
-    required this.partnerUserNickname,
-    required this.partnerUserEmail,
-    required this.partnerUserProfilePicUrl,
     required this.postTitle,
     required this.postUserNickname,
     required this.postUserEmail,
@@ -36,13 +24,7 @@ class ChatModel {
   Map<String, dynamic> toMap() {
     return {
       'chatId': chatId,
-      'currentUserNickname': currentUserNickname,
-      'currentUserEmail': currentUserEmail,
-      'currentUserProfilePicUrl': currentUserProfilePicUrl,
       'dateCreated': dateCreated,
-      'partnerUserNickname': partnerUserNickname,
-      'partnerUserEmail': partnerUserEmail,
-      'partnerUserProfilePicUrl': partnerUserProfilePicUrl,
       'postUserNickname': postUserNickname,
       'postUserEmail': postUserEmail,
       'postUserProfilePicUrl': postUserProfilePicUrl,

@@ -5,7 +5,7 @@ import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/presentation/widgets/atoms/profile_circle_image.dart';
+import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/cupertino.dart';
 
 class AnonymousProfileSwitch extends StatefulWidget {
@@ -24,7 +24,8 @@ class _AnonymousProfileSwitchState extends State<AnonymousProfileSwitch> {
   Map<String, dynamic> userData = {};
   List<String> randomImages = List.generate(
     20,
-    (index) => 'assets/images/profile_random_image_${(index + 1).toString().padLeft(2, '0')}.jpeg',
+    (index) =>
+        'assets/images/profile_random_image_${(index + 1).toString().padLeft(2, '0')}.jpeg',
   );
 
   @override
@@ -49,7 +50,7 @@ class _AnonymousProfileSwitchState extends State<AnonymousProfileSwitch> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: EdgeInsets.symmetric(vertical: 24),
+      padding: EdgeInsets.symmetric(vertical: 6),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[

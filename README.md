@@ -1,19 +1,27 @@
 
-# 밤하늘 - 목소리로 소통하는 음성 SNS
-<div style="display: flex; justify-content: space-evenly; gap: 20px;">
-    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/3e2e5955-b727-40d0-9ec3-77160c752733/image.png" />
-    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/e5659ec8-1c5a-4839-bce9-cbd11f3fb927/image.png" />
-    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/408437b4-036f-4404-b170-980dfcdd42c8/image.png" />
-</div>
+<h1 style="text-align: center;">밤하늘 - 목소리로 소통하는 음성 SNS</h1>
 
-- 밤하늘은 일상을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
-- 다양한 기능을 통해 사용자들이 자신의 목소리로 생각과 감정을 표현할 수 있도록 돕습니다.
+<table style="margin: 0 auto;">
+  <tr>
+    <td style="padding: 0 20px;">
+      <img width="240" src="https://velog.velcdn.com/images/yun_dal/post/3e2e5955-b727-40d0-9ec3-77160c752733/image.png" />
+    </td>
+    <td style="padding: 0 20px;">
+      <img width="240" src="https://velog.velcdn.com/images/yun_dal/post/e5659ec8-1c5a-4839-bce9-cbd11f3fb927/image.png" />
+    </td>
+    <td style="padding: 0 20px;">
+      <img width="240" src="https://velog.velcdn.com/images/yun_dal/post/408437b4-036f-4404-b170-980dfcdd42c8/image.png" />
+    </td>
+  </tr>
+</table>
+
+- **밤하늘**은 목소리로 생각과 감정을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
 - 주요 기능은 다음과 같습니다
-    - 음성 게시글 작성: 프로필 사진과 닉네임, 음성 녹음 파일을 포함한 게시글을 업로드하여 다른 사용자들과 공유할 수 있습니다.
-    - 음성 메시지 답장: 마음에 드는 게시글에 음성 메시지를 보내 소통할 수 있습니다.
+    - 음성 게시글 작성: 프로필 사진과 닉네임, 음성을 담은 게시글을 업로드하여 다른 사용자들과 소통할 수 있습니다.
+    - 음성 메시지 답장: 마음에 드는 게시글에 음성 메시지를 보낼 수 있습니다.
     - 음성 채팅: 답장을 통해 시작된 대화를 음성 채팅방에서 이어나갈 수 있습니다.
-- 밤하늘은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
-
+- **밤하늘**은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
+<br></br>
 
 
 # 목차
@@ -21,8 +29,8 @@
 - [구현 결과](#구현-결과)
 - [폴더 구조](#폴더-구조)
 - [프로젝트 특징](#프로젝트-특징)
-- [회고](#회고)
-
+- [프로젝트 개발일지 및 회고록](#프로젝트-개발일지-및-회고록)
+<br></br>
 
 
 # 요약
@@ -39,7 +47,7 @@
 | 디바이스             | iphone 12 pro (iOS 17.4.1), SM-G965N(Android 13)           |
 | 테스트 환경          | macOS Monterey(14.0)                                  |
 | 기능                 | - Firebase Authentication Google, Apple 로그인 <br> - 음성 게시글 업로드 <br> - 음성 게시글 답장을 통해 채팅 기능 <br> - 프로필 사진 및 닉네임 변경 기능 |
-
+<br></br>
 
 
 # 구현 결과
@@ -55,7 +63,7 @@
 | 로그인 페이지 | 내 정보 페이지 | 프로필 변경 페이지 |
 |:--------------------------:|:--------------------------:|:--------------------------:|
 | ![IMG_2008](https://github.com/Yundal0/everyones_tone/assets/101382788/34ff1097-471b-4947-b034-dbf3bbe7cd48) | ![IMG_2006](https://github.com/Yundal0/everyones_tone/assets/101382788/b4c318e5-3475-4f6a-acca-c689410e3a1a) | ![IMG_2007](https://github.com/Yundal0/everyones_tone/assets/101382788/c24c8bd9-40d0-4d65-820e-f6b48f0a15f3) |
-
+<br></br>
 
 
 # 폴더 구조
@@ -87,7 +95,7 @@
      |   |-- tiles
  |
 ```
-
+<br></br>
 
 
 # 프로젝트 특징
@@ -112,10 +120,11 @@
     - ChatRoomPage: 상대방의 프로필 사진과 닉네임, 음성 메시지를 확인할 수 있고, 녹음한 음성 메시지 정보를 입력받아 ViewModel로 전달하는 페이지.
     - ChatRoomViewModel: 채팅방 메시지를 정렬하고 채팅방 나가기, 채팅 데이터 실시간 스트리밍 그리고 Repository로 데이터를 전달하는 것이 주된 업무.
     - ChatRoomRepository: Firestore와 상호작용하여 ChatMessageModel을 저장하고 불러오는 역할 수행.
-
+<br></br>
 
 
 # 프로젝트 개발일지 및 회고록
 - <a href="https://equable-jitterbug-e9a.notion.site/94af09276a7549e79912577fb6144708?v=e1ab4856173049daac90f2c6e3435ba3">밤하늘 개발일지</a>
 - <a href="https://equable-jitterbug-e9a.notion.site/b11ed3e7f92d4761b47f75a2835fc891?v=803502e0855942839298fa77cbf58499&pvs=4">밤하늘 문제해결일지</a>
 - <a href="https://equable-jitterbug-e9a.notion.site/d8727e5946ca49c8a618913cd03fbfc7?pvs=4">밤하늘 회고록</a>
+<br></br>

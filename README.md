@@ -1,18 +1,33 @@
 
+<br>
+# 밤하늘 **- 목소리로 소통하는 음성 SNS**
+
+
+<div style="display: flex; justify-content: space-evenly">
+    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/3e2e5955-b727-40d0-9ec3-77160c752733/image.png" />
+    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/e5659ec8-1c5a-4839-bce9-cbd11f3fb927/image.png" />
+    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/408437b4-036f-4404-b170-980dfcdd42c8/image.png" />
+</div>
+
+
+<br>
+- **밤하늘**은 일상을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
+- 다양한 기능을 통해 사용자들이 자신의 목소리로 생각과 감정을 표현할 수 있도록 돕습니다.
+- **밤하늘**에서 제공하는 주요 기능은 다음과 같습니다
+    - **음성 게시글 작성:** 프로필 사진과 닉네임, 음성 녹음 파일을 포함한 게시글을 업로드하여 다른 사용자들과 공유할 수 있습니다.
+    - **음성 메시지 답장:** 마음에 드는 게시글에 음성 메시지를 보내 소통할 수 있습니다.
+    - **음성 채팅:** 답장을 통해 시작된 대화를 음성 채팅방에서 이어나갈 수 있습니다.
+- **밤하늘**은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
+<br>
+
+
 
 # 목차
-
-- [소개](#소개)
 - [요약](#요약)
 - [구현 결과](#구현-결과)
 - [폴더 구조](#폴더-구조)
 - [프로젝트 특징](#프로젝트-특징)
 - [회고](#회고)
-
-
-
-# 소개
-
 
 
 
@@ -82,12 +97,12 @@
 
 
 # 프로젝트 특징
-## MVVM 아키텍처 적용  
+### MVVM 아키텍처 적용  
 - Model: 데이터 정의 및 관리를 담당. 
 - View: 사용자 입력을 처리하고, ViewModel에 이벤트를 전달.
 - ViewModel: 비즈니스 로직을 처리하고, Repository를 통해 데이터를 가져오거나 저장.
 - Repository: Firestore와 상호작용하여 데이터를 가져오거나 저장.
-## 적용 예시
+### 적용 예시
 - [Post]
     - PostModel: 글 작성자 정보와 음성URL, 게시글 제목 그리고 생성 날짜 데이터를 저장.
     - PostPage: 입력받은 게시글 제목, 유저 정보, 음성 녹음 정보를 ViewModel로 전달.

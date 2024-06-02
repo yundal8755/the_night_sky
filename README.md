@@ -2,12 +2,17 @@
 
 # 목차
 
+- [소개](#소개)
 - [요약](#요약)
 - [구현 결과](#구현-결과)
 - [폴더 구조](#폴더-구조)
-- [프로젝트 구조](#프로젝트-구조)
-- [코드](#코드)
+- [프로젝트 특징](#프로젝트-특징)
 - [회고](#회고)
+
+
+
+# 소개
+
 
 
 
@@ -76,9 +81,32 @@
 
 
 
-# 코드
+# 프로젝트 특징
+## MVVM 아키텍처 적용  
+- Model: 데이터 정의 및 관리를 담당. 
+- View: 사용자 입력을 처리하고, ViewModel에 이벤트를 전달.
+- ViewModel: 비즈니스 로직을 처리하고, Repository를 통해 데이터를 가져오거나 저장.
+- Repository: Firestore와 상호작용하여 데이터를 가져오거나 저장.
+## 적용 예시
+- [Post]
+    - PostModel: 글 작성자 정보와 음성URL, 게시글 제목 그리고 생성 날짜 데이터를 저장.
+    - PostPage: 입력받은 게시글 제목, 유저 정보, 음성 녹음 정보를 ViewModel로 전달.
+    - PostViewModel: Firestore 데이터 전달을 위해 PostModel을 제작하고, 로컬 오디오 파일을 Firebase Storage URL로 변환 후 Firestore에 업로드.
+    - PostRepository: Firestore와 상호작용하여 ChatModel 데이터를 Firestore에 저장.
+- [Reply]
+    - ChatModel: 글 작성자 정보와 게시글 제목, 답장자 정보 그리고 채팅 생성일 데이터를 저장.
+    - ReplyPage: 답장할 게시글의 Chat Doc ID와 답장자의 유저 정보, 녹음 정보를 입력받은 후에 ViewModel로 전달.
+    - ReplyViewModel: Firestore 데이터 전달을 위해 ChatModel을 제작하고, 로컬 오디오 파일을 Firebase Storage URL로 변환 후 Firestore에 업로드.
+    - ReplyRepository: Firestore와 상호작용하여 ChatModel 데이터를 Firestore에 저장.
+- [ChatRoom]
+    - ChatMessageModel: 채팅 ID, 메시지 ID, 오디오URL, 사용자 이메일 등의 데이터를 저장.
+    - ChatRoomPage: 상대방의 프로필 사진과 닉네임, 음성 메시지를 확인할 수 있고, 녹음한 음성 메시지 정보를 입력받아 ViewModel로 전달하는 페이지.
+    - ChatRoomViewModel: 채팅방 메시지를 정렬하고 채팅방 나가기, 채팅 데이터 실시간 스트리밍 그리고 Repository로 데이터를 전달하는 것이 주된 업무.
+    - ChatRoomRepository: Firestore와 상호작용하여 ChatMessageModel을 저장하고 불러오는 역할 수행.
 
 
 
-
-# 회고
+# 프로젝트 개발일지 및 회고록
+- <a href="https://equable-jitterbug-e9a.notion.site/94af09276a7549e79912577fb6144708?v=e1ab4856173049daac90f2c6e3435ba3">밤하늘 개발일지</a>
+- <a href="https://equable-jitterbug-e9a.notion.site/b11ed3e7f92d4761b47f75a2835fc891?v=803502e0855942839298fa77cbf58499&pvs=4">밤하늘 문제해결일지</a>
+- <a href="https://equable-jitterbug-e9a.notion.site/d8727e5946ca49c8a618913cd03fbfc7?pvs=4">밤하늘 회고록</a>

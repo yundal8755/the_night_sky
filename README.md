@@ -35,9 +35,11 @@
 | ![IMG_1999](https://github.com/Yundal0/everyones_tone/assets/101382788/1621b1e8-255d-4419-ba4e-356595caa176) | ![IMG_2001](https://github.com/Yundal0/everyones_tone/assets/101382788/e5c6a9d1-e587-4f60-9661-117bd2c14601) | ![IMG_2002](https://github.com/Yundal0/everyones_tone/assets/101382788/b15ae0a1-da6f-4596-87b9-e304266de972) |
 
 | 채팅방 목록 페이지 (데이터x) | 채팅방 목록 페이지 (데이터o) | 채팅방 |
+|:--------------------------:|:--------------------------:|:--------------------------:|
 | ![IMG_2005](https://github.com/Yundal0/everyones_tone/assets/101382788/ae766316-4c20-4cae-970d-b39bc5aa3719) | ![IMG_2003](https://github.com/Yundal0/everyones_tone/assets/101382788/36b700c4-2222-48f6-adc5-815b30b7593a) | ![IMG_2004](https://github.com/Yundal0/everyones_tone/assets/101382788/db511457-1eaf-4fb5-a6c4-e94b80f7ec2c) |
 
 | 로그인 페이지 | 내 정보 페이지 | 프로필 변경 페이지 |
+|:--------------------------:|:--------------------------:|:--------------------------:|
 | ![IMG_2008](https://github.com/Yundal0/everyones_tone/assets/101382788/34ff1097-471b-4947-b034-dbf3bbe7cd48) | ![IMG_2006](https://github.com/Yundal0/everyones_tone/assets/101382788/b4c318e5-3475-4f6a-acca-c689410e3a1a) | ![IMG_2007](https://github.com/Yundal0/everyones_tone/assets/101382788/c24c8bd9-40d0-4d65-820e-f6b48f0a15f3) |
 
 

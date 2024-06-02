@@ -1,24 +1,18 @@
 
-<br>
-# 밤하늘 **- 목소리로 소통하는 음성 SNS**
-
-
-<div style="display: flex; justify-content: space-evenly">
+# 밤하늘 - 목소리로 소통하는 음성 SNS
+<div style="display: flex; justify-content: space-evenly; gap: 20px;">
     <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/3e2e5955-b727-40d0-9ec3-77160c752733/image.png" />
     <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/e5659ec8-1c5a-4839-bce9-cbd11f3fb927/image.png" />
     <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/408437b4-036f-4404-b170-980dfcdd42c8/image.png" />
 </div>
 
-
-<br>
-- **밤하늘**은 일상을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
+- 밤하늘은 일상을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
 - 다양한 기능을 통해 사용자들이 자신의 목소리로 생각과 감정을 표현할 수 있도록 돕습니다.
-- **밤하늘**에서 제공하는 주요 기능은 다음과 같습니다
-    - **음성 게시글 작성:** 프로필 사진과 닉네임, 음성 녹음 파일을 포함한 게시글을 업로드하여 다른 사용자들과 공유할 수 있습니다.
-    - **음성 메시지 답장:** 마음에 드는 게시글에 음성 메시지를 보내 소통할 수 있습니다.
-    - **음성 채팅:** 답장을 통해 시작된 대화를 음성 채팅방에서 이어나갈 수 있습니다.
-- **밤하늘**은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
-<br>
+- 주요 기능은 다음과 같습니다
+    - 음성 게시글 작성: 프로필 사진과 닉네임, 음성 녹음 파일을 포함한 게시글을 업로드하여 다른 사용자들과 공유할 수 있습니다.
+    - 음성 메시지 답장: 마음에 드는 게시글에 음성 메시지를 보내 소통할 수 있습니다.
+    - 음성 채팅: 답장을 통해 시작된 대화를 음성 채팅방에서 이어나갈 수 있습니다.
+- 밤하늘은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
 
 
 

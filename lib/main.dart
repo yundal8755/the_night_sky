@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Everyones Tone',
+      title: '밤하늘',
       home: SplashScreen(),
       debugShowCheckedModeBanner: false,
     );

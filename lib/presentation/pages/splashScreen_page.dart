@@ -22,7 +22,7 @@ class SplashScreenState extends State<SplashScreen> {
         _visible = true;
       });
     });
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>

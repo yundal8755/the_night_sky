@@ -15,11 +15,12 @@
   </tr>
 </table>
 
+<br></br>
 - **밤하늘**은 목소리로 생각과 감정을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
 - 주요 기능은 다음과 같습니다
-    - 음성 게시글 작성: 프로필 사진과 닉네임, 음성을 담은 게시글을 업로드하여 다른 사용자들과 소통할 수 있습니다.
-    - 음성 메시지 답장: 마음에 드는 게시글에 음성 메시지를 보낼 수 있습니다.
-    - 음성 채팅: 답장을 통해 시작된 대화를 음성 채팅방에서 이어나갈 수 있습니다.
+    - 음성 게시글 작성: 프로필 사진과 닉네임, 음성을 담은 게시글을 업로드하여 다른 사용자들과 소통 가능
+    - 음성 메시지 답장: 마음에 드는 게시글에 음성 메시지 전송 가능
+    - 음성 채팅: 답장을 통해 시작된 대화를 음성 채팅방에서 대화 가능
 - **밤하늘**은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
 <br></br>
 
@@ -47,7 +48,6 @@
 | 디바이스             | iphone 12 pro (iOS 17.4.1), SM-G965N(Android 13)           |
 | 테스트 환경          | macOS Monterey(14.0)                                  |
 | 기능                 | - Firebase Authentication Google, Apple 로그인 <br> - 음성 게시글 업로드 <br> - 음성 게시글 답장을 통해 채팅 기능 <br> - 프로필 사진 및 닉네임 변경 기능 |
-<br></br>
 
 
 # 구현 결과
@@ -63,7 +63,6 @@
 | 로그인 페이지 | 내 정보 페이지 | 프로필 변경 페이지 |
 |:--------------------------:|:--------------------------:|:--------------------------:|
 | ![IMG_2008](https://github.com/Yundal0/everyones_tone/assets/101382788/34ff1097-471b-4947-b034-dbf3bbe7cd48) | ![IMG_2006](https://github.com/Yundal0/everyones_tone/assets/101382788/b4c318e5-3475-4f6a-acca-c689410e3a1a) | ![IMG_2007](https://github.com/Yundal0/everyones_tone/assets/101382788/c24c8bd9-40d0-4d65-820e-f6b48f0a15f3) |
-<br></br>
 
 
 # 폴더 구조
@@ -104,21 +103,25 @@
 - View: 사용자 입력을 처리하고, ViewModel에 이벤트를 전달.
 - ViewModel: 비즈니스 로직을 처리하고, Repository를 통해 데이터를 가져오거나 저장.
 - Repository: Firestore와 상호작용하여 데이터를 가져오거나 저장.
+
+</br>
+
+
 ### 적용 예시
 - [Post]
     - PostModel: 글 작성자 정보와 음성URL, 게시글 제목 그리고 생성 날짜 데이터를 저장.
     - PostPage: 입력받은 게시글 제목, 유저 정보, 음성 녹음 정보를 ViewModel로 전달.
-    - PostViewModel: Firestore 데이터 전달을 위해 PostModel을 제작하고, 로컬 오디오 파일을 Firebase Storage URL로 변환 후 Firestore에 업로드.
+    - PostViewModel: PostModel을 제작하고, 로컬 오디오 파일을 Firebase Storage URL로 변환 후 Firestore에 업로드.
     - PostRepository: Firestore와 상호작용하여 ChatModel 데이터를 Firestore에 저장.
 - [Reply]
     - ChatModel: 글 작성자 정보와 게시글 제목, 답장자 정보 그리고 채팅 생성일 데이터를 저장.
     - ReplyPage: 답장할 게시글의 Chat Doc ID와 답장자의 유저 정보, 녹음 정보를 입력받은 후에 ViewModel로 전달.
-    - ReplyViewModel: Firestore 데이터 전달을 위해 ChatModel을 제작하고, 로컬 오디오 파일을 Firebase Storage URL로 변환 후 Firestore에 업로드.
+    - ReplyViewModel: ChatModel을 제작하고, 로컬 오디오 파일을 Firebase Storage URL로 변환 후 Firestore에 업로드.
     - ReplyRepository: Firestore와 상호작용하여 ChatModel 데이터를 Firestore에 저장.
 - [ChatRoom]
     - ChatMessageModel: 채팅 ID, 메시지 ID, 오디오URL, 사용자 이메일 등의 데이터를 저장.
     - ChatRoomPage: 상대방의 프로필 사진과 닉네임, 음성 메시지를 확인할 수 있고, 녹음한 음성 메시지 정보를 입력받아 ViewModel로 전달하는 페이지.
-    - ChatRoomViewModel: 채팅방 메시지를 정렬하고 채팅방 나가기, 채팅 데이터 실시간 스트리밍 그리고 Repository로 데이터를 전달하는 것이 주된 업무.
+    - ChatRoomViewModel: 채팅방 메시지를 정렬하고 채팅방 나가기, 채팅 데이터 실시간 스트리밍 그리고 Repository로 데이터를 전달.
     - ChatRoomRepository: Firestore와 상호작용하여 ChatMessageModel을 저장하고 불러오는 역할 수행.
 <br></br>
 

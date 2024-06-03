@@ -30,7 +30,7 @@
 - [구현 결과](#구현-결과)
 - [폴더 구조](#폴더-구조)
 - [프로젝트 특징](#프로젝트-특징)
-- [개발일지 및 회고록](#개발일지-및-회고록)
+- [프로젝트 문서 및 회고록](#프로젝트-문서-및-회고록)
 <br></br>
 
 
@@ -45,7 +45,7 @@
 | Flutter SDK          | 3.22.1 (stable)                                         |
 | Dart SDK             | 3.4.1                                                   |
 | DevTools             | 2.34.3                                                  |
-| 디바이스             | iphone 12 pro (iOS 17.4.1), SM-G965N(Android 13)           |
+| 디바이스             | iPhone 12 pro (iOS 17.4.1), SM-G965N(Android 13)           |
 | 테스트 환경          | macOS Monterey(14.0)                                  |
 | 기능                 | - Firebase Authentication Google, Apple 로그인 <br> - 음성 게시글 업로드 <br> - 음성 게시글 답장을 통해 채팅 기능 <br> - 프로필 사진 및 닉네임 변경 기능 |
 
@@ -126,8 +126,8 @@
 <br></br>
 
 
-# 개발일지 및 회고록
-- <a href="https://equable-jitterbug-e9a.notion.site/94af09276a7549e79912577fb6144708?v=e1ab4856173049daac90f2c6e3435ba3">밤하늘 개발일지</a>
-- <a href="https://equable-jitterbug-e9a.notion.site/b11ed3e7f92d4761b47f75a2835fc891?v=803502e0855942839298fa77cbf58499&pvs=4">밤하늘 문제해결일지</a>
-- <a href="https://equable-jitterbug-e9a.notion.site/d8727e5946ca49c8a618913cd03fbfc7?pvs=4">밤하늘 회고록</a>
+# 프로젝트 문서 및 회고록
+- <a href="https://equable-jitterbug-e9a.notion.site/438c19dcb0d04bd8bd6586fbf1cecee6">밤하늘 포트폴리오</a>
+- <a href="https://equable-jitterbug-e9a.notion.site/94af09276a7549e79912577fb6144708?v=e1ab4856173049daac90f2c6e3435ba3&pvs=74">밤하늘 개발일지</a>
+- <a href="https://equable-jitterbug-e9a.notion.site/b11ed3e7f92d4761b47f75a2835fc891?v=803502e0855942839298fa77cbf58499">밤하늘 문제해결일지</a>
 <br></br>

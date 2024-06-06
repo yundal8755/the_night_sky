@@ -7,7 +7,7 @@ import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/chat_room/chat_room_view_model.dart';
-import 'package:everyones_tone/presentation/pages/report_page.dart';
+import 'package:everyones_tone/presentation/pages/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/widgets/audio_player/ractangel_audio_player.dart';
 import 'package:everyones_tone/presentation/widgets/dialog_widget.dart';
@@ -30,6 +30,10 @@ class ChatRoomSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ChatRoomViewModel chatRoomViewModel = ChatRoomViewModel();
+    final ReportViewModel reportViewModel = ReportViewModel();
+    final postUserEmail = chatData['postUserEmail'];
+
     return SliverAppBar(
       surfaceTintColor: Colors.transparent,
       backgroundColor: Colors.transparent,
@@ -62,9 +66,6 @@ class ChatRoomSliverAppBar extends StatelessWidget {
                                     builder: (_) => BottomNavBarPage(),
                                   ),
                                 );
-
-                                ChatRoomViewModel chatRoomViewModel =
-                                    ChatRoomViewModel();
                                 await chatRoomViewModel
                                     .deleteChatRoom(chatData);
                               },
@@ -80,14 +81,33 @@ class ChatRoomSliverAppBar extends StatelessWidget {
 
                             DialogWidget.showTwoOptionDialog(
                               context: context,
-                              title: '신고하기',
-                              message: '해당 게시글을 신고하시겠습니까?',
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const ReportPage(),
-                                ),
-                              ),
+                              title: '사용자를 신고하시겠습니까?',
+                              message:
+                                  '신고시 채팅방은 삭제 처리되며, 해당 사용자의 게시글 노출이 제한됩니다.',
+                              onTap: () async {
+                                // 게시글 노출 제한
+                                var blockedUserEmail = '';
+
+                                if (FirestoreData.currentUserEmail ==
+                                    postUserEmail) {
+                                  blockedUserEmail = chatData['replyUserEmail'];
+                                } else {
+                                  blockedUserEmail = chatData['postUserEmail'];
+                                }
+
+                                await reportViewModel.blockUsers(
+                                    blockedUserEmail: blockedUserEmail);
+
+                                Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                    builder: (_) => BottomNavBarPage(),
+                                  ),
+                                );
+
+                                // 채팅방 삭제 처리
+                                await chatRoomViewModel
+                                    .deleteChatRoom(chatData);
+                              },
                             );
                           },
                         ),
@@ -109,7 +129,6 @@ class ChatRoomSliverAppBar extends StatelessWidget {
       flexibleSpace: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
           var top = constraints.biggest.height;
-          var postUserEmail = chatData['postUserEmail'];
 
           return FlexibleSpaceBar(
             centerTitle: true,

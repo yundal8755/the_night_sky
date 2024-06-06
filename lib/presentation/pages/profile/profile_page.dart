@@ -94,14 +94,14 @@ class ProfilePage extends StatelessWidget {
                                       title: '공지사항')));
                         }),
                     ProfilePageTile(
-                        title: '문의사항',
+                        title: '자주 묻는 질문',
                         onTap: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => WebViewPage(
                                       page: AppSites.inquiryPage,
-                                      title: '문의사항')));
+                                      title: '자주 묻는 질문')));
                         }),
                     ProfilePageTile(
                       title: '서비스 이용약관',

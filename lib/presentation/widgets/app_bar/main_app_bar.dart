@@ -4,7 +4,7 @@ import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
-import 'package:everyones_tone/presentation/pages/login/login_page.dart';
+import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
 import 'package:everyones_tone/presentation/pages/profile/profile_page.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +39,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                   userData == null
                       ? bottomSheet(
                           context: context,
-                          child: LoginPage(),
+                          child: InitialLoginPage(),
                           bottomSheetType: BottomSheetHeight.loginPage)
                       : Navigator.push(
                           context,

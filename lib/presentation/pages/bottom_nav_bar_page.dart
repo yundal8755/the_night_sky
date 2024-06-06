@@ -5,7 +5,7 @@ import 'package:everyones_tone/app/constants/app_assets.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
-import 'package:everyones_tone/presentation/pages/login/login_page.dart';
+import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
 import 'package:everyones_tone/presentation/pages/home/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
 import 'package:everyones_tone/presentation/widgets/layout/main_background_layout.dart';
@@ -79,7 +79,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                     userData == null
                         ? bottomSheet(
                             context: context,
-                            child: LoginPage(),
+                            child: InitialLoginPage(),
                             bottomSheetType: BottomSheetHeight.loginPage)
                         : bottomSheet(
                             context: context,
@@ -103,7 +103,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                     userData == null
                         ? bottomSheet(
                             context: context,
-                            child: LoginPage(),
+                            child: InitialLoginPage(),
                             bottomSheetType: BottomSheetHeight.loginPage)
                         : setState(() {
                             _currentIndex = 2;

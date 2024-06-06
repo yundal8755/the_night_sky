@@ -21,7 +21,7 @@ extension ModalSizeExtension on BottomSheetHeight {
       case BottomSheetHeight.dialogBoxTwoButton:
         return 0.25;
       case BottomSheetHeight.loginPage:
-        return 0.35;
+        return 0.5;
       case BottomSheetHeight.replyPage:
         return 0.5;
       case BottomSheetHeight.postPage:

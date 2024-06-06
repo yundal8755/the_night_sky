@@ -2,6 +2,7 @@ import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/app/utils/edit_profile_manager.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
+import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/pages/splashScreen_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +22,7 @@ void main() async {
         ChangeNotifierProvider(create: (_) => AudioPlayProvider()),
         ChangeNotifierProvider(create: (_) => EditProfileManager()),
         ChangeNotifierProvider(create: (_) => FirestoreUserProvider()),
+        ChangeNotifierProvider(create: (_) => LoginViewModel()),
       ],
       child: const MyApp(),
     ),

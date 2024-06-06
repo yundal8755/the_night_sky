@@ -2,13 +2,33 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
-class LoginViewModel {
+class LoginViewModel extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
+
+  bool _termsAccepted = false;
+  bool _privacyAccepted = false;
+
+  bool get termsAccepted => _termsAccepted;
+  bool get privacyAccepted => _privacyAccepted;
+
+  //! 이용약관 체크박스
+  void setTermsAccepted(bool value) {
+    _termsAccepted = value;
+    notifyListeners();
+  }
+
+  void setPrivacyAccepted(bool value) {
+    _privacyAccepted = value;
+    notifyListeners();
+  }
+
+  bool get isFormValid => _termsAccepted && _privacyAccepted;
 
   //! 구글 로그인
   Future<User?> googleSignInMethod() async {
@@ -66,6 +86,7 @@ class LoginViewModel {
     await _googleSignIn.signOut();
   }
 
+  //! 회원탈퇴
   Future<void> deleteUserAccount() async {
     try {
       final User? currentUser = _auth.currentUser;

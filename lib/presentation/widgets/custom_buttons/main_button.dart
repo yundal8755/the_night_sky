@@ -1,3 +1,4 @@
+import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class MainButton extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 16),
           decoration: BoxDecoration(
-            color: backgroundColor,
+            color: onPressed == null ? AppColor.neutrals60 : backgroundColor,
             border: Border.all(color: borderSideColor),
             borderRadius: BorderRadius.circular(15),
           ),

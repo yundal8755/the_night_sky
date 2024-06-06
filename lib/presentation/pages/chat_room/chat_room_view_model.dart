@@ -95,13 +95,13 @@ class ChatRoomViewModel {
       // 각 사용자의 myChat 목록에서 채팅방을 삭제합니다.
       await _firestore
           .collection('user')
-          .doc(chatData['currentUserEmail'])
+          .doc(chatData['postUserEmail'])
           .collection('myChat')
           .doc(chatData['chatId'])
           .delete();
       await _firestore
           .collection('user')
-          .doc(chatData['partnerUserEmail'])
+          .doc(chatData['replyUserEmail'])
           .collection('myChat')
           .doc(chatData['chatId'])
           .delete();

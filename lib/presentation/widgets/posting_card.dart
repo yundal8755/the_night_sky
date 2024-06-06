@@ -9,7 +9,8 @@ import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/presentation/pages/login/login_page.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_page.dart';
-import 'package:everyones_tone/presentation/pages/report_page.dart';
+import 'package:everyones_tone/presentation/pages/report/report_page.dart';
+import 'package:everyones_tone/presentation/pages/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/play_icon_button.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/widgets/dialog_widget.dart';
@@ -22,7 +23,7 @@ class PostingCard extends StatelessWidget {
   final String audioUrl;
   final String postTitle;
   final String nickname;
-  final String replyDocmentId;
+  final String currentDocumentId;
   final String postUserEmail;
 
   const PostingCard(
@@ -31,7 +32,7 @@ class PostingCard extends StatelessWidget {
       required this.audioUrl,
       required this.nickname,
       required this.postTitle,
-      required this.replyDocmentId,
+      required this.currentDocumentId,
       required this.postUserEmail});
 
   @override
@@ -39,6 +40,8 @@ class PostingCard extends StatelessWidget {
     const double circularInt = 40;
     double cardWidth = MediaQuery.of(context).size.width / 1.2;
     double cardHeight = cardWidth * 1.45;
+
+    final ReportViewModel reportViewModel = ReportViewModel();
 
     return Center(
       child: Container(
@@ -147,7 +150,7 @@ class PostingCard extends StatelessWidget {
                                         bool hasReplied = await FirestoreData
                                             .hasRepliedBefore(
                                                 FirestoreData.currentUserEmail!,
-                                                replyDocmentId);
+                                                currentDocumentId);
                                         if (hasReplied) {
                                           DialogWidget.showSingleOptionDialog(
                                               context, '이미 답장을 보냈던 게시글입니다.');
@@ -155,7 +158,8 @@ class PostingCard extends StatelessWidget {
                                           bottomSheet(
                                             context: context,
                                             child: ReplyPage(
-                                                replyDocmentId: replyDocmentId),
+                                                replyDocmentId:
+                                                    currentDocumentId),
                                             bottomSheetType:
                                                 BottomSheetHeight.replyPage,
                                           );
@@ -195,17 +199,30 @@ class PostingCard extends StatelessWidget {
                                                     DialogWidget
                                                         .showTwoOptionDialog(
                                                       context: context,
-                                                      title: '신고하기',
-                                                      message:
+                                                      title:
                                                           '해당 게시글을 신고하시겠습니까?',
-                                                      onTap: () =>
-                                                          Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              const ReportPage(),
-                                                        ),
-                                                      ),
+                                                      message:
+                                                          '신고한 게시물은 더 이상 볼 수 없습니다.',
+                                                      onTap: () async {
+                                                        await reportViewModel
+                                                            .reportPosts(
+                                                                reportedChatId:
+                                                                    currentDocumentId);
+
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    ReportPage(
+                                                              currentDocumentId:
+                                                                  currentDocumentId,
+                                                              postUserEmail:
+                                                                  postUserEmail,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      },
                                                     );
                                                   },
                                                 ),

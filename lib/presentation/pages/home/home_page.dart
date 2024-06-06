@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/posting_card.dart';
@@ -23,10 +24,14 @@ class _HomePageState extends State<HomePage> {
   String currentDocumentId = '';
   int currentPageIndex = 0;
   final _controller = PageController();
+  List<String> reportedPosts = [];
+  List<String> blockedUsers = [];
 
   @override
   void initState() {
     super.initState();
+    _loadReportedPosts();
+    _loadBlockedUsers();
     FirebaseAuth.instance.userChanges().listen(
       (User? user) {
         if (user == null) {
@@ -36,6 +41,44 @@ class _HomePageState extends State<HomePage> {
         }
       },
     );
+  }
+
+  Future<void> _loadReportedPosts() async {
+    final userDoc = FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirestoreData.currentUserEmail);
+    final reportedCollection = userDoc.collection('reported');
+    final snapshot = await reportedCollection.doc('reportedPosts').get();
+
+    setState(() {
+      if (snapshot.exists) {
+        var data = snapshot.data();
+        if (data != null && data['reportedChatId'] is Iterable) {
+          reportedPosts = List<String>.from(data['reportedChatId']);
+        } else if (data != null && data['reportedChatId'] is String) {
+          reportedPosts = [data['reportedChatId']];
+        }
+      }
+    });
+  }
+
+  Future<void> _loadBlockedUsers() async {
+    final userDoc = FirebaseFirestore.instance
+        .collection('user')
+        .doc(FirestoreData.currentUserEmail);
+    final reportedCollection = userDoc.collection('reported');
+    final snapshot = await reportedCollection.doc('blockedUsers').get();
+
+    setState(() {
+      if (snapshot.exists) {
+        var data = snapshot.data();
+        if (data != null && data['blockedUserEmail'] is Iterable) {
+          blockedUsers = List<String>.from(data['blockedUserEmail']);
+        } else if (data != null && data['blockedUserEmail'] is String) {
+          blockedUsers = [data['blockedUserEmail']];
+        }
+      }
+    });
   }
 
   @override
@@ -69,12 +112,19 @@ class _HomePageState extends State<HomePage> {
                     }
                     List<DocumentSnapshot> docs = snapshot.data!.docs;
 
+                    // 필터링: reportedPosts와 blockedUsers에 없는 문서들만 남기기
+                    docs = docs.where((doc) {
+                      var postData = doc.data() as Map<String, dynamic>;
+                      return !reportedPosts.contains(doc.id) &&
+                          !blockedUsers.contains(postData['userEmail']);
+                    }).toList();
+
                     return PageView.builder(
                       controller: _controller,
                       scrollDirection: Axis.vertical,
                       itemCount: docs.length,
 
-                      //! 페이지 변경시
+                      // 페이지 변경 시
                       onPageChanged: (index) async {
                         var post = docs[index].data() as Map<String, dynamic>;
                         String audioUrl = post['audioUrl'];
@@ -85,11 +135,10 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
 
-                      //! 아이템 빌더
+                      // 아이템 빌더
                       itemBuilder: (context, index) {
                         var postData =
                             docs[index].data() as Map<String, dynamic>;
-                        // 최초 페이지 로드 시 한 번만 실행
                         if (index == 0 && currentDocumentId == '') {
                           currentDocumentId = docs[0].id;
                           print('초기 화면의 Doc ID : $currentDocumentId');
@@ -108,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                           profilePicUrl: profilePicUrl,
                           nickname: nickname,
                           postTitle: postTitle,
-                          replyDocmentId: currentDocumentId,
+                          currentDocumentId: currentDocumentId,
                           postUserEmail: postUserEmail,
                         );
                       },

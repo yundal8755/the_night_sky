@@ -40,7 +40,7 @@ class SnsLoginPage extends StatelessWidget {
                       '원하는 로그인 방식을 선택해주세요!',
                       style: AppTextStyle.headlineMedium(),
                     ),
-                    Gap.size12,
+                    Gap.size08,
                     Text(
                       '중복 가입을 막고, 악성 사용자를 제재하는데 사용합니다.',
                       style: AppTextStyle.bodyMedium(AppColor.neutrals20),
@@ -48,6 +48,7 @@ class SnsLoginPage extends StatelessWidget {
                   ],
                 ),
               ),
+
               Column(
                 children: [
                   //! Google로 로그인
@@ -119,7 +120,7 @@ class SnsLoginPage extends StatelessWidget {
                       },
                     )
                 ],
-              )
+              ),
             ],
           ),
         ),

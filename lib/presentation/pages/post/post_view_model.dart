@@ -64,6 +64,7 @@ class PostViewModel {
       userEmail: userEmail,
       profilePicUrl: profilePicUrl,
       dateCreated: dateCreated,
+      boardName: '자유게시판'
     );
 
     print('PostViewModel 실행 완료!');

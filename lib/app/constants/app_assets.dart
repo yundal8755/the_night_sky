@@ -25,11 +25,11 @@ abstract class AppAssets {
   //! Images
   static const String profileBasicImage =
       'assets/images/profile_basic_image.png';
-
   static const String mainBackgroundImage =
       'assets/images/main_background_image.jpeg';
   static const String mainAppIconImage =
       'assets/images/main_app_icon_image.png';
+  static const String masterImage = 'assets/images/main_app_icon_image.png';
 
   static const String profileRandomImage01 =
       'assets/images/profile_random_image_01.jpeg';
@@ -71,4 +71,10 @@ abstract class AppAssets {
       'assets/images/profile_random_image_19.jpeg';
   static const String profileRandomImage20 =
       'assets/images/profile_random_image_20.jpeg';
+  static const String profileRandomImage21 =
+      'assets/images/profile_random_image_21.jpeg';
+  static const String profileRandomImage22 =
+      'assets/images/profile_random_image_22.jpeg';
+  static const String profileRandomImage23 =
+      'assets/images/profile_random_image_23.jpeg';
 }

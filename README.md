@@ -16,12 +16,18 @@
 </table>
 </br>
 
-- **밤하늘**은 목소리로 생각과 감정을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
-- 주요 기능은 다음과 같습니다
-    - 음성 게시글 작성: 프로필 사진과 닉네임, 음성을 담은 게시글을 업로드하여 다른 사용자들과 소통 가능
-    - 음성 메시지 답장: 마음에 드는 게시글에 음성 메시지 전송 가능
-    - 음성 채팅: 답장을 통해 시작된 채팅방에서 음성 메시지로 대화 가능
-- **밤하늘**은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
+### 앱 소개
+- **밤하늘**은 목소리로 생각과 감정을 공유하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
+- 목소리만이 가진 따뜻함과 진솔함을 통해, 여러분의 일상을 더욱 특별하게 만들어 보세요!
+
+
+### 주요 기능
+- `음성 게시글 작성`: 프로필 사진과 닉네임, 음성을 담은 게시글을 업로드하여 다른 사용자들과 소통 가능
+- `음성 메시지 답장`: 마음에 드는 게시글에 음성 메시지 전송 가능
+- `음성 채팅`: 답장을 통해 시작된 채팅방에서 음성 메시지로 대화 가능
+- `프로필 변경`: 랜덤 프로필 사진과 랜덤 닉네임으로 새로운 프로필로 변경 가능
+- `게시글 신고 및 사용자 차단`: 불쾌한 게시글을 신고하거나 사용자를 차단하여 게시글을 필터링 가능
+
 <br></br>
 
 
@@ -30,6 +36,7 @@
 - [구현 결과](#구현-결과)
 - [폴더 구조](#폴더-구조)
 - [프로젝트 특징](#프로젝트-특징)
+- [Change Log](#change-log)
 - [프로젝트 문서 및 회고록](#프로젝트-문서-및-회고록)
 <br></br>
 
@@ -76,22 +83,22 @@
      |   |-- models
      |   |-- repository
      |   |-- utils
- |-- presentation
-     |-- pages
-     |   |-- chat_room
-     |   |-- chat_thumbnail
-     |   |-- login
-     |   |-- post
-     |   |-- profile
-     |   |-- register_profile
-     |   |-- reply
-     |-- widgets
-     |   |-- app_bar
-     |   |-- audio_player
-     |   |-- custom_buttons
-     |   |-- layout
-     |   |-- record_buttons
-     |   |-- tiles
+     |-- presentation
+     |   |-- pages
+     |   |   |-- chat_room
+     |   |   |-- chat_thumbnail
+     |   |   |-- login
+     |   |   |-- post
+     |   |   |-- profile
+     |   |   |-- register_profile
+     |   |   |-- reply
+     |   |-- widgets
+     |   |   |-- app_bar
+     |   |   |-- audio_player
+     |   |   |-- custom_buttons
+     |   |   |-- layout
+     |   |   |-- record_buttons
+     |   |   |-- tiles
  |
 ```
 <br></br>
@@ -125,6 +132,17 @@
     - ChatRoomRepository: Firestore와 상호작용하여 ChatMessageModel을 저장하고 불러오는 역할 수행.
 <br></br>
 
+# Change Log
+### 1.0.0
+
+- 밤하늘 앱 배포
+
+### 1.0.1
+
+- 새로운 프로필 사진을 추가했습니다.
+- 앱을 열 때 처음 보이는 스플래시 화면을 변경했습니다.
+
+</br>
 
 # 프로젝트 문서 및 회고록
 - <a href="https://equable-jitterbug-e9a.notion.site/438c19dcb0d04bd8bd6586fbf1cecee6">밤하늘 포트폴리오</a>

@@ -1,3 +1,4 @@
+import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/app/utils/edit_profile_manager.dart';
@@ -12,6 +13,9 @@ import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  setupLocator(); // 의존성 등록 호출
+
   await Future.delayed(const Duration(microseconds: 300));
   FlutterNativeSplash.remove();
   await Firebase.initializeApp(

@@ -12,17 +12,21 @@ import 'package:everyones_tone/presentation/widgets/layout/main_background_layou
 import 'package:everyones_tone/presentation/widgets/tiles/partner_user_message_tile.dart';
 import 'package:everyones_tone/presentation/widgets/tiles/current_user_message_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ChatRoomPage extends StatelessWidget {
   final Map<String, dynamic> chatData;
 
-  const ChatRoomPage({super.key, required this.chatData});
+  /// GetIt을 통해 인스턴스 가져오기
+  final chatRoomViewModel = GetIt.I<ChatRoomViewModel>();
+
+  ChatRoomPage({super.key, required this.chatData});
 
   @override
   Widget build(BuildContext context) {
-    ChatRoomViewModel chatRoomViewModel = ChatRoomViewModel();
+    // 계속해서 변하는 객체이므로 get it 사용하면 안됨
     final recordStatusManager =
         Provider.of<RecordStatusManager>(context, listen: false);
     chatRoomViewModel.fetchMessageOrder(chatData['chatId']);

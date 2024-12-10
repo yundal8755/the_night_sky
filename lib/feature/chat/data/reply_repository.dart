@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/app/models/chat_model.dart';
-import 'package:everyones_tone/app/models/chat_message_model.dart';
+import 'package:everyones_tone/feature/chat/domain/chat_model.dart';
+import 'package:everyones_tone/feature/chat/domain/chat_message_model.dart';
 
 class ReplyRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;

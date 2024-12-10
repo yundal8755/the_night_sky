@@ -6,7 +6,7 @@ import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
-import 'package:everyones_tone/presentation/pages/chat_room/chat_room_view_model.dart';
+import 'package:everyones_tone/feature/chat/presentation/chat_room_view_model.dart';
 import 'package:everyones_tone/presentation/pages/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/widgets/audio_player/ractangel_audio_player.dart';

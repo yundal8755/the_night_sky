@@ -2,9 +2,9 @@
 
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/app/models/chat_model.dart';
-import 'package:everyones_tone/app/models/chat_message_model.dart';
-import 'package:everyones_tone/presentation/pages/reply/reply_repository.dart';
+import 'package:everyones_tone/feature/chat/domain/chat_model.dart';
+import 'package:everyones_tone/feature/chat/domain/chat_message_model.dart';
+import 'package:everyones_tone/feature/chat/data/reply_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 

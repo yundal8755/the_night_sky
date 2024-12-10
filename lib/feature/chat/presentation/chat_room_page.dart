@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/models/chat_message_model.dart';
+import 'package:everyones_tone/feature/chat/domain/chat_message_model.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/record_status_manager.dart';
-import 'package:everyones_tone/presentation/pages/chat_room/chat_room_view_model.dart';
+import 'package:everyones_tone/feature/chat/presentation/chat_room_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/chat_room_sliver_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/record_buttons/record_status_button.dart';
 import 'package:everyones_tone/presentation/widgets/layout/main_background_layout.dart';

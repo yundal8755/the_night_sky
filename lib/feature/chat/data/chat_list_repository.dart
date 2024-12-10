@@ -1,4 +1,4 @@
-import 'package:everyones_tone/app/models/chat_model.dart';
+import 'package:everyones_tone/feature/chat/domain/chat_model.dart';
 import 'package:everyones_tone/feature/chat/data/chat_list_datasource.dart';
 
 class ChatListRepository {

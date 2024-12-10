@@ -8,7 +8,7 @@ import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
-import 'package:everyones_tone/presentation/pages/reply/reply_page.dart';
+import 'package:everyones_tone/feature/chat/presentation/reply_page.dart';
 import 'package:everyones_tone/presentation/pages/report/report_page.dart';
 import 'package:everyones_tone/presentation/pages/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/play_icon_button.dart';

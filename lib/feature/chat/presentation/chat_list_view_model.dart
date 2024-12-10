@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/feature/chat/data/chat_list_repository.dart';
 import 'package:flutter/material.dart';
-import 'package:everyones_tone/app/models/chat_model.dart';
+import 'package:everyones_tone/feature/chat/domain/chat_model.dart';
 
 class ChatListViewModel extends ChangeNotifier {
   final ChatListRepository _repository = ChatListRepository();

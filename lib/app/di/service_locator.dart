@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:everyones_tone/presentation/pages/chat_room/chat_room_view_model.dart';
+import 'package:everyones_tone/feature/chat/presentation/chat_room_view_model.dart';
 
 // GetIt 인스턴스 생성
 final getIt = GetIt.instance;

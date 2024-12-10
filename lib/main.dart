@@ -33,8 +33,8 @@ void main() async {
   );
 
   // FCM 토큰 설정
-  String? fcmToken = await FirebaseMessaging.instance.getToken();
-  debugPrint('===== FCM TOKEN : $fcmToken =====');
+  // String? fcmToken = await FirebaseMessaging.instance.getToken();
+  // debugPrint('===== FCM TOKEN : $fcmToken =====');
 
   FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
     if (message != null && message.notification != null) {

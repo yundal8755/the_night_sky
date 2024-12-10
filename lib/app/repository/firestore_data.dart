@@ -4,6 +4,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirestoreData {
   FirestoreData._(); // Private constructor
 
+  /// Collection
+  static const chatCollection = 'chat';
+  static const postCollection = 'post';
+  static const reportCollection = 'report';
+  static const userCollection = 'user';
+
+  /// SubCollection
+  static const messageSubCollection = 'message';
+
+  /// array
+  static const myChatListArray = 'myChatList';
+
+  /// 변수
   static final FirebaseAuth _authInstance = FirebaseAuth.instance;
   static User? get currentUser => _authInstance.currentUser;
   static String? get currentUserEmail => currentUser?.email;

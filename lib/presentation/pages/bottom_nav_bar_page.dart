@@ -6,13 +6,13 @@ import 'package:everyones_tone/app/utils/audio_play_provider.dart';
 import 'package:everyones_tone/app/utils/bottom_sheet.dart';
 import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
-import 'package:everyones_tone/presentation/pages/home/home_page.dart';
+import 'package:everyones_tone/feature/home/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
 import 'package:everyones_tone/presentation/widgets/layout/main_background_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'chat_thumbnail/chat_thumbnail_page.dart';
+import '../../feature/chat/presentation/chat_list_page.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   @override
@@ -24,7 +24,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   final List<Widget> _children = [
     HomePage(),
     PostPage(),
-    ChatThumbnailPage(),
+    ChatListPage(),
   ];
 
   @override

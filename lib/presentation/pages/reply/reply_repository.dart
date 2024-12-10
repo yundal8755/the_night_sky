@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/models/chat_model.dart';
 import 'package:everyones_tone/app/models/chat_message_model.dart';
-import 'package:everyones_tone/app/repository/database_helper.dart';
 
 class ReplyRepository {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -30,7 +29,7 @@ class ReplyRepository {
     await postMessageRef.set(postMessageModel.toMap());
 
     /// user - myChat SubCollection 생성
-    await createUserChatSubcollection(postMessageModel.userEmail, chatRef.id);
+    await updateUserChatList(postMessageModel.userEmail, chatRef.id);
 
     /// Reply Message 정보 저장 및 ID 할당
     final DocumentReference replyMessageRef =
@@ -39,25 +38,27 @@ class ReplyRepository {
     replyMessageModel.messageId = replyMessageRef.id;
     await replyMessageRef.set(replyMessageModel.toMap());
 
-    await createUserChatSubcollection(replyMessageModel.userEmail, chatRef.id);
+    await updateUserChatList(replyMessageModel.userEmail, chatRef.id);
     await createPreviousRepliesSubcollection(
         replyMessageModel.userEmail, chatRef.id, replyDocmentId);
   }
 
-  //! Firestore - Create myChat SubCollection
-  Future<void> createUserChatSubcollection(
-    String userEmail,
-    String chatId,
-  ) async {
+//! Firestore - Update myChatList Array in User Document
+  Future<void> updateUserChatList(String userEmail, String chatId) async {
     final DocumentReference userRef =
         firestore.collection('user').doc(userEmail);
 
-    // myChat SubCollection
-    final CollectionReference myChatRef = userRef.collection('myChat');
-    final DocumentReference myChatNewDocRef = myChatRef.doc(chatId);
-
-    await myChatNewDocRef.set({
-      'chatId': chatId,
+    await userRef.update({
+      'myChatList': FieldValue.arrayUnion([chatId]),
+    }).catchError((error) async {
+      // 문서가 존재하지 않을 경우 생성하면서 myChatList 필드에 chatId 추가
+      if (error is FirebaseException && error.code == 'not-found') {
+        await userRef.set({
+          'myChatList': [chatId],
+        });
+      } else {
+        print('Error updating user chat list: $error');
+      }
     });
   }
 

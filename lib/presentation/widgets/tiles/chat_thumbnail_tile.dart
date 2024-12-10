@@ -4,7 +4,7 @@ import 'package:everyones_tone/app/config/app_color.dart';
 import 'package:everyones_tone/app/config/app_gap.dart';
 import 'package:everyones_tone/app/config/app_text_style.dart';
 import 'package:everyones_tone/presentation/pages/chat_room/chat_room_page.dart';
-import 'package:everyones_tone/presentation/pages/chat_thumbnail/chat_thumbnail_view_model.dart';
+import 'package:everyones_tone/feature/chat/presentation/chat_list_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 
@@ -60,7 +60,7 @@ class ChatThumbnailTile extends StatelessWidget {
             Row(
               children: [
                 FutureBuilder<int>(
-                  future: ChatThumbnailViewModel()
+                  future: ChatListViewModel()
                       .fetchMessageCount(chatData['chatId']),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {

@@ -1,7 +1,4 @@
-# Uncomment this line to define a global platform for your project
-platform :ios, '12.0'
-
-# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+platform :ios, '13.0'
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
@@ -39,56 +36,25 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
+    # Flutter 추가 빌드 설정 적용
     flutter_additional_ios_build_settings(target)
-
-    # 권한(permission) 설정을 추가
+    
+    # 모든 Pods의 배포 대상을 iOS 13.0으로 설정
     target.build_configurations.each do |config|
-      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
-        '$(inherited)',
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['SWIFT_VERSION'] = '5.0' # Swift 버전 명시
+    end
 
-        ## dart: PermissionGroup.calendar
-        # 'PERMISSION_EVENTS=1',
-
-        ## dart: PermissionGroup.reminders
-        # 'PERMISSION_REMINDERS=1',
-
-        ## dart: PermissionGroup.contacts
-        # 'PERMISSION_CONTACTS=1',
-
-        ## dart: PermissionGroup.camera
-        # 'PERMISSION_CAMERA=1',
-
-        ## dart: PermissionGroup.microphone
-        # 'PERMISSION_MICROPHONE=1',
-
-        ## dart: PermissionGroup.speech
-        # 'PERMISSION_SPEECH_RECOGNIZER=1',
-
-        ## dart: PermissionGroup.photos
-        'PERMISSION_PHOTOS=1',
-
-        ## dart: [PermissionGroup.location, PermissionGroup.locationAlways, PermissionGroup.locationWhenInUse]
-        # 'PERMISSION_LOCATION=1',
-
-        ## dart: PermissionGroup.notification
-        'PERMISSION_NOTIFICATIONS=1',
-
-        ## dart: PermissionGroup.mediaLibrary
-        # 'PERMISSION_MEDIA_LIBRARY=1',
-
-        ## dart: PermissionGroup.sensors
-        # 'PERMISSION_SENSORS=1',   
-
-        ## dart: PermissionGroup.bluetooth
-        'PERMISSION_BLUETOOTH=1',
-
-        ## dart: PermissionGroup.appTrackingTransparency
-        # 'PERMISSION_APP_TRACKING_TRANSPARENCY=1',
-
-        ## dart: PermissionGroup.criticalAlerts
-        # 'PERMISSION_CRITICAL_ALERTS=1'
-      ]
+    # 기존 BoringSSL-GRPC 설정 유지
+    if target.name == 'BoringSSL-GRPC'
+      target.source_build_phase.files.each do |file|
+        if file.settings && file.settings['COMPILER_FLAGS']
+          flags = file.settings['COMPILER_FLAGS'].split
+          flags.reject! { |flag| flag == '-GCC_WARN_INHIBIT_ALL_WARNINGS' }
+          file.settings['COMPILER_FLAGS'] = flags.join(' ')
+        end
+      end
     end
   end
 end
-

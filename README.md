@@ -20,13 +20,31 @@
 - **밤하늘**은 목소리로 생각과 감정을 공유하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
 - 목소리만이 가진 따뜻함과 진솔함을 통해, 여러분의 일상을 더욱 특별하게 만들어 보세요!
 
-
 ### 주요 기능
 - `음성 게시글 작성`: 프로필 사진과 닉네임, 음성을 담은 게시글을 업로드하여 다른 사용자들과 소통 가능
 - `음성 메시지 답장`: 마음에 드는 게시글에 음성 메시지 전송 가능
 - `음성 채팅`: 답장을 통해 시작된 채팅방에서 음성 메시지로 대화 가능
 - `프로필 변경`: 랜덤 프로필 사진과 랜덤 닉네임으로 새로운 프로필로 변경 가능
 - `게시글 신고 및 사용자 차단`: 불쾌한 게시글을 신고하거나 사용자를 차단하여 게시글을 필터링 가능
+
+<div style="display: flex; justify-content: space-evenly">
+    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/3e2e5955-b727-40d0-9ec3-77160c752733/image.png" />
+    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/e5659ec8-1c5a-4839-bce9-cbd11f3fb927/image.png" />
+    <img style="width: 240px" src="https://velog.velcdn.com/images/yun_dal/post/408437b4-036f-4404-b170-980dfcdd42c8/image.png" />
+</div>
+
+<br>
+
+
+- 밤하늘은 일상을 공유하고 소통하고자 하는 모든 분들을 위한 음성 기반 SNS입니다.
+- 다양한 기능을 통해 사용자들이 자신의 목소리로 생각과 감정을 표현할 수 있도록 돕습니다.
+- 밤하늘에서 제공하는 주요 기능은 다음과 같습니다
+    - 음성 게시글 작성: 프로필 사진과 닉네임, 음성 녹음 파일을 포함한 게시글을 업로드하여 다른 사용자들과 공유할 수 있습니다.
+    - 음성 메시지 답장: 마음에 드는 게시글에 음성 메시지를 보내 소통할 수 있습니다.
+    - 음성 채팅: 답장을 통해 시작된 대화를 음성 채팅방에서 이어나갈 수 있습니다.
+- 밤하늘은 단순한 텍스트 소통을 넘어, 목소리로 감동과 진정성을 전하는 새로운 소통의 장을 제공합니다.
+<br>
+>>>>>>> b2b06f6a7e3059cf2d9ceb0f4c9ca0c78192ed52
 
 <br></br>
 
@@ -137,6 +155,7 @@
 
 - 밤하늘 앱 배포
 
+<<<<<<< HEAD
 ### 1.0.1
 
 - 새로운 프로필 사진을 추가했습니다.
@@ -149,3 +168,9 @@
 - <a href="https://equable-jitterbug-e9a.notion.site/94af09276a7549e79912577fb6144708?v=e1ab4856173049daac90f2c6e3435ba3&pvs=74">밤하늘 개발일지</a>
 - <a href="https://equable-jitterbug-e9a.notion.site/b11ed3e7f92d4761b47f75a2835fc891?v=803502e0855942839298fa77cbf58499">밤하늘 문제해결일지</a>
 <br></br>
+=======
+# 프로젝트 개발일지 및 회고록
+- <a href="https://equable-jitterbug-e9a.notion.site/94af09276a7549e79912577fb6144708?v=e1ab4856173049daac90f2c6e3435ba3">밤하늘 개발일지</a>
+- <a href="https://equable-jitterbug-e9a.notion.site/b11ed3e7f92d4761b47f75a2835fc891?v=803502e0855942839298fa77cbf58499&pvs=4">밤하늘 문제해결일지</a>
+- <a href="https://equable-jitterbug-e9a.notion.site/d8727e5946ca49c8a618913cd03fbfc7?pvs=4">밤하늘 회고록</a>
+>>>>>>> b2b06f6a7e3059cf2d9ceb0f4c9ca0c78192ed52

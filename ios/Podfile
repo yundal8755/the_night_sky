@@ -1,7 +1,4 @@
-# Uncomment this line to define a global platform for your project
-platform :ios, '12.0'
-
-# CocoaPods analytics sends network stats synchronously affecting flutter build latency.
+platform :ios, '13.0'
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
 
 project 'Runner', {
@@ -39,6 +36,25 @@ end
 
 post_install do |installer|
   installer.pods_project.targets.each do |target|
+    # Flutter 추가 빌드 설정 적용
     flutter_additional_ios_build_settings(target)
+    
+    # 모든 Pods의 배포 대상을 iOS 13.0으로 설정
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+      config.build_settings['ENABLE_BITCODE'] = 'NO'
+      config.build_settings['SWIFT_VERSION'] = '5.0' # Swift 버전 명시
+    end
+
+    # 기존 BoringSSL-GRPC 설정 유지
+    if target.name == 'BoringSSL-GRPC'
+      target.source_build_phase.files.each do |file|
+        if file.settings && file.settings['COMPILER_FLAGS']
+          flags = file.settings['COMPILER_FLAGS'].split
+          flags.reject! { |flag| flag == '-GCC_WARN_INHIBIT_ALL_WARNINGS' }
+          file.settings['COMPILER_FLAGS'] = flags.join(' ')
+        end
+      end
+    end
   end
 end

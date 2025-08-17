@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:everyones_tone/app/enums/record_status.dart';
+import 'package:everyones_tone/app/enum/record_status.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
@@ -39,7 +39,6 @@ class RecordStatusManager with ChangeNotifier {
   bool isPlaying = false;
   ValueNotifier<bool> isPlayingNotifier = ValueNotifier<bool>(false);
   late AudioPlayer audioPlayer;
-
 
   //! 녹음 시작
   Future<void> startRecording() async {

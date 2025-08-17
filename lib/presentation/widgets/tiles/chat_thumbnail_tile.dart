@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/presentation/pages/chat_room/chat_room_page.dart';
 import 'package:everyones_tone/presentation/pages/chat_thumbnail/chat_thumbnail_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
@@ -41,8 +41,7 @@ class ChatThumbnailTile extends StatelessWidget {
           children: [
             Row(
               children: [
-                ProfileCircleImage(
-                    backgroundImage: profilePicUrl, radius: 32),
+                ProfileCircleImage(backgroundImage: profilePicUrl, radius: 32),
                 const SizedBox(width: 16),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

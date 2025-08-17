@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables, avoid_print, must_be_immutable
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/utils/bottom_sheet.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/pages/chat_thumbnail/chat_thumbnail_view_model.dart';
 import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';

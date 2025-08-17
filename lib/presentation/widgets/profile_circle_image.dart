@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ProfileCircleImage extends StatelessWidget {

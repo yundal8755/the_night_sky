@@ -1,10 +1,10 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
 import 'dart:io';
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/pages/register_profile/register_profile_page.dart';
@@ -48,7 +48,6 @@ class SnsLoginPage extends StatelessWidget {
                   ],
                 ),
               ),
-
               Column(
                 children: [
                   //! Google로 로그인
@@ -58,7 +57,7 @@ class SnsLoginPage extends StatelessWidget {
                     onTap: () async {
                       // user 정보 전달받기
                       var user = await loginViewModel.googleSignInMethod();
-      
+
                       // user가 존재할 때 로직
                       if (user != null) {
                         bool isRegistered =
@@ -66,7 +65,7 @@ class SnsLoginPage extends StatelessWidget {
                         print('isRegistered = $isRegistered');
                         if (isRegistered) {
                           print('사용자 정보를 업데이트 합니다.');
-      
+
                           Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -87,7 +86,7 @@ class SnsLoginPage extends StatelessWidget {
                       }
                     },
                   ),
-      
+
                   //! Apple로 로그인
                   if (Platform.isIOS)
                     SnsLoginButton(
@@ -96,8 +95,8 @@ class SnsLoginPage extends StatelessWidget {
                       onTap: () async {
                         var user = await loginViewModel.appleSignInMethod();
                         if (user != null) {
-                          bool isRegistered =
-                              await loginViewModel.isUserRegistered(user.email!);
+                          bool isRegistered = await loginViewModel
+                              .isUserRegistered(user.email!);
                           if (isRegistered) {
                             Navigator.pushAndRemoveUntil(
                               context,

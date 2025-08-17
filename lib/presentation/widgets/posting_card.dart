@@ -1,12 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/app/utils/audio_play_provider.dart';
-import 'package:everyones_tone/app/utils/bottom_sheet.dart';
+import 'package:everyones_tone/app/util/audio_play_provider.dart';
+import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_page.dart';
 import 'package:everyones_tone/presentation/pages/report/report_page.dart';
@@ -139,7 +139,7 @@ class PostingCard extends StatelessWidget {
                                       if (FirestoreData.currentUser == null) {
                                         bottomSheet(
                                             context: context,
-                                            child: InitialLoginPage(),
+                                            child: const InitialLoginPage(),
                                             bottomSheetType:
                                                 BottomSheetHeight.loginPage);
                                       } else if (postUserEmail ==
@@ -180,7 +180,7 @@ class PostingCard extends StatelessWidget {
                                     FirestoreData.currentUser == null
                                         ? bottomSheet(
                                             context: context,
-                                            child: InitialLoginPage(),
+                                            child: const InitialLoginPage(),
                                             bottomSheetType:
                                                 BottomSheetHeight.loginPage)
                                         : bottomSheet(

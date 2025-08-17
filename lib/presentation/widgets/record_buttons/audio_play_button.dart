@@ -1,6 +1,6 @@
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/app/utils/record_status_manager.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
+import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:flutter/material.dart';
 
 class AudioPlayButton extends StatelessWidget {
@@ -46,8 +46,7 @@ class AudioPlayButton extends StatelessWidget {
                 backgroundColor: AppColor.primaryBlue),
             onPressed: recordStatusManager.audioPlay,
             child: ValueListenableBuilder<bool>(
-              valueListenable:
-                  recordStatusManager.isPlayingNotifier,
+              valueListenable: recordStatusManager.isPlayingNotifier,
               builder: (context, isPlaying, child) {
                 return Icon(
                   isPlaying ? Icons.pause : Icons.play_arrow,

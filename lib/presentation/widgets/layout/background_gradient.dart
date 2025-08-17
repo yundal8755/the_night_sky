@@ -1,4 +1,4 @@
-import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundGradient extends StatelessWidget {

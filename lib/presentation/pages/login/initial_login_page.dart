@@ -1,8 +1,8 @@
 // ignore_for_file: use_build_context_synchronously, avoid_print
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/app/constants/app_sites.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
+import 'package:everyones_tone/app/constant/app_sites.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/pages/login/sns_login_page.dart';
 import 'package:everyones_tone/presentation/pages/web_view_page.dart';

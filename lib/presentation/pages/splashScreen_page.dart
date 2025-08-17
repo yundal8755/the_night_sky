@@ -1,4 +1,4 @@
-import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/widgets/layout/background_gradient.dart';
 import 'package:flutter/material.dart';

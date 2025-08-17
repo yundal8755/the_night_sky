@@ -1,6 +1,6 @@
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/app/utils/record_status_manager.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
+import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:flutter/material.dart';
 
 class RecordingButton extends StatelessWidget {
@@ -22,10 +22,7 @@ class RecordingButton extends StatelessWidget {
         builder: (context, value, child) {
           return Center(
             child: SizedBox(
-              child: Text(
-                '$value',
-                style: AppTextStyle.headlineMedium()
-              ),
+              child: Text('$value', style: AppTextStyle.headlineMedium()),
             ),
           );
         },

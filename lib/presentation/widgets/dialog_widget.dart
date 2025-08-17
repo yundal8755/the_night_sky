@@ -1,6 +1,6 @@
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/dialog_button.dart';
 import 'package:flutter/material.dart';
 

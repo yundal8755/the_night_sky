@@ -1,4 +1,4 @@
-import 'package:everyones_tone/app/config/app_text_style.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:flutter/material.dart';
 
 class DialogButton extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:everyones_tone/app/enums/record_status.dart';
-import 'package:everyones_tone/app/utils/record_status_manager.dart';
+import 'package:everyones_tone/app/enum/record_status.dart';
+import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/record_buttons/audio_play_button.dart';
 import 'package:everyones_tone/presentation/widgets/record_buttons/before_record_button.dart';
 import 'package:everyones_tone/presentation/widgets/record_buttons/recording_button.dart';

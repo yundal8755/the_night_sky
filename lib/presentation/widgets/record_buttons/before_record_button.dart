@@ -1,7 +1,7 @@
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/app/utils/audio_play_provider.dart';
-import 'package:everyones_tone/app/utils/record_status_manager.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/util/audio_play_provider.dart';
+import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,7 +29,8 @@ class BeforeRecordButton extends StatelessWidget {
         Provider.of<AudioPlayProvider>(context, listen: false).stopPlaying();
 
         if (isLastMessageMine) {
-          DialogWidget.showSingleOptionDialog(context, '답장이 올 때까지 메시지를 보낼 수 없습니다.');
+          DialogWidget.showSingleOptionDialog(
+              context, '답장이 올 때까지 메시지를 보낼 수 없습니다.');
         } else {
           // Otherwise, start recording
           recordStatusManager.startRecording();

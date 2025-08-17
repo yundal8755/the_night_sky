@@ -1,9 +1,9 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/app/config/app_color.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/app/utils/audio_play_provider.dart';
+import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/posting_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';

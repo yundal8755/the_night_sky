@@ -1,10 +1,10 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, file_names, library_private_types_in_public_api, avoid_print
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/app/utils/audio_play_provider.dart';
-import 'package:everyones_tone/app/utils/bottom_sheet.dart';
-import 'package:everyones_tone/app/utils/firestore_user_provider.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/util/audio_play_provider.dart';
+import 'package:everyones_tone/app/util/bottom_sheet.dart';
+import 'package:everyones_tone/app/util/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
 import 'package:everyones_tone/presentation/pages/home/home_page.dart';
 import 'package:everyones_tone/presentation/pages/post/post_page.dart';
@@ -55,7 +55,8 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
-                    Provider.of<AudioPlayProvider>(context, listen: false).stopPlaying();
+                    Provider.of<AudioPlayProvider>(context, listen: false)
+                        .stopPlaying();
                     setState(() {
                       _currentIndex = 0;
                     });
@@ -99,7 +100,8 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                       ? AppColor.neutrals20
                       : AppColor.neutrals60,
                   onPressed: () {
-                    Provider.of<AudioPlayProvider>(context, listen: false).stopPlaying();
+                    Provider.of<AudioPlayProvider>(context, listen: false)
+                        .stopPlaying();
                     userData == null
                         ? bottomSheet(
                             context: context,

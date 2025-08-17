@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:flutter/material.dart';
 
@@ -200,10 +200,10 @@ class EditProfileManager extends ChangeNotifier {
     required String nickname,
     required String profilePicUrl,
   }) async {
-    final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     DocumentReference userRef =
-        _firestore.collection('user').doc(FirestoreData.currentUserEmail);
+        firestore.collection('user').doc(FirestoreData.currentUserEmail);
 
     // nickname과 profilePicUrl 필드만 업데이트합니다.
     await userRef.update({

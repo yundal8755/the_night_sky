@@ -1,7 +1,7 @@
-import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/app/utils/bottom_sheet.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
-import 'package:everyones_tone/presentation/pages/profile/profile_page.dart';
+import 'package:everyones_tone/features/profile/presentation/profile_page.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +16,7 @@ class ProfilePageButton extends StatelessWidget {
         onTap: () {
           bottomSheet(
               context: context,
-              child: ProfilePage(),
+              child: const ProfilePage(),
               bottomSheetType: BottomSheetHeight.profilePage);
         },
         child: FutureBuilder(

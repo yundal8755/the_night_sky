@@ -1,8 +1,8 @@
 // ignore_for_file: file_names, avoid_print
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
-import 'package:everyones_tone/app/utils/audio_play_provider.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';

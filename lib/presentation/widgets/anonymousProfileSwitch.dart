@@ -1,9 +1,9 @@
 // ignore_for_file: file_names, avoid_print, prefer_const_constructors, library_private_types_in_public_api, unrelated_type_equality_checks
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/cupertino.dart';

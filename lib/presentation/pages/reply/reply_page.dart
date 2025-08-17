@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors, use_build_context_synchronously, avoid_print
 
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/presentation/widgets/anonymousProfileSwitch.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_view_model.dart';
-import 'package:everyones_tone/app/utils/record_status_manager.dart';
+import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/record_buttons/record_status_button.dart';
 import 'package:flutter/material.dart';

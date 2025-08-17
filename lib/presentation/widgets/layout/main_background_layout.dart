@@ -1,4 +1,4 @@
-import 'package:everyones_tone/app/constants/app_assets.dart';
+import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:flutter/material.dart';
 
 class MainBackgroundLayout extends StatelessWidget {

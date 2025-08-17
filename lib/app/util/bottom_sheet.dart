@@ -1,5 +1,5 @@
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/utils/record_status_manager.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +52,8 @@ Future<void> bottomSheet({
       return SingleChildScrollView(
         child: Container(
           width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * bottomSheetType.heightFactor,
+          height:
+              MediaQuery.of(context).size.height * bottomSheetType.heightFactor,
           padding: const EdgeInsets.all(2),
           child: child,
         ),

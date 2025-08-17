@@ -1,6 +1,6 @@
-import 'package:everyones_tone/app/config/app_color.dart';
-import 'package:everyones_tone/app/config/app_gap.dart';
-import 'package:everyones_tone/app/config/app_text_style.dart';
+import 'package:everyones_tone/app/style/app_color.dart';
+import 'package:everyones_tone/app/style/app_gap.dart';
+import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/pages/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';
@@ -84,8 +84,7 @@ class ReportPage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => BottomNavBarPage()
-                                ),
+                                    builder: (context) => BottomNavBarPage()),
                               );
                             },
                           );

@@ -1,9 +1,9 @@
 // ignore_for_file: avoid_print, duplicate_ignore
 
 import 'dart:async';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:everyones_tone/app/enum/record_status.dart';
 import 'package:flutter/foundation.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 
@@ -15,14 +15,25 @@ class RecordStatusManager with ChangeNotifier {
     audioPlayer = AudioPlayer();
 
     // 오디오 재생 완료 리스너 추가
-    // 해당 코드 덕분에 재생, 일시정지 상태가 계속 유지됨
-    audioPlayer.onPlayerComplete.listen(
-      (event) {
+    audioPlayer.playerStateStream.listen((state) {
+      if (state.processingState == ProcessingState.completed) {
         isPlaying = false;
         isPlayingNotifier.value = false;
         notifyListeners();
-      },
-    );
+      } else if (state.playing) {
+        isPlaying = true;
+        isPlayingNotifier.value = true;
+        notifyListeners();
+      } else {
+        isPlaying = false;
+        isPlayingNotifier.value = false;
+        notifyListeners();
+      }
+    });
+
+    audioPlayer.playbackEventStream.listen((event) {}, onError: (Object e, StackTrace stackTrace) {
+      print('A stream error occurred: $e');
+    });
   }
 
   // 녹음 관련 변수
@@ -118,18 +129,24 @@ class RecordStatusManager with ChangeNotifier {
       return;
     }
 
-    if (isPlaying) {
-      // 재생 중이면 오디오 일시정지
-      await audioPlayer.pause();
-    } else {
-      // 오디오 파일 재생
-      await audioPlayer.play(UrlSource('file://$audioFilePath'));
+    try {
+      if (isPlaying) {
+        // 재생 중이면 오디오 일시정지
+        await audioPlayer.pause();
+      } else {
+        // 오디오 파일 설정 및 재생
+        await audioPlayer.setFilePath(audioFilePath!);
+        await audioPlayer.play();
+      }
+    } catch (e) {
+      print('Error audio playback: $e');
     }
 
-    // 재생 상태를 토글하고, 이 변경을 알립니다.
-    isPlaying = !isPlaying;
-    isPlayingNotifier.value = isPlaying;
-    notifyListeners();
+    // 상태는 listener에서 처리되지만, 즉각적인 UI 반영을 위해 toggle 함
+    // (listener가 즉시 반응하지 않을 수 있으므로)
+    // isPlaying = !isPlaying;
+    // isPlayingNotifier.value = isPlaying;
+    // notifyListeners();
   }
 
   //! 음성 삭제
@@ -155,5 +172,11 @@ class RecordStatusManager with ChangeNotifier {
     audioFilePath = null;
     recordingStatusNotifier.value = RecordStatus.before;
     notifyListeners(); // 이 메소드는 클래스 내부에서 호출됩니다.
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
   }
 }

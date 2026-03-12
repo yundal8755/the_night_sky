@@ -25,7 +25,7 @@ dependencies:
 
   # Audio record/player
   record: ^5.0.5
-  audioplayers: ^5.2.1
+  just_audio: ^0.9.42
 
 
   # Firebase

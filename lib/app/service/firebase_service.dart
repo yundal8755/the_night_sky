@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/common/model/post_model.dart';
-import 'package:everyones_tone/common/model/user_model.dart';
+import 'package:everyones_tone/data/model/post_model.dart';
+import 'package:everyones_tone/data/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 

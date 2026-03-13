@@ -2,15 +2,16 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/data/post/dto/post_model.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 
 // TODO : Repository -> DataSource로 변경
 class PostRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final _firestore = FirebaseService.firestore;
 
   Future<void> uploadPostRemote(PostModel postModel) async {
-    DocumentReference userRef = _firestore.collection('post').doc();
+    DocumentReference<PostModel> userRef = FirebaseService.posts.doc();
 
-    await userRef.set(postModel.toMap());
+    await userRef.set(postModel);
     print('PostRemoteRepository 실행 완료!');
   }
 }

@@ -4,8 +4,9 @@ import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/enum/record_status.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/util/edit_profile_manager.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
+import 'package:everyones_tone/data/user/dto/user_model.dart';
 import 'package:everyones_tone/presentation/pages/profile/edit_profile_page.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
@@ -23,25 +24,25 @@ class _EditProfileStatusTileState extends State<EditProfileStatusTile> {
   final recordingStatusNotifier =
       ValueNotifier<RecordStatus>(RecordStatus.before);
 
-  Map<String, dynamic> userData = {};
+  UserModel? userData;
   String profilePicUrl = AppAssets.profileBasicImage;
   String nickname = '닉네임';
 
   @override
   void initState() {
     super.initState();
-    FirestoreData.fetchUserData().then((data) {
+    FirebaseService.fetchCurrentUser().then((data) {
       if (mounted) {
         setState(
           () {
-            userData = data!;
-            profilePicUrl = FirestoreData.currentUser == null
+            userData = data;
+            profilePicUrl = FirebaseService.currentUser == null
                 ? AppAssets.profileBasicImage
-                : userData['profilePicUrl'];
+                : (userData?.profilePicUrl ?? AppAssets.profileBasicImage);
 
-            nickname = FirestoreData.currentUser == null
+            nickname = FirebaseService.currentUser == null
                 ? '닉네임'
-                : userData['nickname'];
+                : (userData?.nickname ?? '닉네임');
           },
         );
       }

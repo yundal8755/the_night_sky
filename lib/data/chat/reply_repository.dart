@@ -1,12 +1,10 @@
-// ignore_for_file: avoid_print
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/data/chat/dto/chat_model.dart';
 import 'package:everyones_tone/data/chat/dto/chat_message_model.dart';
-import 'package:everyones_tone/app/repository/database_helper.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 
 class ReplyRepository {
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final firestore = FirebaseService.firestore;
   // final DatabaseHelper databaseHelper = DatabaseHelper();
 
   //! Firestore - chat Collection method
@@ -77,21 +75,4 @@ class ReplyRepository {
       'previousReplyDocumentId': replyDocumentId,
     });
   }
-
-  //! SQflite
-  // Future<void> uploadReplyLocal(
-  //     ChatModel chatModel,
-  //     ChatMessageModel postMessageModel,
-  //     ChatMessageModel replyMessageModel) async {
-  //   final db = await databaseHelper.database;
-
-  //   // Chat 정보 저장
-  //   await db.insert('chat', chatModel.toMap());
-
-  //   // Post Message 정보 저장
-  //   await db.insert('message', postMessageModel.toMap());
-
-  //   // Reply Message 정보 저장
-  //   await db.insert('message', replyMessageModel.toMap());
-  // }
 }

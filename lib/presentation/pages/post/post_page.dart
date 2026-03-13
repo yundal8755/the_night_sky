@@ -1,8 +1,8 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously, avoid_print
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously,
 
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/presentation/pages/post/post_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/anonymousProfileSwitch.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
@@ -54,16 +54,24 @@ class PostPage extends StatelessWidget {
                       ? hintText
                       : textEditingController.text;
                   String localAudioUrl = recordStatusManager.audioFilePath!;
-                  Map<String, dynamic>? userData =
-                      await FirestoreData.fetchUserData();
+                  final userData = await FirebaseService.fetchCurrentUser();
 
-                  userData!['nickname'] = currentNickname;
-                  userData['profilePicUrl'] = currentProfilePicUrl;
+                  if (userData == null) {
+                    return;
+                  }
+
+                  final nickname =
+                      currentNickname.isNotEmpty ? currentNickname : userData.nickname;
+                  final profilePicUrl = currentProfilePicUrl.isNotEmpty
+                      ? currentProfilePicUrl
+                      : userData.profilePicUrl;
 
                   await postViewModel.uploadPost(
                       postTitle: postTitle,
                       localAudioUrl: localAudioUrl,
-                      userData: userData);
+                      userEmail: userData.userEmail,
+                      nickname: nickname,
+                      profilePicUrl: profilePicUrl);
 
                   recordStatusManager.resetToBefore();
                   Navigator.pop(context); // 다이얼로그 닫기

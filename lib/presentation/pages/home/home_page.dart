@@ -2,10 +2,11 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/style/app_color.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/posting_card.dart';
+import 'package:everyones_tone/data/post/dto/post_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,9 +19,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final postCollection = FirebaseFirestore.instance
-      .collection('post')
-      .orderBy('dateCreated', descending: true);
+  final postCollection =
+      FirebaseService.posts.orderBy('dateCreated', descending: true);
   String currentDocumentId = '';
   int currentPageIndex = 0;
   final _controller = PageController();
@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _loadReportedPosts();
     _loadBlockedUsers();
-    FirebaseAuth.instance.userChanges().listen(
+    FirebaseService.auth.userChanges().listen(
       (User? user) {
         if (user == null) {
           print('User is currently signed out!');
@@ -44,9 +44,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadReportedPosts() async {
-    final userDoc = FirebaseFirestore.instance
-        .collection('user')
-        .doc(FirestoreData.currentUserEmail);
+    final userDoc = FirebaseService.users.doc(FirebaseService.currentUserEmail);
     final reportedCollection = userDoc.collection('reported');
     final snapshot = await reportedCollection.doc('reportedPosts').get();
 
@@ -63,9 +61,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadBlockedUsers() async {
-    final userDoc = FirebaseFirestore.instance
-        .collection('user')
-        .doc(FirestoreData.currentUserEmail);
+    final userDoc = FirebaseService.users.doc(FirebaseService.currentUserEmail);
     final reportedCollection = userDoc.collection('reported');
     final snapshot = await reportedCollection.doc('blockedUsers').get();
 
@@ -93,9 +89,10 @@ class _HomePageState extends State<HomePage> {
             children: [
               const MainAppBar(title: '밤하늘'),
               Expanded(
-                child: StreamBuilder<QuerySnapshot>(
+                child: StreamBuilder<QuerySnapshot<PostModel>>(
                   stream: postCollection.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  builder:
+                      (context, AsyncSnapshot<QuerySnapshot<PostModel>> snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(
                         child: CircularProgressIndicator(
@@ -110,13 +107,14 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     }
-                    List<DocumentSnapshot> docs = snapshot.data!.docs;
+                    List<QueryDocumentSnapshot<PostModel>> docs =
+                        snapshot.data!.docs;
 
                     // 필터링: reportedPosts와 blockedUsers에 없는 문서들만 남기기
                     docs = docs.where((doc) {
-                      var postData = doc.data() as Map<String, dynamic>;
+                      var postData = doc.data();
                       return !reportedPosts.contains(doc.id) &&
-                          !blockedUsers.contains(postData['userEmail']);
+                          !blockedUsers.contains(postData.userEmail);
                     }).toList();
 
                     return PageView.builder(
@@ -137,8 +135,7 @@ class _HomePageState extends State<HomePage> {
 
                       // 아이템 빌더
                       itemBuilder: (context, index) {
-                        var postData =
-                            docs[index].data() as Map<String, dynamic>;
+                        var postData = docs[index].data();
                         if (index == 0 && currentDocumentId == '') {
                           currentDocumentId = docs[0].id;
                           print('초기 화면의 Doc ID : $currentDocumentId');
@@ -146,11 +143,11 @@ class _HomePageState extends State<HomePage> {
 
                         print('CurrentDocument ID : $currentDocumentId');
 
-                        String audioUrl = postData['audioUrl'];
-                        String nickname = postData['nickname'];
-                        String postTitle = postData['postTitle'];
-                        String profilePicUrl = postData['profilePicUrl'];
-                        String postUserEmail = postData['userEmail'];
+                        String audioUrl = postData.audioUrl;
+                        String nickname = postData.nickname;
+                        String postTitle = postData.postTitle;
+                        String profilePicUrl = postData.profilePicUrl;
+                        String postUserEmail = postData.userEmail;
 
                         return PostingCard(
                           audioUrl: audioUrl,

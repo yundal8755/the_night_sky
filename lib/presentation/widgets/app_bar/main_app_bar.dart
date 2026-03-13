@@ -52,8 +52,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                     opacity: 0.2,
                     backgroundImage: userData == null
                         ? AppAssets.profileBasicImage
-                        : userData['profilePicUrl'] ??
-                            AppAssets.profileBasicImage)),
+                        : userData.profilePicUrl)),
           )
         ],
       ),

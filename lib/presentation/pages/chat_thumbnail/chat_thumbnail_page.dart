@@ -3,7 +3,7 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/presentation/pages/chat_thumbnail/chat_thumbnail_view_model.dart';
 import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/main_app_bar.dart';
@@ -17,7 +17,7 @@ class ChatThumbnailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ChatThumbnailViewModel chatThumbnailViewModel = ChatThumbnailViewModel();
 
-    if (FirestoreData.currentUser == null) {
+    if (FirebaseService.currentUser == null) {
       bottomSheet(
           context: context,
           child: InitialLoginPage(),
@@ -52,11 +52,11 @@ class ChatThumbnailPage extends StatelessWidget {
                       var chatData = snapshot.data![index];
                       return ChatThumbnailTile(
                         chatData: chatData,
-                        nickname: FirestoreData.currentUserEmail ==
+                        nickname: FirebaseService.currentUserEmail ==
                                 chatData['postUserEmail']
                             ? chatData['replyUserNickname']
                             : chatData['postUserNickname'],
-                        profilePicUrl: FirestoreData.currentUserEmail ==
+                        profilePicUrl: FirebaseService.currentUserEmail ==
                                 chatData['postUserEmail']
                             ? chatData['replyUserProfilePicUrl']
                             : chatData['postUserProfilePicUrl'],

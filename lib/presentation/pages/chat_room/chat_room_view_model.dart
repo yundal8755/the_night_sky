@@ -1,17 +1,15 @@
 // ignore_for_file: avoid_print
 
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/data/chat/dto/chat_message_model.dart';
 import 'package:everyones_tone/data/chat/chat_room_repository.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class ChatRoomViewModel {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firestore = FirebaseService.firestore;
   final ChatRoomRepository chatRoomRepository = ChatRoomRepository();
-  FirebaseStorage storage = FirebaseStorage.instance;
 
+  /// 채팅 메시지 스트림
   Stream<List<ChatMessageModel>> chatMessagesStream(String chatId) {
     return _firestore
         .collection('chat')
@@ -31,10 +29,10 @@ class ChatRoomViewModel {
     });
   }
 
-  //! Order
+  /// 메시지 정렬
   void fetchMessageOrder(String chatId) {
     // Firestore 인스턴스 생성
-    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    FirebaseFirestore firestore = FirebaseService.firestore;
 
     // 특정 채팅방의 메시지 컬렉션 참조
     CollectionReference messages = firestore
@@ -57,12 +55,14 @@ class ChatRoomViewModel {
     });
   }
 
-  //! Upload
+  /// 메시지 업로드
   Future<void> uploadChatMessage(String chatId, String localAudioUrl,
       String dateCreated, String userEmail) async {
     /// 오디오 URL 변환
-    String replyUserAudioUrl =
-        await convertLocalAudioToStorageUrl(localAudioUrl);
+    String replyUserAudioUrl = await FirebaseService.uploadAudioFile(
+      localPath: localAudioUrl,
+      contentType: 'audio/x-m4a',
+    );
     if (replyUserAudioUrl.isEmpty) {
       print('오디오 파일 업로드 실패');
       return;
@@ -77,7 +77,7 @@ class ChatRoomViewModel {
     await chatRoomRepository.uploadChatMessage(messageModel);
   }
 
-  //! Delete
+  /// 메시지 삭제
   Future<void> deleteChatRoom(Map<String, dynamic> chatData) async {
     try {
       // Firestore 인스턴스
@@ -109,34 +109,6 @@ class ChatRoomViewModel {
       print("채팅방 및 메시지 삭제 성공: ${chatData['chatId']}");
     } catch (e) {
       print("채팅방 삭제 에러: $e");
-    }
-  }
-
-  //! localAudioUrl을 Firebase Storage Url로 변경
-  Future<String> convertLocalAudioToStorageUrl(String localAudioUrl) async {
-    File file = File(localAudioUrl);
-    try {
-      // Firebase Storage에 업로드할 파일의 경로를 지정
-      String fileName =
-          'audio_url/${DateTime.now().millisecondsSinceEpoch}.m4a';
-      Reference ref = storage.ref().child(fileName);
-
-      // 파일 업로드 수행
-      UploadTask uploadTask = ref.putFile(file);
-
-      // 업로드 완료까지 대기
-      await uploadTask.whenComplete(() => null);
-
-      // 업로드된 파일의 URL 가져오기
-      String downloadURL = await ref.getDownloadURL();
-
-      print('downloadURL: $downloadURL');
-
-      return downloadURL;
-    } catch (e) {
-      // 에러 처리
-      print("오디오 파일 업로드 중 에러 발생: $e");
-      return '';
     }
   }
 }

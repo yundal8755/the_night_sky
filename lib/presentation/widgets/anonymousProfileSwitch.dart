@@ -4,7 +4,8 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
+import 'package:everyones_tone/data/user/dto/user_model.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -21,7 +22,7 @@ class _AnonymousProfileSwitchState extends State<AnonymousProfileSwitch> {
   bool isSwitched = false;
   String nickname = '';
   String profilePicUrl = AppAssets.profileBasicImage;
-  Map<String, dynamic> userData = {};
+  UserModel? userData;
   List<String> randomImages = List.generate(
     20,
     (index) =>
@@ -31,15 +32,16 @@ class _AnonymousProfileSwitchState extends State<AnonymousProfileSwitch> {
   @override
   void initState() {
     super.initState();
-    FirestoreData.fetchUserData().then((data) {
+    FirebaseService.fetchCurrentUser().then((data) {
       if (mounted) {
         setState(() {
-          userData = data!;
-          profilePicUrl = FirestoreData.currentUser == null
+          userData = data;
+          profilePicUrl = FirebaseService.currentUser == null
               ? AppAssets.profileBasicImage
-              : userData['profilePicUrl'];
-          nickname =
-              FirestoreData.currentUser == null ? '닉네임' : userData['nickname'];
+              : (userData?.profilePicUrl ?? AppAssets.profileBasicImage);
+          nickname = FirebaseService.currentUser == null
+              ? '닉네임'
+              : (userData?.nickname ?? '닉네임');
           widget.onProfileChanged(nickname, profilePicUrl); // 초기값 전달
         });
       }
@@ -86,8 +88,9 @@ class _AnonymousProfileSwitchState extends State<AnonymousProfileSwitch> {
                   randomImages.shuffle();
                   profilePicUrl = randomImages.first;
                 } else {
-                  nickname = userData['nickname'];
-                  profilePicUrl = userData['profilePicUrl'];
+                  nickname = userData?.nickname ?? '닉네임';
+                  profilePicUrl =
+                      userData?.profilePicUrl ?? AppAssets.profileBasicImage;
                 }
                 widget.onProfileChanged(nickname, profilePicUrl); // 값 변경 시 전달
               });

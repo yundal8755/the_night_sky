@@ -1,16 +1,16 @@
 // ignore_for_file: avoid_print
 
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
 
 class ReportRepository {
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  FirebaseFirestore firestore = FirebaseService.firestore;
 
   //! 게시글 신고하기
   Future<void> reportPosts(String reportedChatId) async {
     // 현재 유저의 문서 참조 가져오기
     final DocumentReference currentUserRef =
-        firestore.collection('user').doc(FirestoreData.currentUserEmail);
+        firestore.collection('user').doc(FirebaseService.currentUserEmail);
 
     // SubCollection에 reportedPosts 문서와 reportedChatId 필드 값 추가하기
     await currentUserRef
@@ -27,7 +27,7 @@ class ReportRepository {
   Future<void> blockUsers(String blockedUserEmail) async {
     // 현재 유저의 문서 참조 가져오기
     DocumentReference currentUserRef =
-        firestore.collection('user').doc(FirestoreData.currentUserEmail);
+        firestore.collection('user').doc(FirebaseService.currentUserEmail);
 
     // reported SubCollection에 blockedUsers 문서와 blockedUserEmail 필드 값 추가하기
     await currentUserRef

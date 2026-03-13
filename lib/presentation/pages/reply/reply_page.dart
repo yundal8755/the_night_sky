@@ -3,12 +3,13 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/presentation/widgets/anonymousProfileSwitch.dart';
 import 'package:everyones_tone/presentation/pages/reply/reply_view_model.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/widgets/app_bar/sub_app_bar.dart';
 import 'package:everyones_tone/presentation/widgets/record_buttons/record_status_button.dart';
+import 'package:everyones_tone/data/user/dto/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -59,15 +60,25 @@ class ReplyPage extends StatelessWidget {
                   String localAudioUrl = recordStatusManager.audioFilePath!;
 
                   // Firestore에 저장된 User의 Data
-                  Map<String, dynamic>? replyUserData =
-                      await FirestoreData.fetchUserData();
+                  final replyUserData = await FirebaseService.fetchCurrentUser();
+                  if (replyUserData == null) {
+                    return;
+                  }
 
-                  replyUserData!['nickname'] = currentNickname;
-                  replyUserData['profilePicUrl'] = currentProfilePicUrl;
+                  final replyUser = UserModel(
+                    userEmail: replyUserData.userEmail,
+                    dateCreated: replyUserData.dateCreated,
+                    nickname: currentNickname.isNotEmpty
+                        ? currentNickname
+                        : replyUserData.nickname,
+                    profilePicUrl: currentProfilePicUrl.isNotEmpty
+                        ? currentProfilePicUrl
+                        : replyUserData.profilePicUrl,
+                  );
 
                   await replyViewModel.uploadReply(
                       localAudioUrl: localAudioUrl,
-                      replyUserData: replyUserData,
+                      replyUser: replyUser,
                       replyDocumentId: replyDocmentId);
 
                   recordStatusManager.resetToBefore();

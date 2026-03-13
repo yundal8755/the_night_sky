@@ -2,7 +2,7 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
@@ -88,7 +88,7 @@ class ChatRoomSliverAppBar extends StatelessWidget {
                                 // 게시글 노출 제한
                                 var blockedUserEmail = '';
 
-                                if (FirestoreData.currentUserEmail ==
+                                if (FirebaseService.currentUserEmail ==
                                     postUserEmail) {
                                   blockedUserEmail = chatData['replyUserEmail'];
                                 } else {
@@ -135,7 +135,7 @@ class ChatRoomSliverAppBar extends StatelessWidget {
             titlePadding: const EdgeInsets.only(bottom: 16.0),
             title: top == MediaQuery.of(context).padding.top + kToolbarHeight
                 ? Text(
-                    FirestoreData.currentUserEmail == postUserEmail
+                    FirebaseService.currentUserEmail == postUserEmail
                         ? chatData['replyUserNickname']
                         : chatData['postUserNickname'],
                     style: AppTextStyle.headlineMedium(),

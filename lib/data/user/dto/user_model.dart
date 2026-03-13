@@ -16,6 +16,11 @@ class UserModel {
     required this.dateCreated,
   });
 
+  factory UserModel.fromJson(Map<String, dynamic> json) =>
+      _$UserModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+
   Map<String, dynamic> toMap() {
     return {
       'nickname': nickname,

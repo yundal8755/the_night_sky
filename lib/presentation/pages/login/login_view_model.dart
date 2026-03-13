@@ -1,14 +1,15 @@
 // ignore_for_file: file_names, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginViewModel extends ChangeNotifier {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseAuth _auth = FirebaseService.auth;
+  final FirebaseFirestore _firestore = FirebaseService.firestore;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   bool _termsAccepted = false;
@@ -73,8 +74,7 @@ class LoginViewModel extends ChangeNotifier {
 
   //! 사용자 정보 저장
   Future<bool> isUserRegistered(String email) async {
-    final userDocument =
-        FirebaseFirestore.instance.collection('user').doc(email);
+    final userDocument = FirebaseService.users.doc(email);
     final doc = await userDocument.get();
     print('user Doc에 user.email 콜렉션 추가!');
     return doc.exists;

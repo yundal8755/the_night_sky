@@ -2,7 +2,7 @@
 
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/data/chat/dto/chat_message_model.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/pages/chat_room/chat_room_view_model.dart';
@@ -70,7 +70,7 @@ class ChatRoomPage extends StatelessWidget {
                             (BuildContext context, int index) {
                               var chatMessageInfo = snapshot.data![index];
                               var currentUserEmail =
-                                  FirestoreData.currentUserEmail;
+                                  FirebaseService.currentUserEmail;
                               var postUserEmail = chatData['postUserEmail'];
                               var replyUserEmail = chatData['replyUserEmail'];
 
@@ -137,7 +137,7 @@ class ChatRoomPage extends StatelessWidget {
                               var messages = snapshot.data ?? [];
                               bool isLastMessageMine = messages.isNotEmpty &&
                                   messages.first.userEmail ==
-                                      FirestoreData.currentUserEmail;
+                                      FirebaseService.currentUserEmail;
 
                               return RecordStatusButton(
                                 isLastMessageMine: isLastMessageMine,
@@ -168,7 +168,7 @@ class ChatRoomPage extends StatelessWidget {
                                       DateFormat("MM/dd HH:mm:ss")
                                           .format(DateTime.now());
                                   String userEmail =
-                                      FirestoreData.currentUserEmail!;
+                                      FirebaseService.currentUserEmail!;
 
                                   chatRoomViewModel
                                       .uploadChatMessage(chatId, localAudioUrl,

@@ -47,11 +47,11 @@ class ProfileSettingPage extends StatelessWidget {
                     radius: MediaQuery.of(context).size.width / 6,
                     backgroundImage: userData == null
                         ? AppAssets.profileBasicImage
-                        : userData['profilePicUrl']),
+                        : userData.profilePicUrl),
                 Gap.size12,
                 // 닉네임
                 Text(
-                  userData == null ? '로그인을 해주세요' : userData['nickname'],
+                  userData == null ? '로그인을 해주세요' : userData.nickname,
                   style: AppTextStyle.titleLarge(),
                 ),
                 Gap.size48,

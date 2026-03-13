@@ -1,16 +1,15 @@
 // ignore_for_file: avoid_print
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/app/repository/firestore_data.dart';
+import 'package:everyones_tone/app/service/firebase_service.dart';
 
 class ChatThumbnailViewModel {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final chatCollection = FirebaseFirestore.instance.collection('chat');
+  final _firestore = FirebaseService.firestore;
+  final chatCollection = FirebaseService.chats;
 
   Stream<List<Map<String, dynamic>>> fetchChatInfoStream() async* {
     await for (var snapshot in _firestore
         .collection('user')
-        .doc(FirestoreData.currentUserEmail)
+        .doc(FirebaseService.currentUserEmail)
         .collection('myChat')
         .snapshots()) {
       List<Map<String, dynamic>> chatDataList = [];
@@ -36,10 +35,8 @@ class ChatThumbnailViewModel {
   }
 
   Future<int> fetchMessageCount(String chatId) async {
-    var messageCollection = FirebaseFirestore.instance
-        .collection('chat')
-        .doc(chatId)
-        .collection('message');
+    var messageCollection =
+        FirebaseService.chats.doc(chatId).collection('message');
     var snapshot = await messageCollection.get();
     return snapshot.docs.length;
   }

@@ -1,11 +1,11 @@
 name: everyones_tone
 description: "A new Flutter project."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: ">=3.2.3 <4.0.0"
 
 dependencies:
   flutter:
@@ -21,12 +21,10 @@ dependencies:
   get_it: ^7.6.7
   google_fonts: ^6.1.0
   flutter_native_splash: ^2.4.4
-  
 
   # Audio record/player
   record: ^5.0.5
   just_audio: ^0.9.42
-
 
   # Firebase
   firebase_core: ^3.12.1
@@ -41,10 +39,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
+  patrol: ^3.11.2
 
   flutter_lints: ^3.0.1
   flutter_launcher_icons: ^0.13.1
-  
 
 # 앱 아이콘 설정
 flutter_launcher_icons:
@@ -70,7 +70,6 @@ flutter_native_splash:
   color: "#07243A"
   image: "assets/images/main_app_icon_image.png"
 
-
 # 앱 에셋 설정
 flutter:
   assets:
@@ -78,3 +77,11 @@ flutter:
     - assets/images/
 
   uses-material-design: true
+
+patrol:
+  app_name: "밤하늘"
+  test_directory: integration_test
+  android:
+    package_name: "com.example.everyones_tone"
+  ios:
+    bundle_id: "com.example.everyonesTone"

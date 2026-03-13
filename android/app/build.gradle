@@ -47,14 +47,13 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 23
-<<<<<<< HEAD
         targetSdkVersion flutter.targetSdkVersion
-=======
-        targetSdkVersion 34
->>>>>>> 2aa0d21d15f9af36778305ab01e88412e3d1c7f0
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+
+        testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: "true"
     }
 
     buildTypes {
@@ -64,6 +63,10 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    testOptions {
+        execution "ANDROIDX_TEST_ORCHESTRATOR"
+    }
 }
 
 flutter {
@@ -72,4 +75,5 @@ flutter {
 
 dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
+    androidTestUtil "androidx.test:orchestrator:1.4.2"
 }

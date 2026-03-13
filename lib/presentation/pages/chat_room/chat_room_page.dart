@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, avoid_print
 
 import 'package:everyones_tone/app/style/app_color.dart';
-import 'package:everyones_tone/app/models/chat_message_model.dart';
+import 'package:everyones_tone/data/chat/dto/chat_message_model.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';

@@ -1,31 +1,26 @@
+import 'package:json_annotation/json_annotation.dart';
 
-class PostModel {
-  final String postTitle;
-  final String audioUrl;
-  final String userEmail;
+part 'user_model.g.dart';
+
+@JsonSerializable()
+class UserModel {
   final String nickname;
   final String profilePicUrl;
+  final String userEmail;
   final String dateCreated;
-  final String boardName;
 
-  PostModel({
-    required this.postTitle,
-    required this.audioUrl,
-    required this.userEmail,
+  UserModel({
     required this.nickname,
     required this.profilePicUrl,
+    required this.userEmail,
     required this.dateCreated,
-    required this.boardName
   });
 
   Map<String, dynamic> toMap() {
     return {
       'nickname': nickname,
-      'audioUrl': audioUrl,
-      'boardName': boardName,
       'profilePicUrl': profilePicUrl,
       'userEmail': userEmail,
-      'postTitle': postTitle,
       'dateCreated': dateCreated,
     };
   }

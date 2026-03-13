@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'chat_model.g.dart';
+
+@JsonSerializable()
 class ChatModel {
   String? chatId;
   String dateCreated;
@@ -20,6 +25,11 @@ class ChatModel {
     required this.replyUserEmail,
     required this.replyUserProfilePicUrl,
   });
+
+  factory ChatModel.fromJson(Map<String, dynamic> json) =>
+      _$ChatModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChatModelToJson(this);
 
   Map<String, dynamic> toMap() {
     return {

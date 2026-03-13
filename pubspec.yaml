@@ -1,6 +1,5 @@
 name: everyones_tone
-description: "A new Flutter project."
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+description: "밤하늘 - 목소리로 소통하는 음성 SNS"
 
 version: 1.0.0+1
 
@@ -21,12 +20,8 @@ dependencies:
   get_it: ^7.6.7
   google_fonts: ^6.1.0
   flutter_native_splash: ^2.4.4
-
-  # Audio record/player
   record: ^5.0.5
   just_audio: ^0.9.42
-
-  # Firebase
   firebase_core: ^3.12.1
   cloud_firestore: ^5.6.6
   firebase_auth: ^5.5.2
@@ -34,8 +29,10 @@ dependencies:
   sign_in_with_apple: ^7.0.1
   firebase_storage: ^12.4.4
   logger: ^2.6.0
+  build_runner: ^2.4.13
+  json_serializable: ^6.9.0
+  json_annotation: ^4.9.0
 
-# 개발 의존성
 dev_dependencies:
   flutter_test:
     sdk: flutter

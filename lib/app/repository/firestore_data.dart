@@ -19,6 +19,7 @@ class FirestoreData {
     return null;
   }
 
+  /// Firestore - previousReplies SubCollection 확인
   static Future<bool> hasRepliedBefore(
       String userEmail, String replyDocumentId) async {
     final userDoc = await FirebaseFirestore.instance

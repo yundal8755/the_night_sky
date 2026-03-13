@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:everyones_tone/app/models/user_model.dart';
+import 'package:everyones_tone/data/user/dto/user_model.dart';
 import 'package:everyones_tone/app/repository/database_helper.dart';
 
 class RegisterProfileRepository {

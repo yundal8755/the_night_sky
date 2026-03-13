@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'chat_message_model.g.dart';
+
+@JsonSerializable()
 class ChatMessageModel {
   String? chatId;
   String? messageId;

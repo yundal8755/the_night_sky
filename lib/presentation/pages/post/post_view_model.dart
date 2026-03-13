@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-import 'package:everyones_tone/app/models/post_model.dart';
+import 'package:everyones_tone/data/post/dto/post_model.dart';
 import 'package:everyones_tone/data/post/post_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';

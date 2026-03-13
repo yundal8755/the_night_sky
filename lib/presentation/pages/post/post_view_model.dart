@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:everyones_tone/app/models/post_model.dart';
-import 'package:everyones_tone/presentation/pages/post/post_repository.dart';
+import 'package:everyones_tone/data/post/post_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 
@@ -58,14 +58,13 @@ class PostViewModel {
     String profilePicUrl = userData['profilePicUrl'] ?? '';
     String dateCreated = DateFormat("MM/dd HH:mm:ss").format(DateTime.now());
     PostModel postModel = PostModel(
-      nickname: nickname,
-      postTitle: postTitle,
-      audioUrl: audioUrl,
-      userEmail: userEmail,
-      profilePicUrl: profilePicUrl,
-      dateCreated: dateCreated,
-      boardName: '자유게시판'
-    );
+        nickname: nickname,
+        postTitle: postTitle,
+        audioUrl: audioUrl,
+        userEmail: userEmail,
+        profilePicUrl: profilePicUrl,
+        dateCreated: dateCreated,
+        boardName: '자유게시판');
 
     print('PostViewModel 실행 완료!');
     await postRemoteRepository.uploadPostRemote(postModel);

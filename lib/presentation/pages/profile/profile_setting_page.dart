@@ -7,7 +7,7 @@ import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/app/util/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/bottom_nav_bar_page.dart';
-import 'package:everyones_tone/features/profile/presentation/edit_profile_page.dart';
+import 'package:everyones_tone/presentation/pages/profile/edit_profile_page.dart';
 import 'package:everyones_tone/presentation/pages/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/widgets/custom_buttons/main_button.dart';

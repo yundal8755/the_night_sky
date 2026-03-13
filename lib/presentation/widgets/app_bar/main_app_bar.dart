@@ -5,7 +5,7 @@ import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/app/util/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/pages/login/initial_login_page.dart';
-import 'package:everyones_tone/features/profile/presentation/profile_page.dart';
+import 'package:everyones_tone/presentation/pages/profile/profile_page.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

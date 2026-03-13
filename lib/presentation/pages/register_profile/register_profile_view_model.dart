@@ -1,5 +1,5 @@
 import 'package:everyones_tone/app/models/user_model.dart';
-import 'package:everyones_tone/presentation/pages/register_profile/register_profile_repository.dart';
+import 'package:everyones_tone/data/user/register_profile_repository.dart';
 import 'package:intl/intl.dart';
 
 class RegisterProfileViewModel {

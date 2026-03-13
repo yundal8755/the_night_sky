@@ -6,7 +6,7 @@ import 'package:everyones_tone/app/enum/record_status.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/app/repository/firestore_data.dart';
 import 'package:everyones_tone/app/util/edit_profile_manager.dart';
-import 'package:everyones_tone/features/profile/presentation/edit_profile_page.dart';
+import 'package:everyones_tone/presentation/pages/profile/edit_profile_page.dart';
 import 'package:everyones_tone/presentation/widgets/profile_circle_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

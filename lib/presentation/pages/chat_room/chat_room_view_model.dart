@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/models/chat_message_model.dart';
-import 'package:everyones_tone/presentation/pages/chat_room/chat_room_repository.dart';
+import 'package:everyones_tone/data/chat/chat_room_repository.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class ChatRoomViewModel {

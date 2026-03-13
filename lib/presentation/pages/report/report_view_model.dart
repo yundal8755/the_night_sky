@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:everyones_tone/presentation/pages/report/report_repository.dart';
+import 'package:everyones_tone/data/report/report_repository.dart';
 
 class ReportViewModel {
   ReportRepository reportRepository = ReportRepository();

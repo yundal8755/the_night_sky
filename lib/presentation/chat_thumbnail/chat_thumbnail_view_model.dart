@@ -8,9 +8,9 @@ class ChatThumbnailViewModel {
 
   Stream<List<Map<String, dynamic>>> fetchChatInfoStream() async* {
     await for (var snapshot in _firestore
-        .collection('user')
+        .collection(FirestoreCollection.user.name)
         .doc(FirebaseService.currentUserEmail)
-        .collection('myChat')
+        .collection(FirestoreSubCollection.myChat.name)
         .snapshots()) {
       List<Map<String, dynamic>> chatDataList = [];
 
@@ -35,8 +35,9 @@ class ChatThumbnailViewModel {
   }
 
   Future<int> fetchMessageCount(String chatId) async {
-    var messageCollection =
-        FirebaseService.chats.doc(chatId).collection('message');
+    var messageCollection = FirebaseService.chats
+        .doc(chatId)
+        .collection(FirestoreSubCollection.message.name);
     var snapshot = await messageCollection.get();
     return snapshot.docs.length;
   }

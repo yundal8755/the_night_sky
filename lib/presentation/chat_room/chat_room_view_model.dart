@@ -12,9 +12,9 @@ class ChatRoomViewModel {
   /// 채팅 메시지 스트림
   Stream<List<ChatMessageModel>> chatMessagesStream(String chatId) {
     return _firestore
-        .collection('chat')
+        .collection(FirestoreCollection.chat.name)
         .doc(chatId)
-        .collection('message')
+        .collection(FirestoreSubCollection.message.name)
         .orderBy('dateCreated', descending: true)
         .snapshots()
         .map((snapshot) {
@@ -36,9 +36,9 @@ class ChatRoomViewModel {
 
     // 특정 채팅방의 메시지 컬렉션 참조
     CollectionReference messages = firestore
-        .collection('chatCollection')
+        .collection(FirestoreCollection.chat.name)
         .doc(chatId)
-        .collection('message');
+        .collection(FirestoreSubCollection.message.name);
 
     // dateCreated 필드를 기준으로 내림차순으로 메시지 정렬
     messages
@@ -81,10 +81,14 @@ class ChatRoomViewModel {
   Future<void> deleteChatRoom(Map<String, dynamic> chatData) async {
     try {
       // Firestore 인스턴스
-      var chatDocRef = _firestore.collection('chat').doc(chatData['chatId']);
+      var chatDocRef = _firestore
+          .collection(FirestoreCollection.chat.name)
+          .doc(chatData['chatId']);
 
       // 'message' 서브컬렉션 내의 모든 문서를 가져옵니다.
-      var messagesSnapshot = await chatDocRef.collection('message').get();
+      var messagesSnapshot = await chatDocRef
+          .collection(FirestoreSubCollection.message.name)
+          .get();
       for (var message in messagesSnapshot.docs) {
         await message.reference.delete();
       }
@@ -94,15 +98,15 @@ class ChatRoomViewModel {
 
       // 각 사용자의 myChat 목록에서 채팅방을 삭제합니다.
       await _firestore
-          .collection('user')
+          .collection(FirestoreCollection.user.name)
           .doc(chatData['postUserEmail'])
-          .collection('myChat')
+          .collection(FirestoreSubCollection.myChat.name)
           .doc(chatData['chatId'])
           .delete();
       await _firestore
-          .collection('user')
+          .collection(FirestoreCollection.user.name)
           .doc(chatData['replyUserEmail'])
-          .collection('myChat')
+          .collection(FirestoreSubCollection.myChat.name)
           .doc(chatData['chatId'])
           .delete();
 

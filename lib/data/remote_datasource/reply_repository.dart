@@ -14,7 +14,8 @@ class ReplyRepository {
       ChatMessageModel replyMessageModel,
       String replyDocmentId) async {
     /// Chat Doc 생성 및 ID 할당
-    final DocumentReference chatRef = firestore.collection('chat').doc();
+    final DocumentReference chatRef =
+        firestore.collection(FirestoreCollection.chat.name).doc();
     chatModel.chatId = chatRef.id;
 
     /// Chat Field 생성
@@ -22,7 +23,7 @@ class ReplyRepository {
 
     /// Post Message 정보 저장 및 ID 할당
     final DocumentReference postMessageRef =
-        chatRef.collection('message').doc();
+        chatRef.collection(FirestoreSubCollection.message.name).doc();
     postMessageModel.chatId = chatRef.id;
     postMessageModel.messageId = postMessageRef.id;
     await postMessageRef.set(postMessageModel.toMap());
@@ -32,7 +33,7 @@ class ReplyRepository {
 
     /// Reply Message 정보 저장 및 ID 할당
     final DocumentReference replyMessageRef =
-        chatRef.collection('message').doc();
+        chatRef.collection(FirestoreSubCollection.message.name).doc();
     replyMessageModel.chatId = chatRef.id;
     replyMessageModel.messageId = replyMessageRef.id;
     await replyMessageRef.set(replyMessageModel.toMap());
@@ -48,10 +49,11 @@ class ReplyRepository {
     String chatId,
   ) async {
     final DocumentReference userRef =
-        firestore.collection('user').doc(userEmail);
+        firestore.collection(FirestoreCollection.user.name).doc(userEmail);
 
     // myChat SubCollection
-    final CollectionReference myChatRef = userRef.collection('myChat');
+    final CollectionReference myChatRef =
+        userRef.collection(FirestoreSubCollection.myChat.name);
     final DocumentReference myChatNewDocRef = myChatRef.doc(chatId);
 
     await myChatNewDocRef.set({
@@ -63,11 +65,11 @@ class ReplyRepository {
   Future<void> createPreviousRepliesSubcollection(
       String userEmail, String chatId, String replyDocumentId) async {
     final DocumentReference userRef =
-        firestore.collection('user').doc(userEmail);
+        firestore.collection(FirestoreCollection.user.name).doc(userEmail);
 
     // previousReplies SubCollection
     final CollectionReference previousRepliesRef =
-        userRef.collection('previousReplies');
+        userRef.collection(FirestoreSubCollection.previousReplies.name);
     final DocumentReference previousRepliesNewDocRef =
         previousRepliesRef.doc(replyDocumentId);
 

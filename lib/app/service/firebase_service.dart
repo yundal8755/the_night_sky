@@ -7,16 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 ///
-/// Firestore 컬렉션 이름
-///
-enum FirestoreCollection {
-  user,
-  post,
-  chat,
-  report;
-}
-
-///
 /// Firebase Service
 /// Firestore 컬렉션 참조 및 파일 업로드 메서드 제공
 ///
@@ -68,8 +58,9 @@ final class FirebaseService {
       return false;
     }
 
-    final previousReplies =
-        await userDoc.reference.collection('previousReplies').get();
+    final previousReplies = await userDoc.reference
+        .collection(FirestoreSubCollection.previousReplies.name)
+        .get();
     for (var doc in previousReplies.docs) {
       if (doc.id == replyDocumentId) {
         return true;
@@ -108,4 +99,26 @@ final class FirebaseService {
       return '';
     }
   }
+}
+
+///
+/// Firestore Collection
+///
+enum FirestoreCollection {
+  user,
+  post,
+  chat,
+  report;
+}
+
+///
+/// Firestore SubCollection
+///
+enum FirestoreSubCollection {
+  message,
+  myChat,
+  previousReplies,
+  reported,
+  reportedPosts,
+  blockedUsers,
 }

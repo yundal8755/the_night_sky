@@ -45,8 +45,11 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadReportedPosts() async {
     final userDoc = FirebaseService.users.doc(FirebaseService.currentUserEmail);
-    final reportedCollection = userDoc.collection('reported');
-    final snapshot = await reportedCollection.doc('reportedPosts').get();
+    final reportedCollection =
+        userDoc.collection(FirestoreSubCollection.reported.name);
+    final snapshot = await reportedCollection
+        .doc(FirestoreSubCollection.reportedPosts.name)
+        .get();
 
     setState(() {
       if (snapshot.exists) {
@@ -62,8 +65,11 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadBlockedUsers() async {
     final userDoc = FirebaseService.users.doc(FirebaseService.currentUserEmail);
-    final reportedCollection = userDoc.collection('reported');
-    final snapshot = await reportedCollection.doc('blockedUsers').get();
+    final reportedCollection =
+        userDoc.collection(FirestoreSubCollection.reported.name);
+    final snapshot = await reportedCollection
+        .doc(FirestoreSubCollection.blockedUsers.name)
+        .get();
 
     setState(() {
       if (snapshot.exists) {

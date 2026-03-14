@@ -9,16 +9,17 @@ class ReportRepository {
   //! 게시글 신고하기
   Future<void> reportPosts(String reportedChatId) async {
     // 현재 유저의 문서 참조 가져오기
-    final DocumentReference currentUserRef =
-        firestore.collection('user').doc(FirebaseService.currentUserEmail);
+    final DocumentReference currentUserRef = firestore
+        .collection(FirestoreCollection.user.name)
+        .doc(FirebaseService.currentUserEmail);
 
     // SubCollection에 reportedPosts 문서와 reportedChatId 필드 값 추가하기
     await currentUserRef
-        .collection('reported')
-        .doc('reportedPosts')
+        .collection(FirestoreSubCollection.reported.name)
+        .doc(FirestoreSubCollection.reportedPosts.name)
         .set({
-          'reportedChatId': FieldValue.arrayUnion([reportedChatId])
-        }, SetOptions(merge: true));
+      'reportedChatId': FieldValue.arrayUnion([reportedChatId])
+    }, SetOptions(merge: true));
 
     print('reportPosts 정상적으로 실행!');
   }
@@ -26,24 +27,26 @@ class ReportRepository {
   //! 사용자 차단하기
   Future<void> blockUsers(String blockedUserEmail) async {
     // 현재 유저의 문서 참조 가져오기
-    DocumentReference currentUserRef =
-        firestore.collection('user').doc(FirebaseService.currentUserEmail);
+    DocumentReference currentUserRef = firestore
+        .collection(FirestoreCollection.user.name)
+        .doc(FirebaseService.currentUserEmail);
 
     // reported SubCollection에 blockedUsers 문서와 blockedUserEmail 필드 값 추가하기
     await currentUserRef
-        .collection('reported')
-        .doc('blockedUsers')
+        .collection(FirestoreSubCollection.reported.name)
+        .doc(FirestoreSubCollection.blockedUsers.name)
         .set({
-          'blockedUserEmail': FieldValue.arrayUnion([blockedUserEmail])
-        }, SetOptions(merge: true));
+      'blockedUserEmail': FieldValue.arrayUnion([blockedUserEmail])
+    }, SetOptions(merge: true));
 
     print('BlockUsers 정상적으로 실행!');
   }
 
   //! 관리자 페이지에 목록 추가하기
   Future<void> countReportedPosts(String reportedChatId) async {
-    final DocumentReference reportRef =
-        firestore.collection('report').doc('reportedPosts');
+    final DocumentReference reportRef = firestore
+        .collection(FirestoreCollection.report.name)
+        .doc(FirestoreSubCollection.reportedPosts.name);
 
     // 현재 값을 가져오기
     final DocumentSnapshot snapshot = await reportRef.get();

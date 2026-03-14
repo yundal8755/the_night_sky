@@ -9,9 +9,9 @@ class ChatRoomRepository {
   /// 채팅 메시지 업로드
   Future<void> uploadChatMessage(ChatMessageModel chatMessageModel) async {
     var messageCollection = _firestore
-        .collection('chat')
+        .collection(FirestoreCollection.chat.name)
         .doc(chatMessageModel.chatId)
-        .collection('message');
+        .collection(FirestoreSubCollection.message.name);
 
     await messageCollection.add(chatMessageModel.toMap());
     print('ChatRoomRepository 실행 완료!');

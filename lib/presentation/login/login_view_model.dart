@@ -94,15 +94,19 @@ class LoginViewModel extends ChangeNotifier {
         throw Exception("User is not logged in");
       }
 
-      var userDocRef = _firestore.collection('user').doc(currentUser.email);
+      var userDocRef = _firestore
+          .collection(FirestoreCollection.user.name)
+          .doc(currentUser.email);
 
-      var myChatSnapshot = await userDocRef.collection('myChat').get();
+      var myChatSnapshot =
+          await userDocRef.collection(FirestoreSubCollection.myChat.name).get();
       for (var myChat in myChatSnapshot.docs) {
         await myChat.reference.delete();
       }
 
-      var previousRepliesSnapshot =
-          await userDocRef.collection('previousReplies').get();
+      var previousRepliesSnapshot = await userDocRef
+          .collection(FirestoreSubCollection.previousReplies.name)
+          .get();
       for (var previousReplies in previousRepliesSnapshot.docs) {
         await previousReplies.reference.delete();
       }

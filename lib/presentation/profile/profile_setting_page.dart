@@ -20,7 +20,8 @@ class ProfileSettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final LoginViewModel loginViewModel = LoginViewModel();
+    final LoginViewModel loginViewModel =
+        Provider.of<LoginViewModel>(context, listen: false);
     final userData = Provider.of<FirestoreUserProvider>(context).userData;
 
     return Scaffold(

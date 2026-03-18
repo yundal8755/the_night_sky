@@ -5,22 +5,26 @@ import 'package:everyones_tone/data/model/chat_message_model.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/app/util/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
+import 'package:everyones_tone/app/di/service_locator.dart';
+import 'package:everyones_tone/data/remote_datasource/chat_remote_data_source.dart';
+import 'package:everyones_tone/data/remote_datasource/report_remote_data_source.dart';
 import 'package:everyones_tone/presentation/chat_room/chat_room_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/app_bar/chat_room_sliver_app_bar.dart';
 import 'package:everyones_tone/presentation/common/widget/record_buttons/record_status_button.dart';
 import 'package:everyones_tone/presentation/common/widget/layout/main_background_layout.dart';
 import 'package:everyones_tone/presentation/common/widget/tiles/partner_user_message_tile.dart';
 import 'package:everyones_tone/presentation/common/widget/tiles/current_user_message_tile.dart';
+import 'package:everyones_tone/presentation/report/report_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ChatRoomPage extends StatelessWidget {
   final Map<String, dynamic> chatData;
 
-  /// GetIt을 통해 인스턴스 가져오기
-  final chatRoomViewModel = GetIt.I<ChatRoomViewModel>();
+  late final ChatRoomViewModel chatRoomViewModel = ChatRoomViewModel(
+    chatRoomRepository: getIt<ChatRemoteDataSource>(),
+  );
 
   ChatRoomPage({super.key, required this.chatData});
 
@@ -60,6 +64,7 @@ class ChatRoomPage extends StatelessWidget {
                     CustomScrollView(
                       slivers: <Widget>[
                         ChatRoomSliverAppBar(
+                            chatRoomViewModel: chatRoomViewModel,
                             audioUrl: snapshot.data!.last.audioUrl,
                             chatData: chatData,
                             postUserNickname: chatData['postUserNickname'],

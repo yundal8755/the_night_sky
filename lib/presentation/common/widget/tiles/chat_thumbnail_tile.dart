@@ -9,12 +9,14 @@ import 'package:everyones_tone/presentation/common/widget/profile_circle_image.d
 import 'package:flutter/material.dart';
 
 class ChatThumbnailTile extends StatelessWidget {
+  final ChatThumbnailViewModel chatThumbnailViewModel;
   final Map<String, dynamic> chatData;
   final String profilePicUrl;
   final String nickname;
 
   const ChatThumbnailTile({
     super.key,
+    required this.chatThumbnailViewModel,
     required this.chatData,
     required this.profilePicUrl,
     required this.nickname,
@@ -59,7 +61,7 @@ class ChatThumbnailTile extends StatelessWidget {
             Row(
               children: [
                 FutureBuilder<int>(
-                  future: ChatThumbnailViewModel()
+                  future: chatThumbnailViewModel
                       .fetchMessageCount(chatData['chatId']),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {

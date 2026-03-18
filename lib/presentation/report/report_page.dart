@@ -6,6 +6,7 @@ import 'package:everyones_tone/presentation/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/common/widget/dialog_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ReportPage extends StatelessWidget {
   final String currentDocumentId;
@@ -18,7 +19,8 @@ class ReportPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ReportViewModel reportViewModel = ReportViewModel();
+    final reportViewModel =
+        Provider.of<ReportViewModel>(context, listen: false);
 
     return Scaffold(
       backgroundColor: AppColor.neutrals90,

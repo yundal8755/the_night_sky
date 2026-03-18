@@ -11,14 +11,15 @@ import 'package:everyones_tone/presentation/register_profile/register_profile_pa
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/sns_login_button.dart';
 import 'package:everyones_tone/presentation/common/widget/layout/main_background_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SnsLoginPage extends StatelessWidget {
-  final LoginViewModel loginViewModel = LoginViewModel();
-
   SnsLoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final LoginViewModel loginViewModel =
+        Provider.of<LoginViewModel>(context, listen: false);
     return MainBackgroundLayout(
       child: Scaffold(
         appBar: AppBar(

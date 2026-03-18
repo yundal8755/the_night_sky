@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ChatRoomSliverAppBar extends StatelessWidget {
+  final ChatRoomViewModel chatRoomViewModel;
   final String audioUrl;
   final Map<String, dynamic> chatData;
   final String postUserNickname;
@@ -22,6 +23,7 @@ class ChatRoomSliverAppBar extends StatelessWidget {
 
   const ChatRoomSliverAppBar({
     super.key,
+    required this.chatRoomViewModel,
     required this.audioUrl,
     required this.chatData,
     required this.postUserNickname,
@@ -30,9 +32,9 @@ class ChatRoomSliverAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ChatRoomViewModel chatRoomViewModel = ChatRoomViewModel();
-    final ReportViewModel reportViewModel = ReportViewModel();
     final postUserEmail = chatData['postUserEmail'];
+    final reportViewModel =
+        Provider.of<ReportViewModel>(context, listen: false);
 
     return SliverAppBar(
       surfaceTintColor: Colors.transparent,

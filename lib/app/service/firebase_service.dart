@@ -13,12 +13,20 @@ import 'package:firebase_storage/firebase_storage.dart';
 final class FirebaseService {
   FirebaseService._();
 
+  static final FirebaseService instance = FirebaseService._();
+
   static final FirebaseFirestore firestore = FirebaseFirestore.instance;
   static final FirebaseStorage storage = FirebaseStorage.instance;
   static final FirebaseAuth auth = FirebaseAuth.instance;
 
   static User? get currentUser => auth.currentUser;
   static String? get currentUserEmail => currentUser?.email;
+
+  FirebaseFirestore get firestoreInstance => firestore;
+  FirebaseStorage get storageInstance => storage;
+  FirebaseAuth get authInstance => auth;
+  User? get currentUserValue => currentUser;
+  String? get currentUserEmailValue => currentUserEmail;
 
   /// Firestore 컬렉션 참조
   static CollectionReference<UserModel> get users =>
@@ -37,6 +45,11 @@ final class FirebaseService {
       firestore.collection(FirestoreCollection.chat.name);
   static CollectionReference<Map<String, dynamic>> get reports =>
       firestore.collection(FirestoreCollection.report.name);
+
+  CollectionReference<UserModel> get usersCollection => users;
+  CollectionReference<PostModel> get postsCollection => posts;
+  CollectionReference<Map<String, dynamic>> get chatsCollection => chats;
+  CollectionReference<Map<String, dynamic>> get reportsCollection => reports;
 
   /// Firestore에서 현재 사용자 데이터 가져오기
   static Future<UserModel?> fetchCurrentUser() async {
@@ -99,6 +112,25 @@ final class FirebaseService {
       return '';
     }
   }
+
+  Future<UserModel?> fetchCurrentUserInstance() => fetchCurrentUser();
+
+  Future<bool> hasRepliedBeforeInstance(
+    String userEmail,
+    String replyDocumentId,
+  ) =>
+      hasRepliedBefore(userEmail, replyDocumentId);
+
+  Future<String> uploadAudioFileInstance({
+    required String localPath,
+    String folder = 'audio_url',
+    String? contentType,
+  }) =>
+      uploadAudioFile(
+        localPath: localPath,
+        folder: folder,
+        contentType: contentType,
+      );
 }
 
 ///

@@ -60,6 +60,7 @@ class ChatThumbnailPage extends StatelessWidget {
                                 chatData['postUserEmail']
                             ? chatData['replyUserProfilePicUrl']
                             : chatData['postUserProfilePicUrl'],
+                        chatThumbnailViewModel: chatThumbnailViewModel,
                       );
                     },
                   );

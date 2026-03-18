@@ -18,6 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
+///
+/// 홈 화면에서 게시글을 보여주는 위젯
+///
 class PostingCard extends StatelessWidget {
   final String profilePicUrl;
   final String audioUrl;
@@ -37,11 +40,11 @@ class PostingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final reportViewModel =
+        Provider.of<ReportViewModel>(context, listen: false);
     const double circularInt = 40;
     double cardWidth = MediaQuery.of(context).size.width / 1.2;
     double cardHeight = cardWidth * 1.45;
-
-    final ReportViewModel reportViewModel = ReportViewModel();
 
     return Center(
       child: Container(

@@ -5,7 +5,7 @@ import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/constant/app_sites.dart';
-import 'package:everyones_tone/app/util/firestore_user_provider.dart';
+import 'package:everyones_tone/app/provider/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/profile/profile_setting_page.dart';
 import 'package:everyones_tone/presentation/web_view_page.dart';
 import 'package:everyones_tone/presentation/common/widget/profile_circle_image.dart';

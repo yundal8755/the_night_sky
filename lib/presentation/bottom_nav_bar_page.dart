@@ -2,9 +2,9 @@
 
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/app/util/audio_play_provider.dart';
+import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
-import 'package:everyones_tone/app/util/firestore_user_provider.dart';
+import 'package:everyones_tone/app/provider/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/login/initial_login_page.dart';
 import 'package:everyones_tone/presentation/home/home_page.dart';
 import 'package:everyones_tone/presentation/post/post_page.dart';

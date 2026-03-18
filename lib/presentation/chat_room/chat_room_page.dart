@@ -3,18 +3,16 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/data/model/chat_message_model.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
-import 'package:everyones_tone/app/util/audio_play_provider.dart';
+import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/data/remote_datasource/chat_remote_data_source.dart';
-import 'package:everyones_tone/data/remote_datasource/report_remote_data_source.dart';
 import 'package:everyones_tone/presentation/chat_room/chat_room_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/app_bar/chat_room_sliver_app_bar.dart';
 import 'package:everyones_tone/presentation/common/widget/record_buttons/record_status_button.dart';
 import 'package:everyones_tone/presentation/common/widget/layout/main_background_layout.dart';
 import 'package:everyones_tone/presentation/common/widget/tiles/partner_user_message_tile.dart';
 import 'package:everyones_tone/presentation/common/widget/tiles/current_user_message_tile.dart';
-import 'package:everyones_tone/presentation/report/report_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +35,7 @@ class ChatRoomPage extends StatelessWidget {
 
     return PopScope(
       canPop: true,
-      onPopInvoked: (didPop) async {
+      onPopInvokedWithResult: (didPop, result) async {
         // 음성 재생 중이라면 정지
         if (Provider.of<AudioPlayProvider>(context, listen: false).isPlaying) {
           Provider.of<AudioPlayProvider>(context, listen: false).stopPlaying();

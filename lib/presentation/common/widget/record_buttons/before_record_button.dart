@@ -1,6 +1,6 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/app/util/audio_play_provider.dart';
+import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/common/widget/dialog_widget.dart';
 import 'package:flutter/material.dart';

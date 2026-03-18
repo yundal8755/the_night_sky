@@ -4,7 +4,7 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
-import 'package:everyones_tone/presentation/common/widget/anonymousProfileSwitch.dart';
+import 'package:everyones_tone/presentation/common/widget/anonymous_profile_switch.dart';
 import 'package:everyones_tone/presentation/reply/reply_view_model.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/common/widget/app_bar/sub_app_bar.dart';

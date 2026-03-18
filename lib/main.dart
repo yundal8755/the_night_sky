@@ -1,7 +1,7 @@
 import 'package:everyones_tone/app/di/service_locator.dart';
-import 'package:everyones_tone/app/util/audio_play_provider.dart';
-import 'package:everyones_tone/app/util/firestore_user_provider.dart';
-import 'package:everyones_tone/app/util/edit_profile_manager.dart';
+import 'package:everyones_tone/app/provider/audio_play_provider.dart';
+import 'package:everyones_tone/app/provider/firestore_user_provider.dart';
+import 'package:everyones_tone/app/provider/edit_profile_manager.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
 import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/login/login_view_model.dart';

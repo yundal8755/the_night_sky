@@ -4,7 +4,7 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
-import 'package:everyones_tone/app/util/edit_profile_manager.dart';
+import 'package:everyones_tone/app/provider/edit_profile_manager.dart';
 import 'package:everyones_tone/presentation/register_profile/register_profile_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/main_button.dart';

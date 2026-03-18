@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/style/app_color.dart';
-import 'package:everyones_tone/app/util/audio_play_provider.dart';
+import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/presentation/common/widget/app_bar/main_app_bar.dart';
 import 'package:everyones_tone/presentation/common/widget/posting_card.dart';
 import 'package:everyones_tone/data/model/post_model.dart';
@@ -35,10 +35,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider.value(value: _viewModel),
-      ],
+    return ChangeNotifierProvider(
+      create: (context) => _viewModel,
       child: Consumer<HomeViewModel>(
         builder: (context, viewModel, _) {
           return PopScope(
@@ -49,7 +47,10 @@ class _HomePageState extends State<HomePage> {
               body: SafeArea(
                 child: Column(
                   children: [
+                    // 메인 앱바
                     const MainAppBar(title: '밤하늘'),
+
+                    // 게시글 리스트
                     Expanded(
                       child: StreamBuilder<QuerySnapshot<PostModel>>(
                         stream: viewModel.postsStream,

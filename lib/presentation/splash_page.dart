@@ -4,14 +4,14 @@ import 'package:everyones_tone/presentation/common/widget/layout/background_grad
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  SplashScreenState createState() => SplashScreenState();
+  SplashPageState createState() => SplashPageState();
 }
 
-class SplashScreenState extends State<SplashScreen> {
+class SplashPageState extends State<SplashPage> {
   bool _visible = false;
 
   @override

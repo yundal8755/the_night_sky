@@ -23,27 +23,32 @@ class HomeViewModel extends ChangeNotifier {
   Stream<QuerySnapshot<PostModel>> get postsStream =>
       postRemoteDataSource.postsStream();
 
+  /// 초기화
   Future<void> init() async {
     await loadReportedPosts();
     await loadBlockedUsers();
     _listenAuthChanges();
   }
 
+  /// 신고된 게시글 불러오기
   Future<void> loadReportedPosts() async {
     reportedPosts = await reportRemoteDataSource.fetchReportedPosts();
     notifyListeners();
   }
 
+  /// 차단된 유저 불러오기
   Future<void> loadBlockedUsers() async {
     blockedUsers = await reportRemoteDataSource.fetchBlockedUsers();
     notifyListeners();
   }
 
+  /// 현재 보고 있는 게시글의 문서 ID 설정
   void setCurrentDocumentId(String documentId) {
     currentDocumentId = documentId;
     notifyListeners();
   }
 
+  /// 로그인 상태 변경 감지
   void _listenAuthChanges() {
     _authSubscription?.cancel();
     _authSubscription = authRemoteDataSource.userChanges().listen(

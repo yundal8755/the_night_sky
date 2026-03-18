@@ -1,11 +1,12 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
-import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/presentation/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/common/widget/dialog_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ReportPage extends StatelessWidget {
@@ -61,11 +62,7 @@ class ReportPage extends StatelessWidget {
                       backgroundColor: AppColor.primaryBlue,
                       text: '페이지 닫기',
                       textColor: AppColor.neutrals20,
-                      onPressed: () => Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (_) => BottomNavBarPage(),
-                        ),
-                      ),
+                      onPressed: () => context.go(AppRouteLocation.home),
                     ),
 
                     //! 페이지 닫기 버튼
@@ -83,11 +80,7 @@ class ReportPage extends StatelessWidget {
                               await reportViewModel.blockUsers(
                                   blockedUserEmail: postUserEmail);
 
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => BottomNavBarPage()),
-                              );
+                              context.go(AppRouteLocation.home);
                             },
                           );
                         })

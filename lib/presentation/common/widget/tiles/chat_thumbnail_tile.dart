@@ -3,10 +3,11 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
-import 'package:everyones_tone/presentation/chat_room/chat_room_page.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/presentation/chat_thumbnail/chat_thumbnail_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/profile_circle_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ChatThumbnailTile extends StatelessWidget {
   final ChatThumbnailViewModel chatThumbnailViewModel;
@@ -26,14 +27,7 @@ class ChatThumbnailTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ChatRoomPage(
-              chatData: chatData,
-            ),
-          ),
-        );
+        context.push(AppRoutePath.chatRoom, extra: chatData);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

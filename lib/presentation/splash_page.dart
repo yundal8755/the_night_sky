@@ -1,8 +1,9 @@
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/presentation/common/widget/layout/background_gradient.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:go_router/go_router.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -23,18 +24,8 @@ class SplashPageState extends State<SplashPage> {
       });
     });
     Timer(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          pageBuilder: (context, animation, secondaryAnimation) =>
-              BottomNavBarPage(),
-          transitionsBuilder: (context, animation, secondaryAnimation, child) {
-            return FadeTransition(
-              opacity: animation,
-              child: child,
-            );
-          },
-        ),
-      );
+      if (!mounted) return;
+      context.go(AppRouteLocation.home);
     });
   }
 

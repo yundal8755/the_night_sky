@@ -2,16 +2,17 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
-import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/chat_room/chat_room_view_model.dart';
 import 'package:everyones_tone/presentation/report/report_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/common/widget/audio_player/rectangle_audio_player.dart';
 import 'package:everyones_tone/presentation/common/widget/dialog_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ChatRoomSliverAppBar extends StatelessWidget {
@@ -63,11 +64,7 @@ class ChatRoomSliverAppBar extends StatelessWidget {
                               title: '채팅방을 나가시겠습니까?',
                               message: '주고 받은 대화들은 모두 삭제됩니다.',
                               onTap: () async {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (_) => BottomNavBarPage(),
-                                  ),
-                                );
+                                context.go(AppRouteLocation.home);
                                 await chatRoomViewModel
                                     .deleteChatRoom(chatData);
                               },
@@ -100,11 +97,7 @@ class ChatRoomSliverAppBar extends StatelessWidget {
                                 await reportViewModel.blockUsers(
                                     blockedUserEmail: blockedUserEmail);
 
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (_) => BottomNavBarPage(),
-                                  ),
-                                );
+                                context.go(AppRouteLocation.home);
 
                                 // 채팅방 삭제 처리
                                 await chatRoomViewModel

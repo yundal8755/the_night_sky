@@ -5,12 +5,12 @@ import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/constant/app_sites.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/app/provider/firestore_user_provider.dart';
-import 'package:everyones_tone/presentation/profile/profile_setting_page.dart';
-import 'package:everyones_tone/presentation/web_view_page.dart';
 import 'package:everyones_tone/presentation/common/widget/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/common/widget/tiles/profile_page_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -66,10 +66,7 @@ class ProfilePage extends StatelessWidget {
                     ProfilePageTile(
                       title: '프로필 설정',
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfileSettingPage()));
+                        context.push(AppRouteLocation.profileSetting);
                       },
                     ),
                   ],
@@ -86,43 +83,43 @@ class ProfilePage extends StatelessWidget {
                     ProfilePageTile(
                         title: '공지사항',
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WebViewPage(
-                                      page: AppSites.noticePage,
-                                      title: '공지사항')));
+                          context.push(
+                            AppRouteLocation.webView(
+                              title: '공지사항',
+                              url: AppSites.noticePage,
+                            ),
+                          );
                         }),
                     ProfilePageTile(
                         title: '자주 묻는 질문',
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WebViewPage(
-                                      page: AppSites.inquiryPage,
-                                      title: '자주 묻는 질문')));
+                          context.push(
+                            AppRouteLocation.webView(
+                              title: '자주 묻는 질문',
+                              url: AppSites.inquiryPage,
+                            ),
+                          );
                         }),
                     ProfilePageTile(
                       title: '서비스 이용약관',
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => WebViewPage(
-                                    page: AppSites.termsOfUsePage,
-                                    title: '서비스 이용약관')));
+                        context.push(
+                          AppRouteLocation.webView(
+                            title: '서비스 이용약관',
+                            url: AppSites.termsOfUsePage,
+                          ),
+                        );
                       },
                     ),
                     ProfilePageTile(
                         title: '개인정보 처리방침',
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WebViewPage(
-                                      page: AppSites.privacyPolicy,
-                                      title: '개인정보 처리방침')));
+                          context.push(
+                            AppRouteLocation.webView(
+                              title: '개인정보 처리방침',
+                              url: AppSites.privacyPolicy,
+                            ),
+                          );
                         }),
                   ],
                 ),

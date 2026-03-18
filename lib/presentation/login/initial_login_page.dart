@@ -3,12 +3,12 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_sites.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/presentation/login/login_view_model.dart';
-import 'package:everyones_tone/presentation/login/sns_login_page.dart';
-import 'package:everyones_tone/presentation/web_view_page.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/common/widget/tiles/login_page_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class InitialLoginPage extends StatelessWidget {
@@ -39,11 +39,10 @@ class InitialLoginPage extends StatelessWidget {
                   onChanged: (value) {
                     loginViewModel.setTermsAccepted(value!);
                   },
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const WebViewPage(
-                          page: AppSites.termsOfUsePage, title: '서비스 이용약관'),
+                  onTap: () => context.push(
+                    AppRouteLocation.webView(
+                      title: '서비스 이용약관',
+                      url: AppSites.termsOfUsePage,
                     ),
                   ),
                 ),
@@ -53,11 +52,10 @@ class InitialLoginPage extends StatelessWidget {
                   onChanged: (value) {
                     loginViewModel.setPrivacyAccepted(value!);
                   },
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const WebViewPage(
-                          page: AppSites.privacyPolicy, title: '개인정보 처리방침'),
+                  onTap: () => context.push(
+                    AppRouteLocation.webView(
+                      title: '개인정보 처리방침',
+                      url: AppSites.privacyPolicy,
                     ),
                   ),
                 ),
@@ -74,13 +72,8 @@ class InitialLoginPage extends StatelessWidget {
               onPressed: loginViewModel.isFormValid
                   ? () async {
                       // await Future.delayed(Duration(milliseconds: 500));
-                      Navigator.pop(context);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SnsLoginPage(),
-                        ),
-                      );
+                      context.pop();
+                      context.push(AppRouteLocation.loginMethod);
                     }
                   : null,
             ),

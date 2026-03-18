@@ -5,12 +5,12 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
-import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/presentation/login/login_view_model.dart';
-import 'package:everyones_tone/presentation/register_profile/register_profile_page.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/sns_login_button.dart';
 import 'package:everyones_tone/presentation/common/widget/layout/main_background_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SnsLoginPage extends StatelessWidget {
@@ -66,21 +66,11 @@ class SnsLoginPage extends StatelessWidget {
                         print('isRegistered = $isRegistered');
                         if (isRegistered) {
                           print('사용자 정보를 업데이트 합니다.');
-
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BottomNavBarPage(),
-                            ),
-                            (Route<dynamic> route) => false,
-                          );
+                          context.go(AppRouteLocation.home);
                         } else {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => RegisterProfilePage(
-                                userEmail: user.email!,
-                              ),
+                          context.push(
+                            AppRouteLocation.registerProfile(
+                              email: user.email!,
                             ),
                           );
                         }
@@ -99,20 +89,11 @@ class SnsLoginPage extends StatelessWidget {
                           bool isRegistered = await loginViewModel
                               .isUserRegistered(user.email!);
                           if (isRegistered) {
-                            Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => BottomNavBarPage(),
-                              ),
-                              (Route<dynamic> route) => false,
-                            );
+                            context.go(AppRouteLocation.home);
                           } else {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => RegisterProfilePage(
-                                  userEmail: user.email!,
-                                ),
+                            context.push(
+                              AppRouteLocation.registerProfile(
+                                email: user.email!,
                               ),
                             );
                           }

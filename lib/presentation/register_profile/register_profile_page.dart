@@ -3,13 +3,14 @@
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
-import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/app/provider/edit_profile_manager.dart';
 import 'package:everyones_tone/presentation/register_profile/register_profile_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/common/widget/layout/main_background_layout.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterProfilePage extends StatelessWidget {
   final String userEmail;
@@ -71,13 +72,7 @@ class RegisterProfilePage extends StatelessWidget {
                         text: '🚀 시작하기',
                         textColor: AppColor.neutrals20,
                         onPressed: () async {
-                          Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BottomNavBarPage(),
-                            ),
-                            (Route<dynamic> route) => false,
-                          );
+                          context.go(AppRouteLocation.home);
 
                           await registerProfileViewModel.registerUserData(
                               userEmail: userEmail,

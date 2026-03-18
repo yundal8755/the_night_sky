@@ -1,13 +1,14 @@
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/app/provider/firestore_user_provider.dart';
 import 'package:everyones_tone/presentation/login/initial_login_page.dart';
-import 'package:everyones_tone/presentation/profile/profile_page.dart';
 import 'package:everyones_tone/presentation/common/widget/profile_circle_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -42,10 +43,7 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                           context: context,
                           child: const InitialLoginPage(),
                           bottomSheetType: BottomSheetHeight.loginPage)
-                      : Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfilePage()));
+                      : context.push(AppRouteLocation.profile);
                 },
                 child: ProfileCircleImage(
                     radius: 16,

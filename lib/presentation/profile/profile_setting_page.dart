@@ -4,15 +4,16 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
 import 'package:everyones_tone/app/provider/firestore_user_provider.dart';
-import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/profile/edit_profile_page.dart';
 import 'package:everyones_tone/presentation/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/common/widget/profile_circle_image.dart';
 import 'package:everyones_tone/presentation/common/widget/custom_buttons/main_button.dart';
 import 'package:everyones_tone/presentation/common/widget/dialog_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ProfileSettingPage extends StatelessWidget {
@@ -89,13 +90,7 @@ class ProfileSettingPage extends StatelessWidget {
                     onTap: () async {
                       loginViewModel.signOut();
 
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BottomNavBarPage(),
-                        ),
-                        (Route<dynamic> route) => false,
-                      );
+                      context.go(AppRouteLocation.home);
                     },
                   ),
                 ),
@@ -110,13 +105,7 @@ class ProfileSettingPage extends StatelessWidget {
                       onTap: () async {
                         await loginViewModel.deleteUserAccount();
 
-                        Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BottomNavBarPage(),
-                          ),
-                          (Route<dynamic> route) => false,
-                        );
+                        context.go(AppRouteLocation.home);
                       },
                     );
                   },

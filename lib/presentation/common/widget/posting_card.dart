@@ -4,6 +4,7 @@ import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/style/app_gap.dart';
 import 'package:everyones_tone/app/style/app_text_style.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/app/util/bottom_sheet.dart';
@@ -17,6 +18,7 @@ import 'package:everyones_tone/presentation/common/widget/dialog_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 ///
 /// 홈 화면에서 게시글을 보여주는 위젯
@@ -213,17 +215,13 @@ class PostingCard extends StatelessWidget {
                                                                 reportedChatId:
                                                                     currentDocumentId);
 
-                                                        Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    ReportPage(
-                                                              currentDocumentId:
-                                                                  currentDocumentId,
-                                                              postUserEmail:
-                                                                  postUserEmail,
-                                                            ),
+                                                        context.push(
+                                                          AppRouteLocation
+                                                              .report(
+                                                            docId:
+                                                                currentDocumentId,
+                                                            postUserEmail:
+                                                                postUserEmail,
                                                           ),
                                                         );
                                                       },

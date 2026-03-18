@@ -2,8 +2,8 @@ import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/app/provider/audio_play_provider.dart';
 import 'package:everyones_tone/app/provider/firestore_user_provider.dart';
 import 'package:everyones_tone/app/provider/edit_profile_manager.dart';
+import 'package:everyones_tone/app/router/app_router.dart';
 import 'package:everyones_tone/app/util/record_status_manager.dart';
-import 'package:everyones_tone/presentation/bottom_nav_bar_page.dart';
 import 'package:everyones_tone/presentation/login/login_view_model.dart';
 import 'package:everyones_tone/presentation/report/report_view_model.dart';
 import 'package:flutter/material.dart';
@@ -75,9 +75,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: '밤하늘',
-      home: BottomNavBarPage(),
+      routerConfig: appRouter,
       debugShowCheckedModeBanner: false,
     );
   }

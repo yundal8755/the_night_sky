@@ -1,17 +1,20 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/data/model/post_model.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:intl/intl.dart';
 
+///
+/// 게시글 관련 원격 데이터 소스
+///
 class PostRemoteDataSource {
-  PostRemoteDataSource(this.firebaseService);
+  PostRemoteDataSource();
 
-  final FirebaseService firebaseService;
+  final firebaseService = getIt<FirebaseService>();
 
-  FirebaseFirestore get _firestore => firebaseService.firestoreInstance;
-
+  /// 게시글 업로드
   Future<void> uploadPostRemote(PostModel postModel) async {
     DocumentReference<PostModel> userRef =
         firebaseService.postsCollection.doc();
@@ -20,12 +23,14 @@ class PostRemoteDataSource {
     print('PostRemoteRepository 실행 완료!');
   }
 
+  /// 게시글 스트림
   Stream<QuerySnapshot<PostModel>> postsStream() {
     return firebaseService.postsCollection
         .orderBy('dateCreated', descending: true)
         .snapshots();
   }
 
+  /// 게시글 업로드
   Future<void> uploadPost({
     required String postTitle,
     required String localAudioUrl,

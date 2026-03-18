@@ -1,16 +1,20 @@
 // ignore_for_file: avoid_print
 
+import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+///
+/// 신고 관련 원격 데이터 소스
+///
 class ReportRemoteDataSource {
-  ReportRemoteDataSource(this.firebaseService);
+  ReportRemoteDataSource();
 
-  final FirebaseService firebaseService;
+  final firebaseService = getIt<FirebaseService>();
 
   FirebaseFirestore get firestore => firebaseService.firestoreInstance;
 
-  //! 게시글 신고하기
+  /// 게시글 신고하기
   Future<void> reportPosts(String reportedChatId) async {
     final currentUserEmail = firebaseService.currentUserEmailValue;
     if (currentUserEmail == null) {
@@ -32,7 +36,7 @@ class ReportRemoteDataSource {
     print('reportPosts 정상적으로 실행!');
   }
 
-  //! 사용자 차단하기
+  /// 사용자 차단하기
   Future<void> blockUsers(String blockedUserEmail) async {
     final currentUserEmail = firebaseService.currentUserEmailValue;
     if (currentUserEmail == null) {
@@ -54,7 +58,7 @@ class ReportRemoteDataSource {
     print('BlockUsers 정상적으로 실행!');
   }
 
-  //! 관리자 페이지에 목록 추가하기
+  /// 관리자 페이지에 목록 추가하기
   Future<void> countReportedPosts(String reportedChatId) async {
     final DocumentReference reportRef = firestore
         .collection(FirestoreCollection.report.name)
@@ -76,7 +80,7 @@ class ReportRemoteDataSource {
         .set({reportedChatId: '${reportCounted + 1}'}, SetOptions(merge: true));
   }
 
-  //! 신고된 게시글 목록 가져오기
+  /// 신고된 게시글 목록 가져오기
   Future<List<String>> fetchReportedPosts() async {
     final currentUserEmail = firebaseService.currentUserEmailValue;
     if (currentUserEmail == null) {
@@ -107,7 +111,7 @@ class ReportRemoteDataSource {
     return [];
   }
 
-  //! 차단 사용자 목록 가져오기
+  /// 차단 사용자 목록 가져오기
   Future<List<String>> fetchBlockedUsers() async {
     final currentUserEmail = firebaseService.currentUserEmailValue;
     if (currentUserEmail == null) {

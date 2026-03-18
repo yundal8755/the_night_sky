@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/data/model/chat_model.dart';
 import 'package:everyones_tone/data/model/chat_message_model.dart';
@@ -6,15 +7,17 @@ import 'package:everyones_tone/data/model/post_model.dart';
 import 'package:everyones_tone/data/model/user_model.dart';
 import 'package:intl/intl.dart';
 
+///
+/// 답장 관련 원격 데이터 소스
+///
 class ReplyRemoteDataSource {
-  ReplyRemoteDataSource(this.firebaseService);
+  ReplyRemoteDataSource();
 
-  final FirebaseService firebaseService;
+  final firebaseService = getIt<FirebaseService>();
 
   FirebaseFirestore get firestore => firebaseService.firestoreInstance;
-  // final DatabaseHelper databaseHelper = DatabaseHelper();
 
-  //! 입력받은 정보를 DB에 업로드
+  /// 입력받은 정보를 DB에 업로드
   Future<void> uploadReply({
     required String localAudioUrl,
     required UserModel replyUser,
@@ -83,7 +86,7 @@ class ReplyRemoteDataSource {
     );
   }
 
-  //! Firestore - chat Collection method
+  /// chat Collection에 새로운 Document 생성 및 ID 할당
   Future<void> uploadReplyRemote(
       ChatModel chatModel,
       ChatMessageModel postMessageModel,
@@ -119,7 +122,7 @@ class ReplyRemoteDataSource {
         replyMessageModel.userEmail, chatRef.id, replyDocmentId);
   }
 
-  //! Firestore - Create myChat SubCollection
+  /// user - myChat SubCollection 생성
   Future<void> createUserChatSubcollection(
     String userEmail,
     String chatId,
@@ -137,7 +140,7 @@ class ReplyRemoteDataSource {
     });
   }
 
-  //! Firestore - Create previousReplies SubCollection
+  /// user - previousReplies SubCollection 생성
   Future<void> createPreviousRepliesSubcollection(
       String userEmail, String chatId, String replyDocumentId) async {
     final DocumentReference userRef =

@@ -1,13 +1,17 @@
 // ignore_for_file: avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:everyones_tone/data/model/chat_message_model.dart';
 
+///
+/// 채팅 관련 원격 데이터 소스
+///
 class ChatRemoteDataSource {
-  ChatRemoteDataSource(this.firebaseService);
+  ChatRemoteDataSource();
 
-  final FirebaseService firebaseService;
+  final firebaseService = getIt<FirebaseService>();
 
   FirebaseFirestore get _firestore => firebaseService.firestoreInstance;
 

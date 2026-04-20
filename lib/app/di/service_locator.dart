@@ -39,35 +39,41 @@ void _registerItem(_LocatorItem item) {
             () => FirebaseService.instance);
       }
       break;
+
     case _LocatorItem.googleSignIn:
       if (!getIt.isRegistered<GoogleSignIn>()) {
         getIt.registerLazySingleton<GoogleSignIn>(() => GoogleSignIn());
       }
       break;
+
     case _LocatorItem.authRepository:
       if (!getIt.isRegistered<AuthRemoteDataSource>()) {
         getIt.registerLazySingleton<AuthRemoteDataSource>(
             () => AuthRemoteDataSource(getIt()));
       }
       break;
+
     case _LocatorItem.postRepository:
       if (!getIt.isRegistered<PostRemoteDataSource>()) {
         getIt.registerLazySingleton<PostRemoteDataSource>(
             () => PostRemoteDataSource());
       }
       break;
+
     case _LocatorItem.reportRepository:
       if (!getIt.isRegistered<ReportRemoteDataSource>()) {
         getIt.registerLazySingleton<ReportRemoteDataSource>(
             () => ReportRemoteDataSource());
       }
       break;
+
     case _LocatorItem.chatRoomRepository:
       if (!getIt.isRegistered<ChatRemoteDataSource>()) {
         getIt.registerLazySingleton<ChatRemoteDataSource>(
             () => ChatRemoteDataSource());
       }
       break;
+
     case _LocatorItem.replyRepository:
       if (!getIt.isRegistered<ReplyRemoteDataSource>()) {
         getIt.registerLazySingleton<ReplyRemoteDataSource>(

@@ -2,7 +2,9 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:everyones_tone/app/di/service_locator.dart';
+import 'package:everyones_tone/app/util/app_log.dart';
 import 'package:everyones_tone/data/model/post_model.dart';
+import 'package:everyones_tone/data/model/upload_post_result.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
 import 'package:intl/intl.dart';
 
@@ -14,13 +16,15 @@ class PostRemoteDataSource {
 
   final firebaseService = getIt<FirebaseService>();
 
-  /// 게시글 업로드
-  Future<void> uploadPostRemote(PostModel postModel) async {
+  /// 게시글 업로드 (documentId 반환)
+  Future<String> uploadPostRemote(PostModel postModel) async {
     DocumentReference<PostModel> userRef =
         firebaseService.postsCollection.doc();
 
     await userRef.set(postModel);
-    print('PostRemoteRepository 실행 완료!');
+    AppLog.d('PostRemoteDataSource uploadPostRemote 실행 완료!');
+    AppLog.d('CurrentDocument ID : ${userRef.id}');
+    return userRef.id;
   }
 
   /// 게시글 스트림
@@ -31,7 +35,7 @@ class PostRemoteDataSource {
   }
 
   /// 게시글 업로드
-  Future<void> uploadPost({
+  Future<UploadPostResult?> uploadPost({
     required String postTitle,
     required String localAudioUrl,
     required String userEmail,
@@ -43,8 +47,10 @@ class PostRemoteDataSource {
       contentType: 'audio/x-m4a',
     );
     if (audioUrl.isEmpty) {
-      print('오디오 파일 업로드 실패');
-      return;
+      // TODO : 임시 더미 URL 제거
+      AppLog.e('⚠️ 오디오 파일 업로드 실패. 테스트를 위해 임시 더미 URL을 사용합 니다.');
+      audioUrl =
+          'https://firebasestorage.googleapis.com/v0/b/everyones-tone.appspot.com/o/audio_url%2Fdummy.m4a?alt=media';
     }
 
     String dateCreated = DateFormat("MM/dd HH:mm:ss").format(DateTime.now());
@@ -59,6 +65,11 @@ class PostRemoteDataSource {
     );
 
     print('PostRepository 실행 완료!');
-    await uploadPostRemote(postModel);
+    final documentId = await uploadPostRemote(postModel);
+    return UploadPostResult(
+      documentId: documentId,
+      audioUrl: audioUrl,
+      dateCreated: dateCreated,
+    );
   }
 }

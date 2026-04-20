@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:everyones_tone/app/util/app_log.dart';
 import 'package:everyones_tone/data/model/post_model.dart';
 import 'package:everyones_tone/data/model/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -106,9 +107,11 @@ final class FirebaseService {
         uploadTask = ref.putFile(file);
       }
 
-      await uploadTask.whenComplete(() => null);
+      await uploadTask;
       return await ref.getDownloadURL();
-    } catch (e) {
+    } catch (e, stackTrace) {
+      AppLog.e('[FirebaseService] Audio upload error: $e');
+      AppLog.e('[FirebaseService] StackTrace: $stackTrace');
       return '';
     }
   }

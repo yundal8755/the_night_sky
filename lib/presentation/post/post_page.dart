@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, use_build_context_synchronously,
 
+import 'package:everyones_tone/app/di/service_locator.dart';
 import 'package:everyones_tone/app/style/app_color.dart';
 import 'package:everyones_tone/app/constant/app_assets.dart';
 import 'package:everyones_tone/app/service/firebase_service.dart';
@@ -12,15 +13,22 @@ import 'package:everyones_tone/presentation/common/widget/record_buttons/record_
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///
+/// 게시글 작성 페이지
+/// TODO : StatefulWidget으로 변경 후 ViewModel 적용하기
+///
 class PostPage extends StatelessWidget {
   const PostPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     const String hintText = '제목을 입력해주세요!';
-    final PostViewModel postViewModel = PostViewModel();
+
+    final postViewModel = getIt<PostViewModel>();
+
     final recordStatusManager =
         Provider.of<RecordStatusManager>(context, listen: false);
+
     final textEditingController = TextEditingController();
 
     String currentNickname = '';
@@ -32,6 +40,7 @@ class PostPage extends StatelessWidget {
         children: [
           Column(
             children: [
+              // 상단 바
               SubAppBar(
                 title: '게시글 업로드',
                 onPressed: () async {
@@ -79,10 +88,14 @@ class PostPage extends StatelessWidget {
                   Navigator.pop(context); // Home으로 이동
                 },
               ),
+
+              // 제목 입력 필드
               CustomTextField(
                 hintText: '제목을 입력해주세요!',
                 textEditingController: textEditingController,
               ),
+
+              // 익명 프로필 스위치
               AnonymousProfileSwitch(
                 onProfileChanged: (nickname, profilePicUrl) {
                   currentNickname = nickname;
